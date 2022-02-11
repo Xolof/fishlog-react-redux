@@ -1,18 +1,29 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import FishCatchCard from './FishCatchCard';
 
 const LeafletMap = ({ fishCatches }) => {
     return (
         <>
-            <MapContainer center={[51.505, -0.09]} zoom={13}>
+            <MapContainer center={[56, 12.6]} zoom={9}>
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={[51.505, -0.09]}>
-                <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-            </Marker>
+            {
+                fishCatches.map((fishCatch) => {
+                    const splitPosition = fishCatch.location.split(",");
+                    const lat = splitPosition[0];
+                    const lon = splitPosition[1];
+
+                    return (
+                        <Marker position={[lat, lon]} key={fishCatch.id}>
+                            <Popup>
+                                <FishCatchCard fishCatch={fishCatch} />
+                            </Popup>
+                        </Marker>
+                    )
+                })
+            }
             </MapContainer>
         </>
     )

@@ -72,8 +72,22 @@ footer {
     width: 50%;
     height: auto;
   }
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid $second-color;
 }
 
 .leaflet-container {
   height: 50vh;
+}
+
+.leaflet-popup-content {
+  .fishCatchCard {
+    img {
+      width: 80%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    border-bottom: none;
+  }
 }
