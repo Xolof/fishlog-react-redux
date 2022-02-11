@@ -2,6 +2,7 @@ import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
+import MapView from "./components/MapView";
 import About from "./components/About";
 import NotFound from "./components/NotFound";
 import { Route, Routes } from "react-router-dom";
@@ -17,6 +18,10 @@ function App() {
           <Route
             path="/"
             element={<Home />}
+          />
+          <Route
+            path="/map"
+            element={<MapView />}
           />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />

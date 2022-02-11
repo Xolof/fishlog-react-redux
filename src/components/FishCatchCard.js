@@ -1,6 +1,6 @@
 const FishCatchCard = ({ fishCatch }) => {
     return (
-        <section class="fishCatchCard">
+        <section className="fishCatchCard">
                 <h3>{fishCatch.species}</h3>
                 <p>{fishCatch.length} cm</p>
                 <p>{fishCatch.weight} g</p>
