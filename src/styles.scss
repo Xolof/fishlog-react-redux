@@ -6,6 +6,10 @@ $third-color: #97cba9;
 
 $fourth-color: #134e76;
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   background-color: $fourth-color;
   font-family: Arial, Helvetica, sans-serif;
