@@ -5,21 +5,24 @@ import Home from "./components/Home";
 import About from "./components/About";
 import NotFound from "./components/NotFound";
 import { Route, Routes } from "react-router-dom";
+import { DataProvider } from "./context/DataContext";
 
 function App() {
   return (
     <div className="App">
-      <Header title="React Fishlog" />
-      <Nav />
-      <Routes>
-        <Route
-          path="/"
-          element={<Home />}
-        />
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer /> 
+      <DataProvider>
+        <Header title="React Fishlog" />
+        <Nav />
+        <Routes>
+          <Route
+            path="/"
+            element={<Home />}
+          />
+          <Route path="/about" element={<About />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </DataProvider>
     </div>
   );
 }
