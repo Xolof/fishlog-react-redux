@@ -1,3 +1,5 @@
+@use "sass:color";
+
 $first-color: #feffdf;
 
 $second-color: #dde0ab;
@@ -5,6 +7,8 @@ $second-color: #dde0ab;
 $third-color: #97cba9; 
 
 $fourth-color: #134e76;
+
+$black: #0f0f0f;
 
 html {
   overflow-y: scroll;
@@ -78,16 +82,43 @@ footer {
 
 .leaflet-container {
   height: 50vh;
+  a.leaflet-popup-close-button {
+    top: 8px;
+    width: 36px;
+    height: 28px;
+    font-size: 28px;
+    color: $black;
+    &:hover {
+      color: color.scale($third-color, $lightness: -20%);
+    }
+  }
 }
 
 .leaflet-popup-content {
   .fishCatchCard {
     img {
-      width: 80%;
+      width: 150px;
       height: auto;
       display: block;
       margin: 0 auto;
+      border: 2px solid $fourth-color;
     }
     border-bottom: none;
   }
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: color.scale($first-color, $lightness: 50%);
+  font-size: 1.4em;
+  h3 {
+    margin: 0.2em 0 0.2em;
+  }
+  p {
+    margin: 0 0 0.4em 0;
+  }
+  border-radius: 0;
+}
+
+.leaflet-popup-tip {
+  background-color: color.scale($first-color, $lightness: 50%);
 }
