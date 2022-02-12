@@ -4,7 +4,15 @@ import DataContext from "../context/DataContext";
 import UserStatus from "./UserStatus";
 
 const Nav = () => {
-    const { search, setSearch, userName } = useContext(DataContext);
+    const { userName, setUserName } = useContext(DataContext);
+
+    function handleLogout(e) {
+        e.preventDefault();
+        localStorage.removeItem("token");
+        localStorage.removeItem("userName");
+        setUserName(false);
+    }
+
     return (
         <>
             <UserStatus userName={userName} />
@@ -16,9 +24,15 @@ const Nav = () => {
                     <li>
                         <Link to="/map">Map</Link>
                     </li>
-                    <li>
-                        <Link to="/login">Login</Link>
-                    </li>
+                    {
+                        userName ?
+                        <a
+                            onClick={handleLogout}
+                        >Logout</a> :
+                        <li>
+                            <Link to="/login">Login</Link>
+                        </li>
+                    }
                     <li>
                         <Link to="/about">About</Link>
                     </li>
