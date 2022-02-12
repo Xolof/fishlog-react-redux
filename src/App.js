@@ -3,6 +3,7 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
 import MapView from "./components/MapView";
+import Login from "./components/Login";
 import About from "./components/About";
 import NotFound from "./components/NotFound";
 import { Route, Routes } from "react-router-dom";
@@ -23,6 +24,7 @@ function App() {
             path="/map"
             element={<MapView />}
           />
+          <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

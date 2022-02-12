@@ -4,6 +4,8 @@ import useAxiosFetch from "../hooks/useAxiosFetch";
 const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
+    const [userName, setUserName] = useState(localStorage.getItem("userName"));
+
     const [fishCatches, setFishCatches] = useState([]);
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
@@ -27,7 +29,8 @@ export const DataProvider = ({ children }) => {
                 {
                     search, setSearch,
                     searchResults, fetchError, isLoading,
-                    fishCatches, setFishCatches
+                    fishCatches, setFishCatches,
+                    userName, setUserName
                 }
             }
         >
