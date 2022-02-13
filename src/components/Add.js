@@ -10,11 +10,17 @@ const Add = () => {
     const [length, setLength] = useState("");
     const [weight, setWeight] = useState("");
     const [uploadImages, setUploadImages] = useState([]);
+    const [previewImageUrls, setPreviewImageUrls] = useState([]);
     const [date, setDate] = useState("");
     const { setFlashMessage, fishCatches, setFishCatches } = useContext(DataContext);
     const username = localStorage.getItem("userName");
     const navigate = useNavigate();
-    // const previewImage = URL.createObjectURL(uploadImage);
+
+    useEffect(() => {
+        console.log(uploadImages)
+        if (uploadImages.length < 1) return;
+        setPreviewImageUrls(URL.createObjectURL(uploadImages));
+    }, [uploadImages]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -123,8 +129,8 @@ const Add = () => {
                     }}
                 />
                 {
-                    uploadImages ?
-                    <img src={uploadImages[0]} alt="uploadImage" />
+                    previewImageUrls ?
+                    <img src={previewImageUrls} alt="uploadPreviewImage" className="uploadPreviewImage" />
                     : null
                 }
                 <button type="submit">Save</button>
