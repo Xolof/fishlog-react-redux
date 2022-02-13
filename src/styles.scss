@@ -14,6 +14,11 @@ $success: #2e8b35;
 
 $error: #e3242b;
 
+* {
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+}
+
 html {
   overflow-y: scroll;
 }
@@ -149,4 +154,31 @@ footer {
 
 .error {
   background-color: $error;
+}
+
+form {
+  input {
+    display: block;
+    width: 100%;
+    padding: 1em;
+    margin-bottom: 0.2em;
+  }
+  button {
+    background-color: $fourth-color;
+    margin-top: 1.2em;
+    display: block;
+    width: 100%;
+    border: 1px solid $first-color;
+    padding: 1em;
+    color: $first-color;
+    cursor: pointer;
+    &:hover {
+      color: $fourth-color;
+      background-color: $third-color;
+    }
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all ease 0.2s;
+  }
 }
