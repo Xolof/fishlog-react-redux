@@ -29,6 +29,11 @@ body {
   padding: 0 0.4em;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
 article {
   flex: 1;
 }
@@ -121,4 +126,13 @@ footer {
 
 .leaflet-popup-tip {
   background-color: color.scale($first-color, $lightness: 70%);
+}
+
+.flashMessage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #0f0f0f;
+  padding: 1em 2em;
+  margin: 0;
 }

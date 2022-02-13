@@ -1,15 +1,13 @@
 const UserStatus = ({ userName }) => {
-
-
     if (userName) {
         return (
             <>
-                <p>Logged in as {userName}</p>
+                <h4>Logged in as {userName}</h4>
             </>
         )
     }
 
-    return (<p>Not logged in</p>)
+    return (<h4>Not logged in</h4>)
 }
 
 export default UserStatus;

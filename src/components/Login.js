@@ -7,7 +7,7 @@ const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [passWord, setPassWord] = useState('');
-    const { setUserName } = useContext(DataContext);
+    const { setUserName, setFlashMessage } = useContext(DataContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,11 +23,12 @@ const Login = () => {
                 const res = await api.get(`http://localhost:8000/api/get_user?token=${response.data.token}`);
                 localStorage.setItem("userName", res.data.user.name);
                 setUserName(res.data.user.name);
+                setFlashMessage("You logged in!");
                 navigate('/');
             }
         } catch (err) {
             console.error(`Error: ${err.message}`);
-            console.error("Could not log in. Check your credentials.")
+            setFlashMessage("Could not log in. Check your credentials.")
         }
     }
 

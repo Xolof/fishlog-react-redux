@@ -4,6 +4,16 @@ import useAxiosFetch from "../hooks/useAxiosFetch";
 const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
+    const [flashMessage, setFlashMessage] = useState(false);
+
+    useEffect(()=>{
+        if (!flashMessage === false) {
+            setTimeout(() => {
+                setFlashMessage(false);
+            },2500);
+        }
+      },[flashMessage])
+
     const [userName, setUserName] = useState(localStorage.getItem("userName"));
 
     const [fishCatches, setFishCatches] = useState([]);
@@ -30,7 +40,8 @@ export const DataProvider = ({ children }) => {
                     search, setSearch,
                     searchResults, fetchError, isLoading,
                     fishCatches, setFishCatches,
-                    userName, setUserName
+                    userName, setUserName,
+                    flashMessage, setFlashMessage
                 }
             }
         >
