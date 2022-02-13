@@ -23,12 +23,18 @@ const Login = () => {
                 const res = await api.get(`http://localhost:8000/api/get_user?token=${response.data.token}`);
                 localStorage.setItem("userName", res.data.user.name);
                 setUserName(res.data.user.name);
-                setFlashMessage("You logged in!");
+                setFlashMessage({
+                    message: "You logged in!",
+                    style: "success"
+                });
                 navigate('/');
             }
         } catch (err) {
             console.error(`Error: ${err.message}`);
-            setFlashMessage("Could not log in. Check your credentials.")
+            setFlashMessage({
+                message: "Could not log in. Check your credentials.",
+                style: "error"
+            })
         }
     }
 

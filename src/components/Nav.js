@@ -10,7 +10,10 @@ const Nav = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("userName");
         setUserName(false);
-        setFlashMessage("You logged out!");
+        setFlashMessage({
+            message: "You logged out!",
+            style: "success"
+        });
     }
 
     return (

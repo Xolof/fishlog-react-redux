@@ -10,6 +10,10 @@ $fourth-color: #134e76;
 
 $black: #0f0f0f;
 
+$success: #2e8b35;
+
+$error: #e3242b;
+
 html {
   overflow-y: scroll;
 }
@@ -61,6 +65,7 @@ article {
     border: 1px solid $first-color;
     padding: 1em;
     color: $first-color;
+    cursor: pointer;
     &:hover {
       color: $fourth-color;
       background-color: $third-color;
@@ -132,7 +137,16 @@ footer {
   position: absolute;
   top: 0;
   right: 0;
-  background-color: #0f0f0f;
+  background-color: $black;
   padding: 1em 2em;
   margin: 0;
+  font-weight: bold;
+}
+
+.success {
+  background-color: $success;
+}
+
+.error {
+  background-color: $error;
 }

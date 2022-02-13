@@ -4,7 +4,7 @@ const FlashMessage = ({ flashMessage }) => {
         <>
             {
                 flashMessage ?
-                <p className="flashMessage">{flashMessage}</p> :
+                <p className={`flashMessage ${flashMessage.style}`}>{flashMessage.message}</p> :
                 null
             }
         </>
