@@ -1,7 +1,7 @@
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import Home from "./components/Home";
+import List from "./components/List";
 import MapView from "./components/MapView";
 import Login from "./components/Login";
 import About from "./components/About";
@@ -19,7 +19,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Home />}
+            element={<List />}
           />
           <Route
             path="/map"
