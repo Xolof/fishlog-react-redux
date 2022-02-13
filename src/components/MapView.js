@@ -12,7 +12,7 @@ const MapView = () => {
             {fetchError && <p className="statusMsg" style={{color: "red"}}>Could not get data</p>}
             {!isLoading && !fetchError &&
                 (searchResults.length ?
-                <LeafletMap fishCatches={searchResults} /> :
+                <LeafletMap fishCatches={searchResults} position={null} /> :
                 <p>No posts</p>)
             }
         </article>
