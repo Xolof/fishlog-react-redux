@@ -1,34 +1,31 @@
-import { useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import FishCatchCard from './FishCatchCard';
 
-const LeafletMap = ({ fishCatches, location, setLocation }) => {
+const LeafletMap = ({ fishCatches, showId }) => {
+
     // const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
     const tileUrl = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
-    
-    const [markerLocation, setMarkerLocation] = useState(null);
 
-    function PositionMarker() {
-        const map = useMapEvents({
-          click(e) {
-            if (setLocation && setMarkerLocation) {
-                setMarkerLocation(e.latlng);
-                setLocation(`${e.latlng.lat},${e.latlng.lng}`);
-            }
-          }
-        })
+    const showCatch = fishCatches.filter(item => item.id === showId)[0];
 
-        if (!location) return null;
-        
-        return markerLocation === null ? null : (
-          <Marker position={markerLocation}></Marker>
-        )
+    let mapPosition = [];
+    let zoom;
+
+    if (showCatch) {
+        const splitPosition = showCatch.location.split(",");
+        const lat = splitPosition[0];
+        const lon = splitPosition[1];
+        mapPosition = [lat, lon];
+        zoom = 14;
+    } else {
+        mapPosition = [55.8, 12.5];
+        zoom = 8;
     }
 
     return (
         <>
             <MapContainer
-                center={[56, 12.6]} zoom={9}
+                center={mapPosition} zoom={zoom}
             >
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -51,7 +48,6 @@ const LeafletMap = ({ fishCatches, location, setLocation }) => {
                     )
                 }) : null
             }
-            <PositionMarker />
             </MapContainer>
         </>
     )
