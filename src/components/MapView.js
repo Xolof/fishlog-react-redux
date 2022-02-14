@@ -6,9 +6,9 @@ import { useParams, Link } from "react-router-dom";
 const MapView = () => {
     const { searchResults, fetchError, isLoading, fishCatches } = useContext(DataContext);
 
-    const id = parseInt(useParams().id);
+    const id = useParams().id;
 
-    if (id != "all" && fishCatches.filter(item => parseInt(item.id) === parseInt(id)).length < 1) {
+    if (id != "all" && fishCatches.filter(item => parseInt(item.id) === parseInt(parseInt(id))).length < 1) {
         return (
             <article>
                 <h2>NotFound</h2>
