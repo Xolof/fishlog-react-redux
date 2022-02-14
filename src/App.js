@@ -27,7 +27,7 @@ function App() {
             element={<Add />}
           />
           <Route
-            path="/map"
+            path="/map/:id"
             element={<MapView />}
           />
           <Route path="/login" element={<Login />} />

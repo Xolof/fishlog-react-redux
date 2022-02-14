@@ -1,8 +1,8 @@
-import LeafletMap from "./LeafletMap";
+import AddMap from "./AddMap";
 import { useState, useContext, useEffect } from "react";
 import api from "../api/api";
 import DataContext from "../context/DataContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Add = () => {
     const [location, setLocation] = useState("");
@@ -17,13 +17,20 @@ const Add = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(uploadImages)
         if (uploadImages.length < 1) return;
         setPreviewImageUrls(URL.createObjectURL(uploadImages));
     }, [uploadImages]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!location) {
+            setFlashMessage({
+                message: "Please set the location by clicking on  the map.",
+                style: "error"
+            });
+            return;
+        }
 
         const uploadImage = uploadImages;
 
@@ -34,8 +41,7 @@ const Add = () => {
             uploadImage,
             username,
             location,
-            date,
-            id: parseInt(fishCatches.sort((a, b) => a.id - b.id)[fishCatches.length - 1].id) + 1
+            date
         };
 
         const formData = new FormData();
@@ -55,27 +61,36 @@ const Add = () => {
             );
 
             await response.data;
-            console.log(response.data);
-            setFishCatches([...fishCatches, data]);
+            setFishCatches([...fishCatches, response.data.data]);
             setFlashMessage({
                 message: "Catch added!",
                 style: "success"
             });
-            navigate('/map');
+            navigate(`/map/${response.data.data.id}`);
         } catch (err) {
             console.error(err)
             console.error(`Error: ${err.message}`);
             setFlashMessage({
-                message: "Could not add the catch.",
+                message: "Could not add catch. Please check your data.",
                 style: "error"
-            })
+            });
         }
+    }
+
+    if (!localStorage.getItem("token")) {
+        return (
+            <article>
+                <h1>Add</h1>
+                <p><Link to="/login">Login</Link> to be able to add a catch.</p>
+            </article>
+        )
     }
 
     return (
         <article>
-            <h1>Add</h1>
-            <LeafletMap location={location} setLocation={setLocation}/>
+            <h2>Add</h2>
+            <p>Click the map to set position.</p>
+            <AddMap location={location} setLocation={setLocation}/>
             {
                 location ?
                 <p>{location.lat} {location.lng}</p>
@@ -129,7 +144,7 @@ const Add = () => {
                     }}
                 />
                 {
-                    previewImageUrls ?
+                    previewImageUrls.length > 0 ?
                     <img src={previewImageUrls} alt="uploadPreviewImage" className="uploadPreviewImage" />
                     : null
                 }

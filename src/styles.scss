@@ -1,18 +1,16 @@
 @use "sass:color";
 
 $first-color: #feffdf;
-
 $second-color: #dde0ab;
-
 $third-color: #97cba9; 
-
 $fourth-color: #134e76;
-
 $black: #0f0f0f;
-
 $success: #2e8b35;
-
 $error: #e3242b;
+
+$mobile: 481px;
+$tablet: 641px; 
+$desktop: 1025px;
 
 * {
   box-sizing:border-box;
@@ -63,10 +61,14 @@ article {
 .navLinks {
   padding:  0 0 1em 0;
   display: flex;
-  justify-content: space-around;
   list-style: none;
+  width: 100%;
+  li {
+    width: 20%;
+  }
   a {
-    flex-grow: 1;
+    width: 100%;
+    display: block;
     border: 1px solid $first-color;
     padding: 1em;
     color: $first-color;
@@ -82,13 +84,17 @@ article {
   }
 }
 
+a {
+  color: $third-color;
+}
+
 footer {
   padding: 1em 0;
 }
 
 .fishCatchCard {
   img {
-    width: 50%;
+    width: 100%;
     height: auto;
   }
   padding-bottom: 0.5em;
@@ -143,10 +149,12 @@ footer {
   position: fixed;
   top: 0;
   right: 0;
+  left: 0;
   background-color: $black;
   padding: 1em 2em;
   margin: 0;
   font-weight: bold;
+  text-align: center;
 }
 
 .success {
@@ -186,5 +194,42 @@ form {
 
 .uploadPreviewImage {
   display: block;
-  width: 50%;
+  width: 100%;
+}
+
+#uploadImage {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+
+#uploadImageLabel {
+    display: block;
+    font-size: 1em;
+    padding: 1em;
+    width: 100%;
+    text-align: center;
+    margin: 1em 0 0.8em;
+    background: $first-color;
+    color: $black;
+    border-radius: 2px;
+    border: 1px solid $first-color;
+    transition: all ease 0.2s;
+    &:hover {
+        background: $third-color;
+        cursor: pointer;
+    }
+}
+
+@media(min-width: $tablet) {
+  .uploadPreviewImage {
+    display: block;
+    width: 50%;
+  }
+  .fishCatchCard {
+    img {
+      width: 50%;
+    }
+  }
 }
