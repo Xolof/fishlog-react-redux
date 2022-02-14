@@ -109,18 +109,22 @@ const Add = () => {
                     value={species}
                     onChange={(e) => setSpecies(e.target.value)}
                 />
-                <label htmlFor="length">Length:</label>
+                <label htmlFor="length">Length (cm):</label>
                 <input
                     id="length"
                     type="number" 
+                    min="0"
+                    max="9999"
                     required
                     value={length}
                     onChange={(e) => setLength(e.target.value)}
                 />
-                <label htmlFor="weight">Weight:</label>
+                <label htmlFor="weight">Weight (g):</label>
                 <input
                     id="weight"
-                    type="number" 
+                    type="number"
+                    min="0"
+                    max="9999999"
                     required
                     value={weight}
                     onChange={(e) => setWeight(e.target.value)}
