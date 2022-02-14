@@ -8,7 +8,7 @@ const MapView = () => {
 
     const id = useParams().id;
 
-    if (id != "all" && fishCatches.filter(item => parseInt(item.id) === parseInt(parseInt(id))).length < 1) {
+    if (id != "all" && fishCatches.filter(item => parseInt(item.id) === parseInt(id)).length < 1) {
         return (
             <article>
                 <h2>NotFound</h2>
@@ -24,7 +24,7 @@ const MapView = () => {
             {fetchError && <p className="statusMsg" style={{color: "red"}}>Could not get data</p>}
             {!isLoading && !fetchError &&
                 (searchResults.length ?
-                <LeafletMap fishCatches={searchResults} position={null} showId={id} /> :
+                <LeafletMap fishCatches={searchResults} position={null} showId={parseInt(id)} /> :
                 <p>No posts</p>)
             }
         </article>
