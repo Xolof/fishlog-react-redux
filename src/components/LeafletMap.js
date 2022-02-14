@@ -43,6 +43,18 @@ const LeafletMap = ({ fishCatches, showId }) => {
                         <Marker position={[lat, lon]} key={fishCatch.id}>
                             <Popup>
                                 <FishCatchCard fishCatch={fishCatch} />
+                                {
+                                    fishCatch.username === localStorage.getItem("userName") ?
+                                    <>
+                                        <button
+                                            onClick={() => console.log("edit " + fishCatch.id)}
+                                        >Edit</button>
+                                        <button
+                                            onClick={() => console.log("delete "  + fishCatch.id)}
+                                        >Delete</button>
+                                    </>
+                                    : null
+                                }
                             </Popup>
                         </Marker>
                     )
