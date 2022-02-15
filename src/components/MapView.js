@@ -4,7 +4,7 @@ import LeafletMap from "./LeafletMap";
 import { useParams, Link } from "react-router-dom";
 
 const MapView = () => {
-    const { setSearch, searchResults, fetchError, isLoading, fishCatches } = useContext(DataContext);
+    const { setSearch, searchResults, fetchError, isLoading, fishCatches, setFishCatches } = useContext(DataContext);
 
     const id = useParams().id;
 
@@ -31,7 +31,7 @@ const MapView = () => {
             {fetchError && <p className="statusMsg" style={{color: "red"}}>Could not get data</p>}
             {!isLoading && !fetchError &&
                 (searchResults.length ?
-                <LeafletMap fishCatches={searchResults} position={null} showId={parseInt(id)} /> :
+                <LeafletMap fishCatches={searchResults} setFishCatches={setFishCatches} position={null} showId={parseInt(id)} /> :
                 <p>No posts</p>)
             }
         </article>

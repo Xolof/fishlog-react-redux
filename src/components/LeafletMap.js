@@ -1,7 +1,13 @@
+import { useContext } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import FishCatchCard from './FishCatchCard';
+import { useNavigate } from "react-router-dom";
+import api from "../api/api";
+import DataContext from "../context/DataContext";
 
-const LeafletMap = ({ fishCatches, showId }) => {
+const LeafletMap = ({ fishCatches, setFishCatches, showId }) => {
+    const { setFlashMessage } = useContext(DataContext);
+    const navigate = useNavigate();
 
     // const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
     const tileUrl = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
@@ -20,6 +26,35 @@ const LeafletMap = ({ fishCatches, showId }) => {
     } else {
         mapPosition = [55.8, 12.5];
         zoom = 8;
+    }
+
+    async function handleDelete (id) {
+        try {
+            const response = await api.delete(
+                `/api/delete/${id}`,
+                {
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                }
+            );
+
+            await response.data;
+            console.log(response.data.data);
+            setFishCatches(fishCatches.filter(item => item.id != id));
+            setFlashMessage({
+                message: "Catch deleted!",
+                style: "success"
+            });
+            navigate(`/map/all`);
+        } catch (err) {
+            console.error(err)
+            console.error(`Error: ${err.message}`);
+            setFlashMessage({
+                message: "Could not delete catch. Please check your data.",
+                style: "error"
+            });
+        }
     }
 
     return (
@@ -47,10 +82,10 @@ const LeafletMap = ({ fishCatches, showId }) => {
                                     fishCatch.username === localStorage.getItem("userName") ?
                                     <>
                                         <button
-                                            onClick={() => console.log("edit " + fishCatch.id)}
+                                            onClick={() => navigate(`/edit/${fishCatch.id}`)}
                                         >Edit</button>
                                         <button
-                                            onClick={() => console.log("delete "  + fishCatch.id)}
+                                            onClick={() => handleDelete(fishCatch.id)}
                                         >Delete</button>
                                     </>
                                     : null
