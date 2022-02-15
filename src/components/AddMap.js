@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet'
 
-const LeafletMap = ({ location, setLocation }) => {
-
+const LeafletMap = ({ location, setLocation, center }) => {
     // const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
     const tileUrl = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
     
     const [markerLocation, setMarkerLocation] = useState(null);
+    const mapCenter = center ?? [56, 12.6];
 
     function PositionMarker() {
         const map = useMapEvents({
@@ -16,17 +16,26 @@ const LeafletMap = ({ location, setLocation }) => {
                 setLocation(`${e.latlng.lat},${e.latlng.lng}`);
             }
           }
-        })
+        });
 
-        return markerLocation === null ? null : (
-            <Marker position={markerLocation}></Marker>
-        )
+        if (location && typeof location === "string") {
+            const splitPosition = location.split(",");
+            const lat = splitPosition[0];
+            const lon = splitPosition[1];
+            location = [lat, lon];
+        }
+
+        const position = markerLocation ?? location ?? null;
+
+        return position ? (
+            <Marker position={position}></Marker>
+        ) : null;
     }
 
     return (
         <>
             <MapContainer
-                center={[56, 12.6]} zoom={9}
+                center={mapCenter} zoom={9}
             >
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

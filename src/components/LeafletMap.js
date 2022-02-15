@@ -12,7 +12,7 @@ const LeafletMap = ({ fishCatches, setFishCatches, showId }) => {
     // const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
     const tileUrl = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
 
-    const showCatch = fishCatches.filter(item => item.id === showId)[0];
+    const showCatch = fishCatches.filter(item => parseInt(item.id) === parseInt(showId))[0];
 
     let mapPosition = [];
     let zoom;
@@ -40,7 +40,6 @@ const LeafletMap = ({ fishCatches, setFishCatches, showId }) => {
             );
 
             await response.data;
-            console.log(response.data.data);
             setFishCatches(fishCatches.filter(item => item.id != id));
             setFlashMessage({
                 message: "Catch deleted!",

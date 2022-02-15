@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import List from "./components/List";
 import MapView from "./components/MapView";
 import Add from "./components/Add";
+import Edit from "./components/Edit";
 import Login from "./components/Login";
 import About from "./components/About";
 import NotFound from "./components/NotFound";
@@ -25,6 +26,10 @@ function App() {
           <Route
             path="/add"
             element={<Add />}
+          />
+          <Route
+            path="/edit/:id"
+            element={<Edit />}
           />
           <Route
             path="/map/:id"

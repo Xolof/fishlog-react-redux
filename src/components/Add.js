@@ -61,6 +61,8 @@ const Add = () => {
             );
 
             await response.data;
+            const newCatch = response.data.data;
+            newCatch.username = localStorage.getItem("userName");
             setFishCatches([...fishCatches, response.data.data]);
             setFlashMessage({
                 message: "Catch added!",
@@ -91,12 +93,6 @@ const Add = () => {
             <h2>Add</h2>
             <p>Click the map to set position.</p>
             <AddMap location={location} setLocation={setLocation}/>
-            {
-                location ?
-                <p>{location.lat} {location.lng}</p>
-                : null 
-            }
-
             <form
                 className="addForm"
                 onSubmit={handleSubmit}
