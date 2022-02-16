@@ -11,7 +11,6 @@ const Edit = () => {
     const [length, setLength] = useState("");
     const [weight, setWeight] = useState("");
     const [error, setError] = useState(null);
-    const [loaded, setLoaded] = useState(false);
     const [mapCenter, setMapCenter] = useState(null);
     const [uploadImages, setUploadImages] = useState([]);
     const [previewImageUrls, setPreviewImageUrls] = useState([]);
