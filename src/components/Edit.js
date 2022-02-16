@@ -37,7 +37,8 @@ const Edit = () => {
             const lon = parseFloat(splitPosition[1]);
             setLocation([lat, lon]);
             setMapCenter([lat, lon]);
-            setPreviewImageUrls([`http://localhost:8000${res.data.imageurl}`]);
+            const imageUrl = `http://localhost:8000${res.data.imageurl}`;
+            setPreviewImageUrls([imageUrl]);
         }).catch(err => {
             setError(err)
         });
@@ -65,17 +66,18 @@ const Edit = () => {
             return;
         }
 
-        const uploadImage = uploadImages;
-
         const data = {
             id,
             species,
             length,
             weight,
-            uploadImage,
             location,
             date
         };
+
+        if (uploadImages.size) {
+            data.uploadImage = uploadImages;        
+        }
 
         const formData = new FormData();
         for (const key in data) {
@@ -175,7 +177,6 @@ const Edit = () => {
                     <input
                         id="uploadImage"
                         type="file"
-                        value={uploadImages[0]}
                         onChange={(e) => {
                             setUploadImages(...e.target.files)
                         }}
