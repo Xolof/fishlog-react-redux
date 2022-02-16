@@ -39,7 +39,7 @@ const Edit = () => {
             const lon = parseFloat(splitPosition[1]);
             setLocation([lat, lon]);
             setMapCenter([lat, lon]);
-            // setUploadImages([res.data.imageurl]);
+            setPreviewImageUrls([`http://localhost:8000${res.data.imageurl}`]);
         }).catch(err => {
             setError(err)
         });
@@ -182,11 +182,7 @@ const Edit = () => {
                             setUploadImages(...e.target.files)
                         }}
                     />
-                    {
-                        previewImageUrls.length > 0 ?
-                        <img src={previewImageUrls} alt="uploadPreviewImage" className="uploadPreviewImage" />
-                        : null
-                    }
+                    <img src={previewImageUrls} alt="Catch image" className="uploadPreviewImage" />
                     <button type="submit">Save</button>
                 </form>
             </article>
