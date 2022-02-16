@@ -99,11 +99,9 @@ const Edit = () => {
             const newCatch = response.data.data;
             newCatch.username = localStorage.getItem("userName");
 
-            setFishCatches([
-                fishCatches.map(item => {
+            setFishCatches(fishCatches.map(item => {
                     return parseInt(item.id) === parseInt(newCatch.id) ? newCatch : item;
-                })
-            ]);
+                }));
 
             setFlashMessage({
                 message: "Catch updated!",
