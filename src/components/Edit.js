@@ -173,7 +173,7 @@ const Edit = () => {
                         value={date}
                         onChange={(e) => setDate(e.target.value)}
                     />
-                    <label htmlFor="uploadImage" id="uploadImageLabel">Add image</label>
+                    <label htmlFor="uploadImage" id="uploadImageLabel">Change image</label>
                     <input
                         id="uploadImage"
                         type="file"
