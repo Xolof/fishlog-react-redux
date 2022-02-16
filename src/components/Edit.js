@@ -17,7 +17,6 @@ const Edit = () => {
     const [previewImageUrls, setPreviewImageUrls] = useState([]);
     const [date, setDate] = useState("");
     const { setFlashMessage, fishCatches, setFishCatches } = useContext(DataContext);
-    const username = localStorage.getItem("userName");
     const navigate = useNavigate();
     const params = useParams();
     const id = params.id;
