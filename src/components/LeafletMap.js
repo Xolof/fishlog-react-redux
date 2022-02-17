@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import DataContext from "../context/DataContext";
 
-const LeafletMap = ({ fishCatches, setFishCatches, showId }) => {
-    const { setFlashMessage } = useContext(DataContext);
+const LeafletMap = ({ searchResults, showId }) => {
+    const { setFlashMessage, fishCatches, setFishCatches } = useContext(DataContext);
     const navigate = useNavigate();
 
     // const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
@@ -40,7 +40,9 @@ const LeafletMap = ({ fishCatches, setFishCatches, showId }) => {
             );
 
             await response.data;
-            setFishCatches(fishCatches.filter(item => item.id != id));
+            setFishCatches(fishCatches.filter(item => {
+                return parseInt(item.id) !== parseInt(id)
+            }));
             setFlashMessage({
                 message: "Catch deleted!",
                 style: "success"
@@ -67,8 +69,8 @@ const LeafletMap = ({ fishCatches, setFishCatches, showId }) => {
                 className="map-tiles"
             />
             {
-                fishCatches ?
-                fishCatches.map((fishCatch) => {
+                searchResults ?
+                searchResults.map((fishCatch) => {
                     const splitPosition = fishCatch.location.split(",");
                     const lat = splitPosition[0];
                     const lon = splitPosition[1];

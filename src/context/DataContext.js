@@ -28,9 +28,9 @@ export const DataProvider = ({ children }) => {
 
     useEffect(() => {
         const filteredResults = fishCatches.filter(fishCatch => {
-            return ((fishCatch.species).toLowerCase()).includes(search.toLowerCase())
+            return ((fishCatch.species).toLowerCase()).includes(search.toLowerCase());
         });
-    setSearchResults(filteredResults);
+        setSearchResults(filteredResults);
     }, [fishCatches, search]);
 
     return (
