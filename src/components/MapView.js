@@ -29,7 +29,7 @@ const MapView = () => {
                 onChange={(e) => {setSearch(e.target.value)}}
             />
             {isLoading && !fetchError && <p className="statusMsg">Loading...</p>}
-            {fetchError && <p className="statusMsg" style={{color: "red"}}>Could not get data</p>}
+            {fetchError && <p className="error">Could not get data</p>}
             {!isLoading && !fetchError &&
                 (searchResults.length ?
                 <LeafletMap fishCatches={searchResults} setFishCatches={setFishCatches} showId={parseInt(id)} /> :
