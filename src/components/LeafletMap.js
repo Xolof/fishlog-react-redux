@@ -82,9 +82,11 @@ const LeafletMap = ({ fishCatches, setFishCatches, showId }) => {
                                     <>
                                         <button
                                             onClick={() => navigate(`/edit/${fishCatch.id}`)}
+                                            className="editButton"
                                         >Edit</button>
                                         <button
                                             onClick={() => handleDelete(fishCatch.id)}
+                                            className="deleteButton"
                                         >Delete</button>
                                     </>
                                     : null
