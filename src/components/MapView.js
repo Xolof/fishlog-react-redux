@@ -4,7 +4,7 @@ import LeafletMap from "./LeafletMap";
 import { useParams, Link } from "react-router-dom";
 
 const MapView = () => {
-    const { setSearch, searchResults, fetchError, isLoading, fishCatches, setFishCatches } = useContext(DataContext);
+    const { search, setSearch , searchResults, fetchError, isLoading, fishCatches, setFishCatches } = useContext(DataContext);
 
     const id = useParams().id;
 
@@ -25,6 +25,7 @@ const MapView = () => {
                 type="search"
                 name="search"
                 id="search"
+                value={search}
                 onChange={(e) => {setSearch(e.target.value)}}
             />
             {isLoading && !fetchError && <p className="statusMsg">Loading...</p>}
