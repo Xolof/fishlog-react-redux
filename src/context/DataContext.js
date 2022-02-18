@@ -4,7 +4,7 @@ import useAxiosFetch from "../hooks/useAxiosFetch";
 const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
-    const API_URL = "http://localhost:8000";
+    const API_URL = process.env.REACT_APP_API_URL;
 
     const [flashMessage, setFlashMessage] = useState(false);
 
