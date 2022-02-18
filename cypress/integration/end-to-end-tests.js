@@ -1,12 +1,12 @@
 import 'cypress-file-upload';
 
-const API_URL = "http://localhost:3000/map/all";
+const URL = `http://localhost:3000/map/all`;
 
 const species = "torsk";
 
 describe("Test filtering for a species", () => {
-    it(`Visits ${API_URL}`, () => {
-        cy.visit(API_URL)        
+    it(`Visits ${URL}`, () => {
+        cy.visit(URL)        
         cy.get("#search").type(species)
         cy.get(".leaflet-marker-icon").first().click({ force: true })
         cy.get(".leaflet-popup-content-wrapper").contains(species)
@@ -14,16 +14,16 @@ describe("Test filtering for a species", () => {
 })
 
 describe("Test going to Add Page without logging in", () => {
-    it(`Visits ${API_URL}`, () => {
-        cy.visit(API_URL)        
+    it(`Visits ${URL}`, () => {
+        cy.visit(URL)        
         cy.get('a:contains(Add)').click()
         cy.contains("Login to be able to add a catch")
     })
 })
 
 describe("Test logging in, then logging out", () => {
-    it(`Visits ${API_URL}`, () => {
-        cy.visit(API_URL)
+    it(`Visits ${URL}`, () => {
+        cy.visit(URL)
         cy.get('a:contains(Login)').click()
         cy.get("#email").type("kjell@ullared.se")
         cy.get("#passWord").type("pass123")
@@ -35,8 +35,8 @@ describe("Test logging in, then logging out", () => {
 })
 
 describe("Test logging in, adding a fishcatch, deleting it and logging out.", () => {
-    it(`Visits ${API_URL}`, () => {
-        cy.visit(API_URL)
+    it(`Visits ${URL}`, () => {
+        cy.visit(URL)
         cy.get('a:contains(Login)').click()
         cy.get("#email").type("kjell@ullared.se")
         cy.get("#passWord").type("pass123")
