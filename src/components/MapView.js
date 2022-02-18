@@ -27,7 +27,7 @@ const MapView = () => {
             {!isLoading && !fetchError &&
                 (searchResults.length ?
                 <LeafletMap searchResults={searchResults} showId={parseInt(id)} /> :
-                <p>No posts</p>)
+                <p>Nothing found.</p>)
             }
         </article>
     )

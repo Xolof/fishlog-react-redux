@@ -15,7 +15,7 @@ const List = () => {
             {!isLoading && !fetchError &&
                 (searchResults.length ?
                 <Feed fishCatches={searchResults} /> :
-                <p>No posts</p>)
+                <p>Nothing found.</p>)
             }
         </article>
     )
