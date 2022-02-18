@@ -4,6 +4,8 @@ import useAxiosFetch from "../hooks/useAxiosFetch";
 const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
+    const API_URL = "http://localhost:8000";
+
     const [flashMessage, setFlashMessage] = useState(false);
 
     useEffect(()=>{
@@ -20,7 +22,7 @@ export const DataProvider = ({ children }) => {
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
 
-    const { data, fetchError, isLoading } = useAxiosFetch("http://localhost:8000/api/public_fishcatch");
+    const { data, fetchError, isLoading } = useAxiosFetch(`${API_URL}/api/public_fishcatch`);
 
     useEffect(() => {
         setFishCatches(data);
@@ -41,7 +43,8 @@ export const DataProvider = ({ children }) => {
                     searchResults, fetchError, isLoading,
                     fishCatches, setFishCatches,
                     userName, setUserName,
-                    flashMessage, setFlashMessage
+                    flashMessage, setFlashMessage,
+                    API_URL
                 }
             }
         >

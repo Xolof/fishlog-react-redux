@@ -15,7 +15,7 @@ const Edit = () => {
     const [uploadImages, setUploadImages] = useState([]);
     const [previewImageUrls, setPreviewImageUrls] = useState([]);
     const [date, setDate] = useState("");
-    const { setFlashMessage, fishCatches, setFishCatches } = useContext(DataContext);
+    const { setFlashMessage, fishCatches, setFishCatches, API_URL } = useContext(DataContext);
     const navigate = useNavigate();
     const params = useParams();
     const id = params.id;
@@ -37,7 +37,7 @@ const Edit = () => {
             const lon = parseFloat(splitPosition[1]);
             setLocation([lat, lon]);
             setMapCenter([lat, lon]);
-            const imageUrl = `http://localhost:8000${res.data.imageurl}`;
+            const imageUrl = `${API_URL}${res.data.imageurl}`;
             setPreviewImageUrls([imageUrl]);
         }).catch(err => {
             setError(err)

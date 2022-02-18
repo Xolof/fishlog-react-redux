@@ -7,7 +7,7 @@ const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [passWord, setPassWord] = useState('');
-    const { setUserName, setFlashMessage } = useContext(DataContext);
+    const { setUserName, setFlashMessage, API_URL } = useContext(DataContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,7 +20,7 @@ const Login = () => {
             if (response.data.token) {
                 await response.data.token;
                 localStorage.setItem("token", response.data.token);
-                const res = await api.get(`http://localhost:8000/api/get_user?token=${response.data.token}`);
+                const res = await api.get(`${API_URL}/api/get_user?token=${response.data.token}`);
                 localStorage.setItem("userName", res.data.user.name);
                 setUserName(res.data.user.name);
                 setFlashMessage({
