@@ -2,12 +2,13 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import DataContext from "../context/DataContext";
+import showToast from "../registerServiceWorker";
 
 const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [passWord, setPassWord] = useState('');
-    const { setUserName, setFlashMessage, API_URL } = useContext(DataContext);
+    const { setUserName, API_URL } = useContext(DataContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,18 +24,11 @@ const Login = () => {
                 const res = await api.get(`${API_URL}/api/get_user?token=${response.data.token}`);
                 localStorage.setItem("userName", res.data.user.name);
                 setUserName(res.data.user.name);
-                setFlashMessage({
-                    message: "You logged in!",
-                    style: "success"
-                });
-                navigate('/');
+                showToast("You logged in!");
             }
         } catch (err) {
             console.error(`Error: ${err.message}`);
-            setFlashMessage({
-                message: "Could not log in. Check your credentials.",
-                style: "error"
-            })
+            showToast("Login failed, please check username and password.");
         }
     }
 

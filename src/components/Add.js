@@ -3,6 +3,7 @@ import { useState, useContext, useEffect } from "react";
 import api from "../api/api";
 import DataContext from "../context/DataContext";
 import { useNavigate, Link } from "react-router-dom";
+import showToast from "../registerServiceWorker";
 
 const Add = () => {
     const [location, setLocation] = useState("");
@@ -12,7 +13,7 @@ const Add = () => {
     const [uploadImages, setUploadImages] = useState([]);
     const [previewImageUrls, setPreviewImageUrls] = useState([]);
     const [date, setDate] = useState("");
-    const { setFlashMessage, fishCatches, setFishCatches } = useContext(DataContext);
+    const { fishCatches, setFishCatches } = useContext(DataContext);
     const username = localStorage.getItem("userName");
     const navigate = useNavigate();
 
@@ -25,10 +26,7 @@ const Add = () => {
         e.preventDefault();
 
         if (!location) {
-            setFlashMessage({
-                message: "Please set the location by clicking on  the map.",
-                style: "error"
-            });
+            showToast("Please set the location by clicking on the map.");
             return;
         }
 
@@ -64,18 +62,12 @@ const Add = () => {
             const newCatch = response.data.data;
             newCatch.username = localStorage.getItem("userName");
             setFishCatches([...fishCatches, response.data.data]);
-            setFlashMessage({
-                message: "Catch added!",
-                style: "success"
-            });
+            showToast("Catch added!");
             navigate(`/map/${response.data.data.id}`);
         } catch (err) {
             console.error(err)
             console.error(`Error: ${err.message}`);
-            setFlashMessage({
-                message: "Could not add catch. Please check your data.",
-                style: "error"
-            });
+            showToast("Could not add catch, please check your data.");
         }
     }
 

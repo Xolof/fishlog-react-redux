@@ -4,6 +4,7 @@ import { useState, useContext, useEffect } from "react";
 import api from "../api/api";
 import DataContext from "../context/DataContext";
 import { useNavigate, useParams, Link } from "react-router-dom";
+import showToast from "../registerServiceWorker";
 
 const Edit = () => {
     const [location, setLocation] = useState("");
@@ -15,7 +16,7 @@ const Edit = () => {
     const [uploadImages, setUploadImages] = useState([]);
     const [previewImageUrls, setPreviewImageUrls] = useState([]);
     const [date, setDate] = useState("");
-    const { setFlashMessage, fishCatches, setFishCatches, API_URL } = useContext(DataContext);
+    const { fishCatches, setFishCatches, API_URL } = useContext(DataContext);
     const navigate = useNavigate();
     const params = useParams();
     const id = params.id;
@@ -59,10 +60,7 @@ const Edit = () => {
         e.preventDefault();
 
         if (!location) {
-            setFlashMessage({
-                message: "Please set the location by clicking on  the map.",
-                style: "error"
-            });
+            showToast("Please set the location by clicking on the map.");
             return;
         }
 
@@ -103,18 +101,13 @@ const Edit = () => {
                     return parseInt(item.id) === parseInt(newCatch.id) ? newCatch : item;
                 }));
 
-            setFlashMessage({
-                message: "Catch updated!",
-                style: "success"
-            });
+            showToast("Catch updated");
             navigate(`/map/${response.data.data.id}`);
         } catch (err) {
             console.error(err)
             console.error(`Error: ${err.message}`);
-            setFlashMessage({
-                message: "Could not add catch. Please check your data.",
-                style: "error"
-            });
+            showToast("Could not update catch, please check your data.");
+
         }
     }
 

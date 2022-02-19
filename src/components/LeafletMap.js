@@ -4,9 +4,10 @@ import FishCatchCard from './FishCatchCard';
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import DataContext from "../context/DataContext";
+import showToast from '../registerServiceWorker';
 
 const LeafletMap = ({ searchResults, showId }) => {
-    const { setFlashMessage, fishCatches, setFishCatches } = useContext(DataContext);
+    const { fishCatches, setFishCatches } = useContext(DataContext);
     const navigate = useNavigate();
 
     // const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
@@ -43,18 +44,12 @@ const LeafletMap = ({ searchResults, showId }) => {
             setFishCatches(fishCatches.filter(item => {
                 return parseInt(item.id) !== parseInt(id)
             }));
-            setFlashMessage({
-                message: "Catch deleted!",
-                style: "success"
-            });
+            showToast("Catch deleted!");
             navigate(`/map/all`);
         } catch (err) {
             console.error(err)
             console.error(`Error: ${err.message}`);
-            setFlashMessage({
-                message: "Could not delete catch. Please check your data.",
-                style: "error"
-            });
+            showToast("Could not delete catch.");
         }
     }
 

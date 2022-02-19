@@ -1,23 +1,23 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import DataContext from "../context/DataContext";
+import { ToastContainer } from 'react-toastify';
+import showToast from "../registerServiceWorker";
 
 const Nav = () => {
-    const { userName, setUserName, setFlashMessage } = useContext(DataContext);
+    const { userName, setUserName } = useContext(DataContext);
 
     function handleLogout(e) {
         e.preventDefault();
         localStorage.removeItem("token");
         localStorage.removeItem("userName");
         setUserName(false);
-        setFlashMessage({
-            message: "You logged out!",
-            style: "success"
-        });
+        showToast("You logged out!");
     }
 
     return (
         <>
+            <ToastContainer />
             <nav>
                 <ul className="navLinks">
                     <li>

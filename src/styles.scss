@@ -164,27 +164,6 @@ footer {
   background-color: color.scale($first-color, $lightness: 70%);
 }
 
-.flashMessage {
-  z-index: 9999999;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  background-color: $black;
-  padding: 1em 2em;
-  margin: 0;
-  font-weight: bold;
-  text-align: center;
-}
-
-.success {
-  background-color: $success;
-}
-
-.error {
-  background-color: $error;
-}
-
 form {
   input {
     display: block;

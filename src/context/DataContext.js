@@ -6,16 +6,6 @@ const DataContext = createContext({});
 export const DataProvider = ({ children }) => {
     const API_URL = process.env.REACT_APP_API_URL;
 
-    const [flashMessage, setFlashMessage] = useState(false);
-
-    useEffect(()=>{
-        if (!flashMessage === false) {
-            setTimeout(() => {
-                setFlashMessage(false);
-            },2500);
-        }
-      },[flashMessage])
-
     const [userName, setUserName] = useState(localStorage.getItem("userName"));
 
     const [fishCatches, setFishCatches] = useState([]);
@@ -43,7 +33,6 @@ export const DataProvider = ({ children }) => {
                     searchResults, fetchError, isLoading,
                     fishCatches, setFishCatches,
                     userName, setUserName,
-                    flashMessage, setFlashMessage,
                     API_URL
                 }
             }
