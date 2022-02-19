@@ -21,33 +21,36 @@ const Edit = () => {
     const params = useParams();
     const id = params.id;
 
-    useEffect(async () => {
+    useEffect(() => {
         setIsLoading(true);
-        try {
-            const res = await api.get(
-                `/api/fishcatch/${id}`,                {
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem("token")
-                }
-            });
-            setSpecies(res.data.species);
-            setLength(res.data.length);
-            setWeight(res.data.weight);
-            setDate(res.data.date);
-            setLocation(res.data.location);
-            const splitPosition = res.data.location.split(",");
-            const lat = parseFloat(splitPosition[0]);
-            const lon = parseFloat(splitPosition[1]);
-            setLocation([lat, lon]);
-            setMapCenter([lat, lon]);
-            const imageUrl = `${API_URL}${res.data.imageurl}`;
-            setPreviewImageUrls([imageUrl]);
-        } catch (err) {
-            setError(err)
-
-        } finally {
-            setIsLoading(false)
+        async function fetchCatch () {
+            try {
+                const res = await api.get(
+                    `/api/fishcatch/${id}`,                {
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                });
+                setSpecies(res.data.species);
+                setLength(res.data.length);
+                setWeight(res.data.weight);
+                setDate(res.data.date);
+                setLocation(res.data.location);
+                const splitPosition = res.data.location.split(",");
+                const lat = parseFloat(splitPosition[0]);
+                const lon = parseFloat(splitPosition[1]);
+                setLocation([lat, lon]);
+                setMapCenter([lat, lon]);
+                const imageUrl = `${API_URL}${res.data.imageurl}`;
+                setPreviewImageUrls([imageUrl]);
+            } catch (err) {
+                setError(err)
+    
+            } finally {
+                setIsLoading(false)
+            }
         }
+        fetchCatch();        
     }, []);
 
     useEffect(() => {
