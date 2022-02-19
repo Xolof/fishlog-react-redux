@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import DataContext from "../context/DataContext";
 import { ToastContainer } from 'react-toastify';
@@ -21,13 +21,13 @@ const Nav = () => {
             <nav>
                 <ul className="navLinks">
                     <li>
-                        <Link to="/add">Add</Link>
+                        <NavLink to="/add" activeClassName="active">Add</NavLink>
                     </li>
                     <li>
-                        <Link to="/">List</Link>
+                        <NavLink to="/" activeClassName="active">List</NavLink>
                     </li>
                     <li>
-                        <Link to="/map/all">Map</Link>
+                        <NavLink to="/map/all" activeClassName="active">Map</NavLink>
                     </li>
                     <li>
                     {
@@ -35,11 +35,11 @@ const Nav = () => {
                         <a
                             onClick={handleLogout}
                         >Logout</a> :
-                            <Link to="/login">Login</Link>
+                            <NavLink to="/login" activeClassName="active">Login</NavLink>
                     }
                     </li>
                     <li>
-                        <Link to="/about">About</Link>
+                        <NavLink to="/about" activeClassName="active">About</NavLink>
                     </li>
                 </ul>
             </nav>
