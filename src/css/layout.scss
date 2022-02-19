@@ -1,0 +1,39 @@
+header {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  article {
+    flex: 1;
+  }
+  
+  .navLinks {
+    padding:  0 0 1em 0;
+    display: flex;
+    list-style: none;
+    width: 100%;
+    li {
+      width: 20%;
+    }
+    a {
+      width: 100%;
+      display: block;
+      border: 1px solid $first-color;
+      padding: 1em;
+      color: $first-color;
+      cursor: pointer;
+      &:hover {
+        color: $fourth-color;
+        background-color: $third-color;
+      }
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all ease 0.2s;
+    }
+  }
+  
+  footer {
+    padding: 1em 0;
+  }
+  

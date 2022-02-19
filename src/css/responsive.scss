@@ -1,0 +1,16 @@
+$mobile: 481px;
+$tablet: 641px; 
+$desktop: 1025px;
+
+@media(min-width: $tablet) {
+  .uploadPreviewImage {
+    display: block;
+    width: 50%;
+  }
+
+  .fishCatchCard {
+    img {
+      width: 50%;
+    }
+  }
+}
