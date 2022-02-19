@@ -18,6 +18,16 @@ const Login = () => {
                 email,
                 password: passWord
             });
+
+            if (response.data.error) {
+                for (let key in response.data.error) {
+                    for (let message of response.data.error[key]) {
+                        errorToast(message);
+                    }
+                }
+                return;
+            }
+
             if (response.data.token) {
                 await response.data.token;
                 localStorage.setItem("token", response.data.token);
