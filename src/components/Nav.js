@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import DataContext from "../context/DataContext";
 import { ToastContainer } from 'react-toastify';
-import showToast from "../registerServiceWorker";
+import { infoToast } from "../toastService";
 
 const Nav = () => {
     const { userName, setUserName } = useContext(DataContext);
@@ -12,7 +12,7 @@ const Nav = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("userName");
         setUserName(false);
-        showToast("You logged out!");
+        infoToast("You logged out.");
     }
 
     return (

@@ -7,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import App from './App';
 import { BrowserRouter as Router } from "react-router-dom";
 import { toast } from "react-toastify";
-import registerServiceWorker from './registerServiceWorker';
 import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
@@ -18,6 +17,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-registerServiceWorker(toast);
-

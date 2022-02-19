@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from "react";
 import api from "../api/api";
 import DataContext from "../context/DataContext";
 import { useNavigate, Link } from "react-router-dom";
-import showToast from "../registerServiceWorker";
+import { successToast, infoToast, errorToast } from "../toastService";
 
 const Add = () => {
     const [location, setLocation] = useState("");
@@ -26,7 +26,7 @@ const Add = () => {
         e.preventDefault();
 
         if (!location) {
-            showToast("Please set the location by clicking on the map.");
+            infoToast("Please set the location by clicking on the map.");
             return;
         }
 
@@ -62,12 +62,12 @@ const Add = () => {
             const newCatch = response.data.data;
             newCatch.username = localStorage.getItem("userName");
             setFishCatches([...fishCatches, response.data.data]);
-            showToast("Catch added!");
+            successToast("Catch added!");
             navigate(`/map/${response.data.data.id}`);
         } catch (err) {
             console.error(err)
             console.error(`Error: ${err.message}`);
-            showToast("Could not add catch, please check your data.");
+            errorToast("Could not add catch, please check your data.");
         }
     }
 

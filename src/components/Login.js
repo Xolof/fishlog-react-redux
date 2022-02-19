@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import DataContext from "../context/DataContext";
-import showToast from "../registerServiceWorker";
+import { successToast, errorToast } from "../toastService";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -24,11 +24,11 @@ const Login = () => {
                 const res = await api.get(`${API_URL}/api/get_user?token=${response.data.token}`);
                 localStorage.setItem("userName", res.data.user.name);
                 setUserName(res.data.user.name);
-                showToast("You logged in!");
+                successToast("You logged in!");
             }
         } catch (err) {
             console.error(`Error: ${err.message}`);
-            showToast("Login failed, please check username and password.");
+            errorToast("Login failed, please check username and password.");
         }
     }
 

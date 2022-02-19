@@ -4,7 +4,7 @@ import FishCatchCard from './FishCatchCard';
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import DataContext from "../context/DataContext";
-import showToast from '../registerServiceWorker';
+import { successToast, errorToast } from "../toastService";
 
 const LeafletMap = ({ searchResults, showId }) => {
     const { fishCatches, setFishCatches } = useContext(DataContext);
@@ -44,12 +44,12 @@ const LeafletMap = ({ searchResults, showId }) => {
             setFishCatches(fishCatches.filter(item => {
                 return parseInt(item.id) !== parseInt(id)
             }));
-            showToast("Catch deleted!");
+            successToast("Catch deleted!");
             navigate(`/map/all`);
         } catch (err) {
             console.error(err)
             console.error(`Error: ${err.message}`);
-            showToast("Could not delete catch.");
+            errorToast("Could not delete catch.");
         }
     }
 

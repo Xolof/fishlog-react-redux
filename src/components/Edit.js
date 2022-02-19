@@ -4,7 +4,7 @@ import { useState, useContext, useEffect } from "react";
 import api from "../api/api";
 import DataContext from "../context/DataContext";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import showToast from "../registerServiceWorker";
+import { successToast, infoToast, errorToast } from "../toastService";
 
 const Edit = () => {
     const [location, setLocation] = useState("");
@@ -60,7 +60,7 @@ const Edit = () => {
         e.preventDefault();
 
         if (!location) {
-            showToast("Please set the location by clicking on the map.");
+            infoToast("Please set the location by clicking on the map.");
             return;
         }
 
@@ -101,12 +101,12 @@ const Edit = () => {
                     return parseInt(item.id) === parseInt(newCatch.id) ? newCatch : item;
                 }));
 
-            showToast("Catch updated");
+            successToast("Catch updated");
             navigate(`/map/${response.data.data.id}`);
         } catch (err) {
             console.error(err)
             console.error(`Error: ${err.message}`);
-            showToast("Could not update catch, please check your data.");
+            errorToast("Could not update catch, please check your data.");
 
         }
     }
