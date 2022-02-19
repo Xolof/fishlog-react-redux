@@ -1,13 +1,12 @@
 @use "sass:color";
 
-@import "loader.scss";
-
 $first-color: #feffdf;
 $second-color: #dde0ab;
 $third-color: #97cba9; 
 $fourth-color: #134e76;
 $black: #0f0f0f;
-$success: #2e8b35;
+$green: #2e8b35;
+$success: $green;
 $error: #e3242b;
 $danger: #e3242b;
 
@@ -239,6 +238,7 @@ form {
   right: 0;
 }
 
+
 @media(min-width: $tablet) {
   .uploadPreviewImage {
     display: block;
@@ -251,3 +251,5 @@ form {
     }
   }
 }
+
+@import "loader.scss";
