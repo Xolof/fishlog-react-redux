@@ -25,6 +25,7 @@ const Login = () => {
                 localStorage.setItem("userName", res.data.user.name);
                 setUserName(res.data.user.name);
                 successToast("You logged in!");
+                navigate("map/all");
             }
         } catch (err) {
             console.error(`Error: ${err.message}`);
