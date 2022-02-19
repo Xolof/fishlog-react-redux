@@ -2,7 +2,7 @@ const Footer = () => {
     const dateObj = new Date();
     return (
         <footer>
-            <p>Copyright Xolof &copy; {dateObj.getFullYear()}</p>
+            <p>&copy; Xolof {dateObj.getFullYear()}</p>
         </footer>
     )
 }
