@@ -141,8 +141,10 @@ const Edit = () => {
                     <label htmlFor="species">Species:</label>
                     <input
                         id="species"
-                        type="text" 
+                        type="text"
                         required
+                        pattern="[a-zA-Z0-9]+"
+                        maxlength="30"
                         value={species}
                         onChange={(e) => setSpecies(e.target.value)}
                     />
