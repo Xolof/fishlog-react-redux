@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import DataContext from "../context/DataContext";
 import { ToastContainer } from 'react-toastify';
-import { infoToast } from "../toastService";
+import { infoToast } from "../services/toastService";
 
 const Nav = () => {
     const { userName, setUserName } = useContext(DataContext);

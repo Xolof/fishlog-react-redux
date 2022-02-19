@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import DataContext from "../context/DataContext";
-import { successToast, errorToast } from "../toastService";
+import { successToast, errorToast } from "../services/toastService";
 
 const Login = () => {
     const navigate = useNavigate();

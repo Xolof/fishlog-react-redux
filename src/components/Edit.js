@@ -4,7 +4,7 @@ import { useState, useContext, useEffect } from "react";
 import api from "../api/api";
 import DataContext from "../context/DataContext";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { successToast, infoToast, errorToast } from "../toastService";
+import { successToast, infoToast, errorToast } from "../services/toastService";
 
 const Edit = () => {
     const [location, setLocation] = useState("");
