@@ -21,13 +21,13 @@ const Nav = () => {
             <nav>
                 <ul className="navLinks">
                     <li>
-                        <NavLink to="/add" activeClassName="active">Add</NavLink>
+                        <NavLink to="/add" activeclassname="active">Add</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/" activeClassName="active">List</NavLink>
+                        <NavLink to="/" activeclassname="active">List</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/map/all" activeClassName="active">Map</NavLink>
+                        <NavLink to="/map/all" activeclassname="active">Map</NavLink>
                     </li>
                     <li>
                     {
@@ -35,11 +35,11 @@ const Nav = () => {
                         <a
                             onClick={handleLogout}
                         >Logout</a> :
-                            <NavLink to="/login" activeClassName="active">Login</NavLink>
+                            <NavLink to="/login" activeclassname="active">Login</NavLink>
                     }
                     </li>
                     <li>
-                        <NavLink to="/about" activeClassName="active">About</NavLink>
+                        <NavLink to="/about" activeclassname="active">About</NavLink>
                     </li>
                 </ul>
             </nav>
