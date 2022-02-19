@@ -230,6 +230,15 @@ form {
     }
 }
 
+.Toastify__toast {
+  border-radius: 0;
+}
+
+.Toastify__toast-container--top-right {
+  top: 0;
+  right: 0;
+}
+
 @media(min-width: $tablet) {
   .uploadPreviewImage {
     display: block;
