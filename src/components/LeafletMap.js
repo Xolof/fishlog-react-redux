@@ -7,7 +7,7 @@ import DataContext from "../context/DataContext";
 import { successToast, errorToast } from "../toastService";
 
 const LeafletMap = ({ searchResults, showId }) => {
-    const { fishCatches, setFishCatches } = useContext(DataContext);
+    const { fishCatches, setFishCatches, setIsLoading } = useContext(DataContext);
     const navigate = useNavigate();
 
     // const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
@@ -30,6 +30,7 @@ const LeafletMap = ({ searchResults, showId }) => {
     }
 
     async function handleDelete (id) {
+        setIsLoading(true);
         try {
             const response = await api.delete(
                 `/api/delete/${id}`,
@@ -50,6 +51,8 @@ const LeafletMap = ({ searchResults, showId }) => {
             console.error(err)
             console.error(`Error: ${err.message}`);
             errorToast("Could not delete catch.");
+        } finally {
+            setIsLoading(false);
         }
     }
 

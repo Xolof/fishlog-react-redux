@@ -3,9 +3,13 @@ import DataContext from "../context/DataContext";
 import LeafletMap from "./LeafletMap";
 import { useParams, Link } from "react-router-dom";
 import Search from "./Search";
+import useAxiosFetch from "../hooks/useAxiosFetch";
 
 const MapView = () => {
-    const { searchResults, fetchError, isLoading, fishCatches, setFishCatches } = useContext(DataContext);
+    const API_URL = process.env.REACT_APP_API_URL;
+    useAxiosFetch(`${API_URL}/api/public_fishcatch`);
+
+    const { searchResults, fetchError, isLoading, fishCatches } = useContext(DataContext);
 
     const id = useParams().id;
 

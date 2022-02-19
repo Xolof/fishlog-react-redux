@@ -2,9 +2,13 @@ import { useContext } from "react";
 import DataContext from "../context/DataContext";
 import Feed from "./Feed";
 import Search from "./Search";
+import useAxiosFetch from "../hooks/useAxiosFetch";
 
 const List = () => {
     const { searchResults, fetchError, isLoading } = useContext(DataContext);
+
+    const API_URL = process.env.REACT_APP_API_URL;
+    useAxiosFetch(`${API_URL}/api/public_fishcatch`);
 
     return (
         <article>

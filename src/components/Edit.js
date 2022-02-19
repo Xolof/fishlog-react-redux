@@ -16,18 +16,20 @@ const Edit = () => {
     const [uploadImages, setUploadImages] = useState([]);
     const [previewImageUrls, setPreviewImageUrls] = useState([]);
     const [date, setDate] = useState("");
-    const { fishCatches, setFishCatches, API_URL } = useContext(DataContext);
+    const { fishCatches, setFishCatches, API_URL, setIsLoading } = useContext(DataContext);
     const navigate = useNavigate();
     const params = useParams();
     const id = params.id;
 
-    useEffect(() => {
-        api.get(
-            `/api/fishcatch/${id}`,                {
-            headers: {
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        }).then(res => {
+    useEffect(async () => {
+        setIsLoading(true);
+        try {
+            const res = await api.get(
+                `/api/fishcatch/${id}`,                {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            });
             setSpecies(res.data.species);
             setLength(res.data.length);
             setWeight(res.data.weight);
@@ -40,9 +42,12 @@ const Edit = () => {
             setMapCenter([lat, lon]);
             const imageUrl = `${API_URL}${res.data.imageurl}`;
             setPreviewImageUrls([imageUrl]);
-        }).catch(err => {
+        } catch (err) {
             setError(err)
-        });
+
+        } finally {
+            setIsLoading(false)
+        }
     }, []);
 
     useEffect(() => {

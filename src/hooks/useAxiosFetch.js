@@ -1,17 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import DataContext from "../context/DataContext";
 
 const useAxiosFetch = (dataUrl) => {
-    const [data, setData] = useState([]);
-    const [fetchError, setFetchError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const { setData, setFetchError, setIsLoading } = useContext(DataContext);
 
     useEffect(() => {
         let isMounted = true;
         const source = axios.CancelToken.source();
 
         const fetchData = async (url) => {
-            setIsLoading(true);
+        setIsLoading(true);
             try {
                 const res = await axios.get(url, {
                     cancelToken: source.token
@@ -39,8 +38,6 @@ const useAxiosFetch = (dataUrl) => {
 
         return cleanUp;
     }, [dataUrl]);
-
-    return { data, fetchError, isLoading };
 }
 
 export default useAxiosFetch;

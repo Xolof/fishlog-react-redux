@@ -12,7 +12,6 @@ import { Route, Routes } from "react-router-dom";
 import { DataProvider } from "./context/DataContext";
 
 function App() {
-
   return (
     <div className="App">
       <DataProvider>

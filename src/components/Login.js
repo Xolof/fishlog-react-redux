@@ -8,11 +8,11 @@ const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [passWord, setPassWord] = useState('');
-    const { setUserName, API_URL } = useContext(DataContext);
+    const { setUserName, API_URL, setIsLoading } = useContext(DataContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+        setIsLoading(true);
         try {
             const response = await api.post('/api/login', {
                 email,
@@ -40,6 +40,8 @@ const Login = () => {
         } catch (err) {
             console.error(`Error: ${err.message}`);
             errorToast("Login failed, please check username and password.");
+        } finally {
+            setIsLoading(false);
         }
     }
 

@@ -13,7 +13,7 @@ const Add = () => {
     const [uploadImages, setUploadImages] = useState([]);
     const [previewImageUrls, setPreviewImageUrls] = useState([]);
     const [date, setDate] = useState("");
-    const { fishCatches, setFishCatches } = useContext(DataContext);
+    const { fishCatches, setFishCatches, setIsLoading } = useContext(DataContext);
     const username = localStorage.getItem("userName");
     const navigate = useNavigate();
 
@@ -47,6 +47,7 @@ const Add = () => {
             formData.append(key, data[key]);
         }
 
+        setIsLoading(true);
         try {
             const response = await api.post(
                 '/api/create',
@@ -68,6 +69,8 @@ const Add = () => {
             console.error(err)
             console.error(`Error: ${err.message}`);
             errorToast("Could not add catch, please check your data.");
+        } finally {
+            setIsLoading(false);
         }
     }
 
