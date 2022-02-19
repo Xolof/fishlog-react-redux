@@ -26,3 +26,17 @@
     color: $third-color;
   }
   
+.notFoundArticle {
+  * {
+    text-align: center;
+  }
+  .fourOfour {
+    font-size: 10em;
+    margin-bottom: 0;
+  }
+  a {
+    display: block;
+  }
+}
+
+  
