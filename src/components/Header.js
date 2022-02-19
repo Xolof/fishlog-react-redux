@@ -3,13 +3,21 @@ import DataContext from "../context/DataContext";
 import UserStatus from "./UserStatus";
 
 const Header = ({ title }) => {
-    const { userName } = useContext(DataContext);
+    const { userName, isLoading } = useContext(DataContext);
 
     return (
-        <header className="Header">
-            <h1>{title}</h1>
-            <UserStatus userName={userName} />
-        </header>
+        <>
+            { isLoading ?
+                <div className="loader">
+                    <div className="loading"></div>
+                </div>
+                : null
+            }
+            <header className="Header">
+                <h1>{title}</h1>
+                <UserStatus userName={userName} />
+            </header>
+        </>
     )
 }
 
