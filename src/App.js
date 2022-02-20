@@ -15,13 +15,7 @@ import { DataProvider } from "./context/DataContext";
 function App() {
   const [darkTheme, setDarkTheme] = useState(false);
     
-  // React useEffect hook that will fire up
-  // when "darkTheme" changes
   useEffect(() => {
-    // Accessing scss variable "--background-color"
-    // and "--text-color" using plain JavaScript
-    // and changing the same according to the state of "darkTheme"
-
     const root = document.documentElement;
 
     root?.style.setProperty(
@@ -47,10 +41,17 @@ function App() {
   return (
     <div className="App">
       <DataProvider>
-        <button
+        <div
+          className="themeToggleContainer"
           onClick={themeToggle}
-        
-        >toogle theme</button>
+        >
+          <div
+            className={darkTheme ? "themeToggleButton right" : "themeToggleButton left"}
+            style={{
+              backgroundColor: darkTheme ? "white" : "yellow"
+            }}
+          ></div>
+        </div>
         <Header title="React Fishlog" />
         <Nav />
         <Routes>

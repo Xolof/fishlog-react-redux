@@ -1,0 +1,24 @@
+.themeToggleContainer {
+    width: 4em;
+    height: 2em;
+    display: block;
+    border: 1px solid $first-color;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.themeToggleButton {
+    width: 1.9em;
+    height: 1.9em;
+    border-radius: 50%;
+    transition: 0.2s all ease;
+    position: relative;
+}
+
+.left {
+    left: 0;
+}
+
+.right {
+    left: 2em;
+}
