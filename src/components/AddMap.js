@@ -38,7 +38,6 @@ const LeafletMap = ({ location, setLocation, center }) => {
     
         useEffect(() => {
           if (userPosition) {
-              console.log(userPosition)
               return;
           }  
           map.locate().on("locationfound", function (e) {

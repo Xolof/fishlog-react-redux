@@ -58,10 +58,14 @@ const LeafletMap = ({ searchResults, showId }) => {
         const map = useMap();
     
         useEffect(() => {
-          map.locate().on("locationfound", function (e) {
-            setUserPosition(e.latlng);
-            map.flyTo(e.latlng, map.getZoom());
-          });
+            if (userPosition) {
+                console.log(userPosition)
+                return;
+            }
+            map.locate().on("locationfound", function (e) {
+                setUserPosition(e.latlng);
+                map.flyTo(e.latlng, map.getZoom());
+            });
         }, [map]);
     
         return userPosition === null ? null : (
