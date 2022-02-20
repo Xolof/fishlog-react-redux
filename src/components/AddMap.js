@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet'
+import { useState, useContext } from 'react';
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import DataContext from "../context/DataContext";
 
 const LeafletMap = ({ location, setLocation, center }) => {
-    // const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-    const tileUrl = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
-    
+    const { tileUrl } = useContext(DataContext);
+
     const [markerLocation, setMarkerLocation] = useState(null);
     const mapCenter = center ?? [56, 12.6];
 

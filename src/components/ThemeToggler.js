@@ -1,4 +1,9 @@
-const ThemeToggler = ({ darkTheme, setDarkTheme }) => {
+import { useContext, useEffect, useState } from "react";
+import DataContext from "../context/DataContext";
+
+const ThemeToggler = () => {
+    const { darkTheme, setDarkTheme } = useContext(DataContext);
+
     function themeToggle () {
         setDarkTheme(!darkTheme);
     }

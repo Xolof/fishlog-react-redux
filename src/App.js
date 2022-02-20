@@ -9,36 +9,14 @@ import Login from "./components/Login";
 import About from "./components/About";
 import NotFound from "./components/NotFound";
 import ThemeToggler from "./components/ThemeToggler";
-import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { DataProvider } from "./context/DataContext";
 
 function App() {
-  const [darkTheme, setDarkTheme] = useState(false);
-    
-  useEffect(() => {
-    const root = document.documentElement;
-
-    root?.style.setProperty(
-      "--first-color",
-      darkTheme ? "#feffdf" : "#262833"
-    );
-
-    root?.style.setProperty(
-      "--third-color",
-      darkTheme ? "#97cba9" : "#404040"
-    );
-
-    root?.style.setProperty(
-      "--fourth-color",
-      darkTheme ? "#262833" : "#fff"
-    );
-  }, [darkTheme]);
-
   return (
     <div className="App">
       <DataProvider>
-        <ThemeToggler darkTheme={darkTheme} setDarkTheme={setDarkTheme} />
+        <ThemeToggler />
         <Header title="React Fishlog" />
         <Nav />
         <Routes>
@@ -56,7 +34,7 @@ function App() {
           />
           <Route
             path="/map/:id"
-            element={<MapView darkTheme={darkTheme} />}
+            element={<MapView />}
           />
           <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />

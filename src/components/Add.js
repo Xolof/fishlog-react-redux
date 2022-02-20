@@ -85,7 +85,7 @@ const Add = () => {
     return (
         <article>
             <p>Click the map to set position.</p>
-            <AddMap location={location} setLocation={setLocation}/>
+            <AddMap location={location} setLocation={setLocation} />
             <form
                 className="addForm"
                 onSubmit={handleSubmit}
