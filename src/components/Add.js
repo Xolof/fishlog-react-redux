@@ -96,7 +96,7 @@ const Add = () => {
                     type="text" 
                     required
                     pattern="[a-zA-Z0-9]+"
-                    maxlength="30"
+                    maxLength="30"
                     value={species}
                     onChange={(e) => setSpecies(e.target.value)}
                 />
