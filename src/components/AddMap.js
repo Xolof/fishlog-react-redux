@@ -34,30 +34,30 @@ const LeafletMap = ({ location, setLocation, center }) => {
     }
 
     const [userPosition, setUserPosition] = useState(null);
-    function UserMarker() {  
+    function UserMarker() {
         const map = useMap();
-    
+
         useEffect(() => {
-          if (userPosition) {
-              return;
-          }  
-          map.locate().on("locationfound", function (e) {
+            if (userPosition) {
+                return;
+            }
+            map.locate().on("locationfound", function (e) {
             setUserPosition(e.latlng);
             map.flyTo(e.latlng, map.getZoom());
-          });
+            });
         }, [map]);
 
         const userIcon = L.icon({
             iconUrl: require("../img/user.png"),
             iconSize: [25, 25]
         });
-    
+
         return userPosition === null ? null : (
-          <Marker position={userPosition} icon={userIcon}>
+            <Marker position={userPosition} icon={userIcon}>
             <Popup><br />You are here. <br /></Popup>
-          </Marker>
+            </Marker>
         );
-      }
+    }
 
     return (
         <>
