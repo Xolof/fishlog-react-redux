@@ -12,7 +12,6 @@ const List = () => {
 
     return (
         <article>
-            <h1>List</h1>
             <Search />
             {isLoading && !fetchError && <p className="statusMsg">Loading posts...</p>}
             {fetchError && <p className="statusMsg" style={{color: "red"}}>Could not get data</p>}

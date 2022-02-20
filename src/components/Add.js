@@ -77,7 +77,6 @@ const Add = () => {
     if (!localStorage.getItem("token")) {
         return (
             <article>
-                <h1>Add</h1>
                 <p><Link to="/login">Login</Link> to be able to add a catch.</p>
             </article>
         )
@@ -85,7 +84,6 @@ const Add = () => {
 
     return (
         <article>
-            <h2>Add</h2>
             <p>Click the map to set position.</p>
             <AddMap location={location} setLocation={setLocation}/>
             <form

@@ -47,7 +47,6 @@ const Login = () => {
 
     return (
         <article>
-            <h2>Login</h2>
             <form
                 className="loginForm"
                 onSubmit={handleSubmit}

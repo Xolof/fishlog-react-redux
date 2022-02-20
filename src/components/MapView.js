@@ -24,7 +24,6 @@ const MapView = () => {
 
     return (
         <article>
-            <h1>Map</h1>
             <Search />
             {isLoading && !fetchError && <p className="statusMsg">Loading...</p>}
             {fetchError && <p className="error">Could not get data</p>}
