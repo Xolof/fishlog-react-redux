@@ -48,7 +48,7 @@ function App() {
           <div
             className={darkTheme ? "themeToggleButton right" : "themeToggleButton left"}
             style={{
-              backgroundColor: darkTheme ? "white" : "yellow"
+              backgroundColor: darkTheme ? "ghostwhite" : "gold"
             }}
           ></div>
         </div>
