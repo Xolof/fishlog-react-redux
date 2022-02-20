@@ -1,8 +1,13 @@
-$first-color: #feffdf;
-$second-color: #dde0ab;
-$third-color: #97cba9; 
-$fourth-color: #134e76;
-$black: #0f0f0f;
+:root {
+    --first-color: #feffdf;
+    --third-color: #97cba9;
+    --fourth-color: #fff;
+}
+
+$first-color: var(--first-color);
+$third-color: var(--third-color); 
+$fourth-color: var(--fourth-color);
+
 $green: #2e8b35;
 $success: $green;
 $error: #e3242b;

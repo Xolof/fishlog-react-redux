@@ -8,13 +8,49 @@ import Edit from "./components/Edit";
 import Login from "./components/Login";
 import About from "./components/About";
 import NotFound from "./components/NotFound";
+import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { DataProvider } from "./context/DataContext";
 
 function App() {
+  const [darkTheme, setDarkTheme] = useState(false);
+    
+  // React useEffect hook that will fire up
+  // when "darkTheme" changes
+  useEffect(() => {
+    // Accessing scss variable "--background-color"
+    // and "--text-color" using plain JavaScript
+    // and changing the same according to the state of "darkTheme"
+
+    const root = document.documentElement;
+
+    root?.style.setProperty(
+      "--first-color",
+      darkTheme ? "#feffdf" : "#262833"
+    );
+
+    root?.style.setProperty(
+      "--third-color",
+      darkTheme ? "#97cba9" : "#404040"
+    );
+
+    root?.style.setProperty(
+      "--fourth-color",
+      darkTheme ? "#262833" : "#fff"
+    );
+  }, [darkTheme]);
+
+  function themeToggle () {
+    setDarkTheme(!darkTheme);
+  }
+
   return (
     <div className="App">
       <DataProvider>
+        <button
+          onClick={themeToggle}
+        
+        >toogle theme</button>
         <Header title="React Fishlog" />
         <Nav />
         <Routes>
