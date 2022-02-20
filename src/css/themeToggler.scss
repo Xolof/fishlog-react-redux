@@ -1,18 +1,24 @@
-.themeToggleContainer {
-    width: 4em;
-    height: 2em;
+.themeToggler {
+    width: 100%;
+    height: 1.7em;
     display: block;
+    margin-top: 0.4em;
+    position: relative;
+}
+
+.themeToggleContainer {
+    width: 3.2em;
+    height: 100%;
     border: 1px solid $first-color;
     border-radius: 15px;
     cursor: pointer;
-    margin-top: 0.4em;
-    position: relative;
-    right: 0.1em;
+    float: right;
 }
 
 .themeToggleButton {
-    width: 1.9em;
-    height: 1.9em;
+    margin-top: 0.05em;
+    width: 1.5em;
+    height: 1.5em;
     border-radius: 50%;
     transition: 0.2s all ease;
     position: relative;
@@ -23,5 +29,5 @@
 }
 
 .right {
-    left: 2em;
+    left: 1.5em;
 }

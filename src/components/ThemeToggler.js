@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import DataContext from "../context/DataContext";
 
 const ThemeToggler = () => {
@@ -9,16 +9,18 @@ const ThemeToggler = () => {
     }
 
     return (
-        <div
-          className="themeToggleContainer"
-          onClick={themeToggle}
-        >
+        <div className="themeToggler">
           <div
-            className={darkTheme ? "themeToggleButton right" : "themeToggleButton left"}
-            style={{
-              backgroundColor: darkTheme ? "ghostwhite" : "gold"
-            }}
-          ></div>
+            className="themeToggleContainer"
+            onClick={themeToggle}
+          >
+            <div
+              className={darkTheme ? "themeToggleButton right" : "themeToggleButton left"}
+              style={{
+                backgroundColor: darkTheme ? "ghostwhite" : "gold"
+              }}
+            ></div>
+          </div>
         </div>
     )
 }
