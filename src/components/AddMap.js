@@ -1,5 +1,5 @@
-import { useState, useContext } from 'react';
-import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import { useState, useContext, useEffect } from 'react';
+import { MapContainer, TileLayer, Marker, useMapEvents, useMap, Popup } from 'react-leaflet';
 import DataContext from "../context/DataContext";
 
 const LeafletMap = ({ location, setLocation, center }) => {
@@ -32,6 +32,28 @@ const LeafletMap = ({ location, setLocation, center }) => {
         ) : null;
     }
 
+    const [userPosition, setUserPosition] = useState(null);
+    function UserMarker() {  
+        const map = useMap();
+    
+        useEffect(() => {
+          if (userPosition) {
+              console.log(userPosition)
+              return;
+          }  
+          map.locate().on("locationfound", function (e) {
+            setUserPosition(e.latlng);
+            map.flyTo(e.latlng, map.getZoom());
+          });
+        }, [map]);
+    
+        return userPosition === null ? null : (
+          <Marker position={userPosition}>
+            <Popup><br />You are here. <br /></Popup>
+          </Marker>
+        );
+      }
+
     return (
         <>
             <MapContainer
@@ -42,6 +64,7 @@ const LeafletMap = ({ location, setLocation, center }) => {
                 url={tileUrl}
                 className="map-tiles"
             />
+            <UserMarker />
             <PositionMarker />
             </MapContainer>
         </>

@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { useContext, useState, useEffect } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import FishCatchCard from './FishCatchCard';
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
@@ -53,6 +53,25 @@ const LeafletMap = ({ searchResults, showId }) => {
         }
     }
 
+    const [userPosition, setUserPosition] = useState(null);
+    function UserMarker() {
+        const map = useMap();
+    
+        useEffect(() => {
+          map.locate().on("locationfound", function (e) {
+            setUserPosition(e.latlng);
+            map.flyTo(e.latlng, map.getZoom());
+          });
+        }, [map]);
+    
+        return userPosition === null ? null : (
+          <Marker position={userPosition}>
+            <Popup><br />You are here. <br /></Popup>
+          </Marker>
+        );
+      }
+    
+
     return (
         <>
             <MapContainer
@@ -63,6 +82,7 @@ const LeafletMap = ({ searchResults, showId }) => {
                 url={tileUrl}
                 className="map-tiles"
             />
+            <UserMarker />
             {
                 searchResults ?
                 searchResults.map((fishCatch) => {
