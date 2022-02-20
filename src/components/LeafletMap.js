@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import DataContext from "../context/DataContext";
 import { successToast, errorToast } from "../services/toastService";
+import L from 'leaflet';
 
 const LeafletMap = ({ searchResults, showId }) => {
     const { fishCatches, setFishCatches, setIsLoading, tileUrl } = useContext(DataContext);
@@ -67,9 +68,14 @@ const LeafletMap = ({ searchResults, showId }) => {
                 map.flyTo(e.latlng, map.getZoom());
             });
         }, [map]);
+
+        const userIcon = L.icon({
+            iconUrl: require("../img/user.png"),
+            iconSize: [25, 25]
+        });
     
         return userPosition === null ? null : (
-          <Marker position={userPosition}>
+          <Marker position={userPosition} icon={userIcon}>
             <Popup><br />You are here. <br /></Popup>
           </Marker>
         );

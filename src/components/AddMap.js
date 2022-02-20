@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, useMapEvents, useMap, Popup } from 'react-leaflet';
 import DataContext from "../context/DataContext";
+import L from 'leaflet';
 
 const LeafletMap = ({ location, setLocation, center }) => {
     const { tileUrl } = useContext(DataContext);
@@ -45,9 +46,14 @@ const LeafletMap = ({ location, setLocation, center }) => {
             map.flyTo(e.latlng, map.getZoom());
           });
         }, [map]);
+
+        const userIcon = L.icon({
+            iconUrl: require("../img/user.png"),
+            iconSize: [25, 25]
+        });
     
         return userPosition === null ? null : (
-          <Marker position={userPosition}>
+          <Marker position={userPosition} icon={userIcon}>
             <Popup><br />You are here. <br /></Popup>
           </Marker>
         );
