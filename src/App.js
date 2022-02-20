@@ -8,6 +8,7 @@ import Edit from "./components/Edit";
 import Login from "./components/Login";
 import About from "./components/About";
 import NotFound from "./components/NotFound";
+import ThemeToggler from "./components/ThemeToggler";
 import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { DataProvider } from "./context/DataContext";
@@ -34,24 +35,10 @@ function App() {
     );
   }, [darkTheme]);
 
-  function themeToggle () {
-    setDarkTheme(!darkTheme);
-  }
-
   return (
     <div className="App">
       <DataProvider>
-        <div
-          className="themeToggleContainer"
-          onClick={themeToggle}
-        >
-          <div
-            className={darkTheme ? "themeToggleButton right" : "themeToggleButton left"}
-            style={{
-              backgroundColor: darkTheme ? "ghostwhite" : "gold"
-            }}
-          ></div>
-        </div>
+        <ThemeToggler darkTheme={darkTheme} setDarkTheme={setDarkTheme} />
         <Header title="React Fishlog" />
         <Nav />
         <Routes>
