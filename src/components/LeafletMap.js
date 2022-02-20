@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import FishCatchCard from './FishCatchCard';
 import { useNavigate } from "react-router-dom";
@@ -6,12 +6,21 @@ import api from "../api/api";
 import DataContext from "../context/DataContext";
 import { successToast, errorToast } from "../services/toastService";
 
-const LeafletMap = ({ searchResults, showId }) => {
+const LeafletMap = ({ searchResults, showId, darkTheme }) => {
     const { fishCatches, setFishCatches, setIsLoading } = useContext(DataContext);
     const navigate = useNavigate();
-
-    // const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-    const tileUrl = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
+    
+    const lightTileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+    const darkTileUrl = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
+    const [tileUrl, setTileUrl] = useState(darkTheme ? darkTileUrl : lightTileUrl);
+    useEffect(() => {
+        setTileUrl(darkTheme ? darkTileUrl : lightTileUrl);
+        const root = document.documentElement;
+        root?.style.setProperty(
+            "--map-tiles-filter",
+            darkTheme ? "brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7)" : "none"
+        );
+    }, [darkTheme]);
 
     const showCatch = fishCatches.filter(item => parseInt(item.id) === parseInt(showId))[0];
 

@@ -5,7 +5,7 @@ import { useParams, Link } from "react-router-dom";
 import Search from "./Search";
 import useAxiosFetch from "../hooks/useAxiosFetch";
 
-const MapView = () => {
+const MapView = ({ darkTheme }) => {
     const API_URL = process.env.REACT_APP_API_URL;
     useAxiosFetch(`${API_URL}/api/public_fishcatch`);
 
@@ -29,7 +29,7 @@ const MapView = () => {
             {fetchError && <p className="error">Could not get data</p>}
             {!isLoading && !fetchError &&
                 (searchResults.length ?
-                <LeafletMap searchResults={searchResults} showId={parseInt(id)} /> :
+                <LeafletMap searchResults={searchResults} showId={parseInt(id)} darkTheme={darkTheme} /> :
                 <p>Nothing found.</p>)
             }
         </article>

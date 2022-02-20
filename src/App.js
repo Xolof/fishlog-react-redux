@@ -56,7 +56,7 @@ function App() {
           />
           <Route
             path="/map/:id"
-            element={<MapView />}
+            element={<MapView darkTheme={darkTheme} />}
           />
           <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />
