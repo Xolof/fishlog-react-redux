@@ -12,6 +12,8 @@ export const DataProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(null);
     const API_URL = process.env.REACT_APP_API_URL;
 
+    const [userPosition, setUserPosition] = useState(null);
+
     useEffect(() => {
         setFishCatches(data);
     }, [data]);
@@ -70,7 +72,8 @@ export const DataProvider = ({ children }) => {
                     isLoading, setIsLoading,
                     API_URL,
                     darkTheme, setDarkTheme,
-                    tileUrl
+                    tileUrl,
+                    userPosition, setUserPosition
                 }
             }
         >

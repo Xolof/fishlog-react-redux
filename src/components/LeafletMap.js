@@ -8,7 +8,7 @@ import { successToast, errorToast } from "../services/toastService";
 import L from 'leaflet';
 
 const LeafletMap = ({ searchResults, showId }) => {
-    const { fishCatches, setFishCatches, setIsLoading, tileUrl } = useContext(DataContext);
+    const { fishCatches, setFishCatches, setIsLoading, tileUrl, userPosition, setUserPosition } = useContext(DataContext);
     const navigate = useNavigate();
 
     const showCatch = fishCatches.filter(item => parseInt(item.id) === parseInt(showId))[0];
@@ -23,7 +23,7 @@ const LeafletMap = ({ searchResults, showId }) => {
         mapPosition = [lat, lon];
         zoom = 14;
     } else {
-        mapPosition = [55.8, 12.5];
+        mapPosition = userPosition ? [userPosition.lat, userPosition.lng] : [55.8, 12.5];
         zoom = 8;
     }
 
@@ -54,13 +54,11 @@ const LeafletMap = ({ searchResults, showId }) => {
         }
     }
 
-    const [userPosition, setUserPosition] = useState(null);
     function UserMarker() {
         const map = useMap();
     
         useEffect(() => {
             if (userPosition) {
-                console.log(userPosition)
                 return;
             }
             map.locate().on("locationfound", function (e) {

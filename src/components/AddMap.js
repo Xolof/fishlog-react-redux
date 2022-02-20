@@ -4,10 +4,16 @@ import DataContext from "../context/DataContext";
 import L from 'leaflet';
 
 const LeafletMap = ({ location, setLocation, center }) => {
-    const { tileUrl } = useContext(DataContext);
+    const { tileUrl, userPosition, setUserPosition } = useContext(DataContext);
 
     const [markerLocation, setMarkerLocation] = useState(null);
-    const mapCenter = center ?? [56, 12.6];
+
+    let userCoordinates = null;
+    if (userPosition) {
+        userCoordinates = [userPosition.lat, userPosition.lng];
+    }
+
+    const mapCenter = center ?? userCoordinates ?? [56, 12.6];
 
     function PositionMarker() {
         const map = useMapEvents({
@@ -33,7 +39,6 @@ const LeafletMap = ({ location, setLocation, center }) => {
         ) : null;
     }
 
-    const [userPosition, setUserPosition] = useState(null);
     function UserMarker() {
         const map = useMap();
 
