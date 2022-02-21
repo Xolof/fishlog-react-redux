@@ -30,9 +30,9 @@ const Login = () => {
 
             if (response.data.token) {
                 await response.data.token;
-                localStorage.setItem("token", response.data.token);
+                localStorage.setItem("fishlog-token", response.data.token);
                 const res = await api.get(`${API_URL}/api/get_user?token=${response.data.token}`);
-                localStorage.setItem("userName", res.data.user.name);
+                localStorage.setItem("fishlog-userName", res.data.user.name);
                 setUserName(res.data.user.name);
                 successToast("You logged in!");
                 navigate("/map/all");

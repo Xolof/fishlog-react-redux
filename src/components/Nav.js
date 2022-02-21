@@ -9,8 +9,8 @@ const Nav = () => {
 
     function handleLogout(e) {
         e.preventDefault();
-        localStorage.removeItem("token");
-        localStorage.removeItem("userName");
+        localStorage.removeItem("fishlog-token");
+        localStorage.removeItem("fishlog-userName");
         setUserName(false);
         infoToast("You logged out.");
     }

@@ -3,7 +3,7 @@ import { createContext, useState, useEffect } from "react";
 const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
-    const [userName, setUserName] = useState(localStorage.getItem("userName"));
+    const [userName, setUserName] = useState(localStorage.getItem("fishlog-userName"));
     const [fishCatches, setFishCatches] = useState([]);
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);

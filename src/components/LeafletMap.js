@@ -34,7 +34,7 @@ const LeafletMap = ({ searchResults, showId }) => {
                 `/api/delete/${id}`,
                 {
                     headers: {
-                        "Authorization": "Bearer " + localStorage.getItem("token")
+                        "Authorization": "Bearer " + localStorage.getItem("fishlog-token")
                     }
                 }
             );
@@ -103,7 +103,7 @@ const LeafletMap = ({ searchResults, showId }) => {
                             <Popup>
                                 <FishCatchCard fishCatch={fishCatch} />
                                 {
-                                    fishCatch.username === localStorage.getItem("userName") ?
+                                    fishCatch.username === localStorage.getItem("fishlog-userName") ?
                                     <>
                                         <button
                                             onClick={() => navigate(`/edit/${fishCatch.id}`)}

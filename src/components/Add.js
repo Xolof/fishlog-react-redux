@@ -14,7 +14,7 @@ const Add = () => {
     const [previewImageUrls, setPreviewImageUrls] = useState([]);
     const [date, setDate] = useState("");
     const { fishCatches, setFishCatches, setIsLoading } = useContext(DataContext);
-    const username = localStorage.getItem("userName");
+    const username = localStorage.getItem("fishlog-userName");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -54,14 +54,14 @@ const Add = () => {
                 formData,
                 {
                     headers: {
-                        "Authorization": "Bearer " + localStorage.getItem("token")
+                        "Authorization": "Bearer " + localStorage.getItem("fishlog-token")
                     }
                 }
             );
 
             await response.data;
             const newCatch = response.data.data;
-            newCatch.username = localStorage.getItem("userName");
+            newCatch.username = localStorage.getItem("fishlog-userName");
             setFishCatches([...fishCatches, response.data.data]);
             successToast("Catch added!");
             navigate(`/map/${response.data.data.id}`);
@@ -74,7 +74,7 @@ const Add = () => {
         }
     }
 
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("fishlog-token")) {
         return (
             <article>
                 <p><Link to="/login">Login</Link> to be able to add a catch.</p>

@@ -28,7 +28,7 @@ const Edit = () => {
                 const res = await api.get(
                     `/api/fishcatch/${id}`,                {
                     headers: {
-                        "Authorization": "Bearer " + localStorage.getItem("token")
+                        "Authorization": "Bearer " + localStorage.getItem("fishlog-token")
                     }
                 });
                 setSpecies(res.data.species);
@@ -96,14 +96,14 @@ const Edit = () => {
                 formData,
                 {
                     headers: {
-                        "Authorization": "Bearer " + localStorage.getItem("token")
+                        "Authorization": "Bearer " + localStorage.getItem("fishlog-token")
                     }
                 }
             );
 
             await response.data;
             const newCatch = response.data.data;
-            newCatch.username = localStorage.getItem("userName");
+            newCatch.username = localStorage.getItem("fishlog-userName");
 
             setFishCatches(fishCatches.map(item => {
                     return parseInt(item.id) === parseInt(newCatch.id) ? newCatch : item;
@@ -119,7 +119,7 @@ const Edit = () => {
         }
     }
 
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("fishlog-token")) {
         return (
             <article>
                 <h1>Edit</h1>
