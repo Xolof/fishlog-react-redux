@@ -1,9 +1,11 @@
 
 .Toastify__toast {
-    border-radius: 0;
-  }
+  border-radius: 0;
+  background-color: var(--fourth-color);
+  color: var(--first-color);
+}
   
-  .Toastify__toast-container--top-right {
-    top: 0;
-    right: 0;
-  }
+.Toastify__toast-container--top-right {
+  top: 0;
+  right: 0;
+}
