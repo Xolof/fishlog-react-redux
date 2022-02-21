@@ -25,7 +25,7 @@ export const DataProvider = ({ children }) => {
         setSearchResults(filteredResults);
     }, [fishCatches, search]);
 
-    const [darkTheme, setDarkTheme] = useState(localStorage.getItem("theme") === "dark" ? true : false);
+    const [darkTheme, setDarkTheme] = useState(localStorage.getItem("fishlog-theme") === "dark" ? true : false);
     
     useEffect(() => {
       const root = document.documentElement;
@@ -45,7 +45,7 @@ export const DataProvider = ({ children }) => {
         darkTheme ? "#262833" : "#fff"
       );
 
-      localStorage.setItem("theme", darkTheme ? "dark" : "light");
+      localStorage.setItem("fishlog-theme", darkTheme ? "dark" : "light");
     }, [darkTheme]);
 
     const lightTileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
