@@ -25,7 +25,7 @@ export const DataProvider = ({ children }) => {
         setSearchResults(filteredResults);
     }, [fishCatches, search]);
 
-    const [darkTheme, setDarkTheme] = useState(false);
+    const [darkTheme, setDarkTheme] = useState(localStorage.getItem("theme") === "dark" ? true : false);
     
     useEffect(() => {
       const root = document.documentElement;
@@ -44,6 +44,8 @@ export const DataProvider = ({ children }) => {
         "--fourth-color",
         darkTheme ? "#262833" : "#fff"
       );
+
+      localStorage.setItem("theme", darkTheme ? "dark" : "light");
     }, [darkTheme]);
 
     const lightTileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
@@ -57,6 +59,7 @@ export const DataProvider = ({ children }) => {
             "--map-tiles-filter",
             darkTheme ? "brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7)" : "none"
         );
+
     }, [darkTheme]);
 
     return (
