@@ -1,14 +1,14 @@
-import { useContext, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet"
+import { useContext } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import FishCatchCard from "./FishCatchCard";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import DataContext from "../context/DataContext";
 import { successToast, errorToast } from "../services/toastService";
-import L from "leaflet";
+import UserMarker from "./UserMarker";
 
 const LeafletMap = ({ searchResults, showId }) => {
-  const { fishCatches, setFishCatches, setIsLoading, tileUrl, userPosition, setUserPosition } = useContext(DataContext);
+  const { fishCatches, setFishCatches, setIsLoading, tileUrl, userPosition } = useContext(DataContext);
   const navigate = useNavigate();
 
   const showCatch = fishCatches.filter(item => parseInt(item.id) === parseInt(showId))[0];
@@ -53,32 +53,6 @@ const LeafletMap = ({ searchResults, showId }) => {
       setIsLoading(false);
     }
   }
-
-  function UserMarker() {
-    const map = useMap();
-    
-    useEffect(() => {
-      if (userPosition) {
-        return;
-      }
-      map.locate().on("locationfound", function (e) {
-        setUserPosition(e.latlng);
-        map.flyTo(e.latlng, map.getZoom());
-      });
-    }, [map]);
-
-    const userIcon = L.icon({
-      iconUrl: require("../img/user.png"),
-      iconSize: [25, 25]
-    });
-    
-    return userPosition === null ? null : (
-      <Marker position={userPosition} icon={userIcon}>
-        <Popup><br />You are here. <br /></Popup>
-      </Marker>
-    );
-  }
-    
 
   return (
     <>
