@@ -13,7 +13,7 @@ const Add = () => {
   const [uploadImages, setUploadImages] = useState([]);
   const [previewImageUrls, setPreviewImageUrls] = useState([]);
   const [date, setDate] = useState("");
-  const { fishCatches, setFishCatches, setIsLoading } = useContext(DataContext);
+  const { fishCatches, setFishCatches, setIsLoading, setSearch } = useContext(DataContext);
   const username = localStorage.getItem("fishlog-userName");
   const navigate = useNavigate();
 
@@ -64,6 +64,7 @@ const Add = () => {
       newCatch.username = localStorage.getItem("fishlog-userName");
       setFishCatches([...fishCatches, response.data.data]);
       successToast("Catch added!");
+      setSearch("");
       navigate(`/map/${response.data.data.id}`);
     } catch (err) {
       console.error(err)
