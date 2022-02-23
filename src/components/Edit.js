@@ -143,7 +143,7 @@ const Edit = () => {
             id="species"
             type="text"
             required
-            pattern="[a-zA-Z0-9]+"
+            pattern="[a-zA-ZåäöÅÄÖ0-9]+"
             maxLength="30"
             value={species}
             onChange={(e) => setSpecies(e.target.value)}
