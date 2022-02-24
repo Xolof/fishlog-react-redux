@@ -11,11 +11,13 @@ import NotFound from "./components/NotFound";
 import ThemeToggler from "./components/ThemeToggler";
 import { Route, Routes } from "react-router-dom";
 import { DataProvider } from "./context/DataContext";
+import VerifyToken from "./services/VerifyToken";
 
 function App() {
   return (
     <div className="App">
       <DataProvider>
+        <VerifyToken />
         <ThemeToggler />
         <Header title="React Fishlog" />
         <Nav />
