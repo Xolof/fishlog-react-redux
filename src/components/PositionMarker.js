@@ -4,10 +4,8 @@ import { Marker, useMapEvents } from "react-leaflet";
 const PositionMarker = ({ location, setLocation, markerLocation, setMarkerLocation }) => {
   useMapEvents({
     click(e) {
-      if (setLocation && setMarkerLocation) {
-        setMarkerLocation(e.latlng);
-        setLocation(`${e.latlng.lat},${e.latlng.lng}`);
-      }
+      setMarkerLocation(e.latlng);
+      setLocation(`${e.latlng.lat},${e.latlng.lng}`);
     }
   });
 
