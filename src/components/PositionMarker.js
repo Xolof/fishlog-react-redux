@@ -11,9 +11,7 @@ const PositionMarker = ({ location, setLocation, markerLocation, setMarkerLocati
 
   if (location && typeof location === "string") {
     const splitPosition = location.split(",");
-    const lat = splitPosition[0];
-    const lon = splitPosition[1];
-    location = [lat, lon];
+    location = [splitPosition[0], splitPosition[1]];
   }
 
   const position = markerLocation ?? location ?? null;
