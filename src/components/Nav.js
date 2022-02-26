@@ -32,9 +32,9 @@ const Nav = () => {
           <li>
             {
               userName ?
-                <a
+                <button
                   onClick={handleLogout}
-                >Logout</a> :
+                >Logout</button> :
                 <NavLink to="/login" activeclassname="active">Login</NavLink>
             }
           </li>
