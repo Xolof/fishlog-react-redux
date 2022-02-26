@@ -10,14 +10,21 @@ const UserMarker = () => {
 
   const map = useMap();
 
+  let positionSet = false;
+
   useEffect(() => {
-    if (userPosition) {
-      return;
-    }
-    map.locate().on("locationfound", function (e) {
+    map.locate({ watch:true });
+
+    function onLocationFound(e) {
+      console.log(e.latlng);
+      if (!positionSet) {
+        map.flyTo(e.latlng, map.getZoom());
+      }
+      positionSet = true;
       setUserPosition(e.latlng);
-      map.flyTo(e.latlng, map.getZoom());
-    });
+    }
+
+    map.on("locationfound", onLocationFound);
   }, [map]);
 
   const userIcon = L.icon({
