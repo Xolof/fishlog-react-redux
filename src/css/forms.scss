@@ -4,6 +4,8 @@ form {
       width: 100%;
       padding: 1em;
       margin-bottom: 0.2em;
+      color: $first-color;
+      background-color: $fourth-color;
     }
     button {
       background-color: $fourth-color;
@@ -30,6 +32,8 @@ form {
     display: block;
     width: 100%;
     padding: 1em;
+    color: $first-color;
+    background-color: $fourth-color;
   }
   
   .uploadPreviewImage {
