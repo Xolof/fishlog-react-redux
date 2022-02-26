@@ -17,7 +17,6 @@ export default () => {
 
   function AuthVerify () {
     const decodedJwt = parseJwt(localStorage.getItem("fishlog-token"));
-    console.log(Date.now());
     if (decodedJwt.exp * 1000 > Date.now()) {
       return true;
     }
@@ -29,13 +28,11 @@ export default () => {
     localStorage.removeItem("fishlog-token");
     localStorage.removeItem("fishlog-userName");
     setUserName(false);
-    console.info("You have been logged out due to inactivity.");  
     infoToast("You have been logged out due to inactivity.");  
   }
 
   function handleUserAction(e) {
     if (!localStorage.getItem("fishlog-token")) {
-      console.info("You are not authenticated.");
       return;
     }
 
@@ -43,16 +40,19 @@ export default () => {
       e.preventDefault();
       logOut();
     }
-    console.info("You are authenticated.");
   }
   
   useEffect(() => {
     document.addEventListener("click", handleUserAction);
     document.addEventListener("keydown", handleUserAction);
+    document.addEventListener("mousemove", handleUserAction);
+    document.addEventListener("scroll", handleUserAction);
 
     return function cleanup() {
       document.removeEventListener("click", handleUserAction);
       document.removeEventListener("keydown", handleUserAction);
+      document.removeEventListener("mousemove", handleUserAction);
+      document.removeEventListener("scroll", handleUserAction);
     }
   }, []);
 
