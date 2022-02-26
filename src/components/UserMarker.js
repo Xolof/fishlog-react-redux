@@ -16,8 +16,7 @@ const UserMarker = () => {
     map.locate({ watch:true });
 
     function onLocationFound(e) {
-      console.log(e.latlng);
-      if (!positionSet) {
+      if (!userPosition && !positionSet) {
         map.flyTo(e.latlng, map.getZoom());
       }
       positionSet = true;
