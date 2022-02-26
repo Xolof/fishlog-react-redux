@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import DataContext from "../context/DataContext";
 import UserMarker from "./UserMarker";
@@ -6,8 +6,6 @@ import PositionMarker from "./PositionMarker";
 
 const LeafletMap = ({ location, setLocation, center }) => {
   const { tileUrl, userPosition } = useContext(DataContext);
-
-  const [markerLocation, setMarkerLocation] = useState(null);
 
   let userCoordinates = null;
   if (userPosition) {
@@ -28,8 +26,6 @@ const LeafletMap = ({ location, setLocation, center }) => {
         />
         <UserMarker />
         <PositionMarker
-          markerLocation={markerLocation}
-          setMarkerLocation={setMarkerLocation}
           location={location}
           setLocation={setLocation}
         />

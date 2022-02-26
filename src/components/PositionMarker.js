@@ -1,7 +1,12 @@
 import { Marker, useMapEvents } from "react-leaflet";
+import { useContext } from "react";
+import DataContext from "../context/DataContext";
 
 
-const PositionMarker = ({ location, setLocation, markerLocation, setMarkerLocation }) => {
+const PositionMarker = ({ location, setLocation }) => {
+
+  const { markerLocation, setMarkerLocation } = useContext(DataContext);
+
   useMapEvents({
     click(e) {
       setMarkerLocation(e.latlng);
