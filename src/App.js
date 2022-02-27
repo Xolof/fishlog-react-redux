@@ -6,6 +6,7 @@ import MapView from "./components/MapView";
 import Add from "./components/Add";
 import Edit from "./components/Edit";
 import Login from "./components/Login";
+import Signup from "./components/Signup";
 import About from "./components/About";
 import NotFound from "./components/NotFound";
 import ThemeToggler from "./components/ThemeToggler";
@@ -39,6 +40,7 @@ function App() {
             element={<MapView />}
           />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
