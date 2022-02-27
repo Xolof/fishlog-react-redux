@@ -79,6 +79,7 @@ const Add = () => {
     return (
       <article>
         <p><Link to="/login">Login</Link> to be able to add a catch.</p>
+        <p>Or <Link to="/signup">create an account.</Link></p>
       </article>
     )
   }
