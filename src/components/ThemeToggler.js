@@ -10,7 +10,7 @@ const ThemeToggler = () => {
 
   return (
     <div className="themeToggler">
-      <div
+      <button
         className="themeToggleContainer"
         onClick={themeToggle}
       >
@@ -20,7 +20,7 @@ const ThemeToggler = () => {
             backgroundColor: darkTheme ? "ghostwhite" : "gold"
           }}
         ></div>
-      </div>
+      </button>
     </div>
   )
 }
