@@ -4,7 +4,7 @@ import DataContext from "../context/DataContext";
 import UserMarker from "./UserMarker";
 import PositionMarker from "./PositionMarker";
 
-const LeafletMap = ({ location, setLocation, center }) => {
+const AddMap = ({ location, setLocation, center }) => {
   const { tileUrl, userPosition } = useContext(DataContext);
 
   let userCoordinates = null;
@@ -34,4 +34,4 @@ const LeafletMap = ({ location, setLocation, center }) => {
   )
 }
 
-export default LeafletMap;
+export default AddMap;
