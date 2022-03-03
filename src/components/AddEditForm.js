@@ -56,7 +56,7 @@ const AddEditForm = ({
         value={date}
         onChange={(e) => setDate(e.target.value)}
       />
-      <label htmlFor="uploadImage" id="uploadImageLabel">Change image</label>
+      <label htmlFor="uploadImage" id="uploadImageLabel">{formRole === "add" ? "Add image" : "Change image"}</label>
       <input
 
         required={formRole === "add"}
