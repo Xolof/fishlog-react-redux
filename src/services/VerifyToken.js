@@ -1,10 +1,10 @@
-import { useEffect, useContext } from "react";
-import DataContext from "../context/DataContext";
+import { useEffect } from "react";
+import { useApplicationContext } from "../context/DataContext";
 import { infoToast } from "./toastService";
 import { useNavigate } from "react-router-dom";
 
 export default () => {
-  const { setUserName } = useContext(DataContext);
+  const { setUserName } = useApplicationContext();
   const navigate = useNavigate();
 
   function parseJwt (token) {

@@ -1,9 +1,9 @@
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import axios from "axios";
-import DataContext from "../context/DataContext";
+import { useApplicationContext } from "../context/DataContext";
 
 const useAxiosFetch = (dataUrl) => {
-  const { setData, setFetchError, setIsLoading } = useContext(DataContext);
+  const { setData, setFetchError, setIsLoading } = useApplicationContext();
 
   useEffect(() => {
     let isMounted = true;

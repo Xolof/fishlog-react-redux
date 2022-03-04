@@ -1,9 +1,9 @@
 import AddMap from "./AddMap";
 import AddEditForm from "./AddEditForm";
 import NotFound from "./NotFound";
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import api from "../api/api";
-import DataContext from "../context/DataContext";
+import { useApplicationContext } from "../context/DataContext";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { successToast, infoToast, errorToast } from "../services/toastService";
 
@@ -17,7 +17,7 @@ const Edit = () => {
   const [uploadImages, setUploadImages] = useState([]);
   const [previewImageUrls, setPreviewImageUrls] = useState([]);
   const [date, setDate] = useState("");
-  const { fishCatches, setFishCatches, API_URL, setIsLoading, setSearch } = useContext(DataContext);
+  const { fishCatches, setFishCatches, API_URL, setIsLoading, setSearch } = useApplicationContext();
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id;

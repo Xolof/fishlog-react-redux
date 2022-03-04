@@ -1,14 +1,14 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
-import DataContext from "../context/DataContext";
+import { useApplicationContext } from "../context/DataContext";
 import { successToast, errorToast } from "../services/toastService";
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [passWord, setPassWord] = useState("");
-  const { setUserName, API_URL, setIsLoading } = useContext(DataContext);
+  const { setUserName, API_URL, setIsLoading } = useApplicationContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

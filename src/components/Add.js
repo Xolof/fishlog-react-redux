@@ -1,8 +1,8 @@
 import AddMap from "./AddMap";
 import AddEditForm from "./AddEditForm";
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import api from "../api/api";
-import DataContext from "../context/DataContext";
+import { useApplicationContext } from "../context/DataContext";
 import { useNavigate, Link } from "react-router-dom";
 import { successToast, infoToast, errorToast } from "../services/toastService";
 
@@ -14,7 +14,7 @@ const Add = () => {
   const [uploadImages, setUploadImages] = useState([]);
   const [previewImageUrls, setPreviewImageUrls] = useState([]);
   const [date, setDate] = useState("");
-  const { fishCatches, setFishCatches, setIsLoading, setSearch } = useContext(DataContext);
+  const { fishCatches, setFishCatches, setIsLoading, setSearch } = useApplicationContext();
   const username = localStorage.getItem("fishlog-userName");
   const navigate = useNavigate();
 

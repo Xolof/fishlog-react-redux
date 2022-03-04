@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import DataContext from "../context/DataContext";
+import { useApplicationContext } from "../context/DataContext";
 import UserStatus from "./UserStatus";
 
 const Header = ({ title }) => {
-  const { userName, isLoading } = useContext(DataContext);
+  const { userName, isLoading } = useApplicationContext();
 
   return (
     <>
