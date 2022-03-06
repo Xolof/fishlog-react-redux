@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import DataContext from "../context/DataContext";
+import { useThemeContext } from "../context/ThemeContext";
 
 const ThemeToggler = () => {
-  const { darkTheme, setDarkTheme } = useContext(DataContext);
+  const { darkTheme, setDarkTheme } = useThemeContext();
 
   function themeToggle () {
     setDarkTheme(!darkTheme);
@@ -10,7 +9,7 @@ const ThemeToggler = () => {
 
   return (
     <div className="themeToggler">
-      <div
+      <button
         className="themeToggleContainer"
         onClick={themeToggle}
       >
@@ -20,7 +19,7 @@ const ThemeToggler = () => {
             backgroundColor: darkTheme ? "ghostwhite" : "gold"
           }}
         ></div>
-      </div>
+      </button>
     </div>
   )
 }
