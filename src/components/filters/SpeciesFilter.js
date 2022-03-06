@@ -1,6 +1,6 @@
-import { useApplicationContext } from "../context/DataContext";
+import { useApplicationContext } from "../../context/DataContext";
 
-const Search = () => {
+const SpeciesFilter = () => {
   const { search, setSearch } = useApplicationContext();
 
   return (
@@ -16,7 +16,7 @@ const Search = () => {
         }}
       />
     </>
-  )
-}
+  );
+};
 
-export default Search;
+export default SpeciesFilter;

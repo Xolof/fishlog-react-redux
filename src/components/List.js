@@ -1,6 +1,6 @@
 import { useApplicationContext } from "../context/DataContext";
 import Feed from "./Feed";
-import Search from "./Search";
+import SpeciesFilter from "./filters/SpeciesFilter";
 import useAxiosFetch from "../hooks/useAxiosFetch";
 
 const List = () => {
@@ -11,17 +11,24 @@ const List = () => {
 
   return (
     <article>
-      <Search />
-      {isLoading && !fetchError && <p className="statusMsg">Loading posts...</p>}
-      {fetchError && <p className="statusMsg" style={{color: "red"}}>Could not get data</p>}
-      {!isLoading && !fetchError &&
-                (searchResults.length ?
-                  <Feed fishCatches={searchResults} /> :
-                  <p>Nothing found.</p>)
-      }
+      <SpeciesFilter />
+      {isLoading && !fetchError && (
+        <p className="statusMsg">Loading posts...</p>
+      )}
+      {fetchError && (
+        <p className="statusMsg" style={{ color: "red" }}>
+          Could not get data
+        </p>
+      )}
+      {!isLoading &&
+        !fetchError &&
+        (searchResults.length ? (
+          <Feed fishCatches={searchResults} />
+        ) : (
+          <p>Nothing found.</p>
+        ))}
     </article>
-  )
-}
+  );
+};
 
 export default List;
-
