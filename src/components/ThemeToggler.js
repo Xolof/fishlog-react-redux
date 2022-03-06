@@ -1,7 +1,7 @@
-import { useApplicationContext } from "../context/DataContext";
+import { useThemeContext } from "../context/ThemeContext";
 
 const ThemeToggler = () => {
-  const { darkTheme, setDarkTheme } = useApplicationContext();
+  const { darkTheme, setDarkTheme } = useThemeContext();
 
   function themeToggle () {
     setDarkTheme(!darkTheme);

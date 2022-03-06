@@ -3,11 +3,13 @@ import FishCatchCard from "./FishCatchCard";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import { useApplicationContext } from "../context/DataContext";
+import { useThemeContext } from "../context/ThemeContext";
 import { successToast, errorToast } from "../services/toastService";
 import UserMarker from "./UserMarker";
 
 const LeafletMap = ({ searchResults, showId }) => {
-  const { fishCatches, setFishCatches, setIsLoading, tileUrl, userPosition } = useApplicationContext();
+  const { fishCatches, setFishCatches, setIsLoading, userPosition } = useApplicationContext();
+  const { tileUrl } = useThemeContext();
   const navigate = useNavigate();
 
   const showCatch = fishCatches.filter(item => parseInt(item.id) === parseInt(showId))[0];
