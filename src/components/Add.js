@@ -1,4 +1,4 @@
-import AddMap from "./AddMap";
+import AddEditMap from "./AddEditMap";
 import AddEditForm from "./AddEditForm";
 import { useState, useEffect } from "react";
 import api from "../api/api";
@@ -88,7 +88,7 @@ const Add = () => {
   return (
     <article>
       <p>Click the map to set position.</p>
-      <AddMap location={location} setLocation={setLocation} />
+      <AddEditMap location={location} setLocation={setLocation} />
       <AddEditForm
         formRole="add"
         handleSubmit={handleSubmit}

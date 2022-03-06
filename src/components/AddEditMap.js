@@ -4,7 +4,7 @@ import { useThemeContext } from "../context/ThemeContext";
 import UserMarker from "./UserMarker";
 import PositionMarker from "./PositionMarker";
 
-const AddMap = ({ location, setLocation, center }) => {
+const AddEditMap = ({ location, setLocation, center }) => {
   const { userPosition } = useApplicationContext();
   const { tileUrl } = useThemeContext();
 
@@ -35,4 +35,4 @@ const AddMap = ({ location, setLocation, center }) => {
   )
 }
 
-export default AddMap;
+export default AddEditMap;

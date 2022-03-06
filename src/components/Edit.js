@@ -1,4 +1,4 @@
-import AddMap from "./AddMap";
+import AddEditMap from "./AddEditMap";
 import AddEditForm from "./AddEditForm";
 import NotFound from "./NotFound";
 import { useState, useEffect } from "react";
@@ -27,7 +27,7 @@ const Edit = () => {
     async function fetchCatch () {
       try {
         const res = await api.get(
-          `/api/fishcatch/${id}`,                {
+          `/api/fishcatch/${id}`, {
             headers: {
               "Authorization": "Bearer " + localStorage.getItem("fishlog-token")
             }
@@ -135,7 +135,7 @@ const Edit = () => {
       <article>
         <h2>Edit</h2>
         <p>Click the map to set position.</p>
-        <AddMap location={location} setLocation={setLocation} center={mapCenter} />
+        <AddEditMap location={location} setLocation={setLocation} center={mapCenter} />
         <AddEditForm
           formRole="edit"
           handleSubmit={handleSubmit}
