@@ -9,7 +9,8 @@ export const DataProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
-  const [ markerLocation, setMarkerLocation ] = useState(null);
+  const [markerLocation, setMarkerLocation] = useState(null);
+
   const API_URL = process.env.REACT_APP_API_URL;
 
   const [userPosition, setUserPosition] = useState(null);

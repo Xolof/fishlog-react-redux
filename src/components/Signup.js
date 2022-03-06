@@ -1,22 +1,22 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
-import { useApplicationContext } from "../context/DataContext";
-import { useUserContext } from "../context/UserContext";
+import DataContext from "../context/DataContext";
 import { successToast, errorToast } from "../services/toastService";
 
-const Login = () => {
+const Signup = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [passWord, setPassWord] = useState("");
-  const { API_URL, setIsLoading } = useApplicationContext();
-  const { setUserName } = useUserContext();
+  const [name, setName] = useState("");
+  const { setIsLoading } = useContext(DataContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await api.post("/api/login", {
+      const response = await api.post("/api/register", {
+        name,
         email,
         password: passWord
       });
@@ -30,18 +30,14 @@ const Login = () => {
         return;
       }
 
-      if (response.data.token) {
+      if (response.data.success) {
         await response.data.token;
-        localStorage.setItem("fishlog-token", response.data.token);
-        const res = await api.get(`${API_URL}/api/get_user?token=${response.data.token}`);
-        localStorage.setItem("fishlog-userName", res.data.user.name);
-        setUserName(res.data.user.name);
-        successToast("You logged in!");
-        navigate("/map/all");
+        successToast("You signed up!");
+        navigate("/login");
       }
     } catch (err) {
       console.error(`Error: ${err.message}`);
-      errorToast("Login failed, please check username and password.");
+      errorToast("Signup failed.");
     } finally {
       setIsLoading(false);
     }
@@ -49,10 +45,19 @@ const Login = () => {
 
   return (
     <article>
+      <h2>Create an account</h2>
       <form
-        className="loginForm"
+        className="signupForm"
         onSubmit={handleSubmit}
       >
+        <label htmlFor="username">Username:</label>
+        <input
+          id="name"
+          type="text" 
+          required
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
         <label htmlFor="email">Email:</label>
         <input
           id="email"
@@ -69,11 +74,10 @@ const Login = () => {
           value={passWord}
           onChange={(e) => setPassWord(e.target.value)}
         ></input>
-        <button type="submit">Log in</button>
+        <button type="submit">Sign up</button>
       </form>
-      <p><Link to="/signup">Create a new account</Link></p>
     </article>
   )
 }
 
-export default Login;
+export default Signup;

@@ -6,6 +6,7 @@ import MapView from "./components/MapView";
 import Add from "./components/Add";
 import Edit from "./components/Edit";
 import Login from "./components/Login";
+import Signup from "./components/Signup";
 import About from "./components/About";
 import NotFound from "./components/NotFound";
 import ThemeToggler from "./components/ThemeToggler";
