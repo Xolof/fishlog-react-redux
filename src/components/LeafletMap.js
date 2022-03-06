@@ -1,14 +1,15 @@
-import { useContext } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import FishCatchCard from "./FishCatchCard";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
-import DataContext from "../context/DataContext";
+import { useApplicationContext } from "../context/DataContext";
+import { useThemeContext } from "../context/ThemeContext";
 import { successToast, errorToast } from "../services/toastService";
 import UserMarker from "./UserMarker";
 
 const LeafletMap = ({ searchResults, showId }) => {
-  const { fishCatches, setFishCatches, setIsLoading, tileUrl, userPosition } = useContext(DataContext);
+  const { fishCatches, setFishCatches, setIsLoading, userPosition } = useApplicationContext();
+  const { tileUrl } = useThemeContext();
   const navigate = useNavigate();
 
   const showCatch = fishCatches.filter(item => parseInt(item.id) === parseInt(showId))[0];

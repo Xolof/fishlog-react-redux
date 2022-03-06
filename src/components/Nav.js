@@ -1,11 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
-import DataContext from "../context/DataContext";
+import { useUserContext } from "../context/UserContext";
 import { ToastContainer } from "react-toastify";
 import { infoToast } from "../services/toastService";
 
 const Nav = () => {
-  const { userName, setUserName } = useContext(DataContext);
+  const { userName, setUserName } = useUserContext();
 
   function handleLogout(e) {
     e.preventDefault();
