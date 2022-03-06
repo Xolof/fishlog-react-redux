@@ -1,7 +1,7 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
-import DataContext from "../context/DataContext";
+import { useApplicationContext } from "../context/DataContext";
 import { successToast, errorToast } from "../services/toastService";
 
 const Signup = () => {
@@ -9,7 +9,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [passWord, setPassWord] = useState("");
   const [name, setName] = useState("");
-  const { setIsLoading } = useContext(DataContext);
+  const { setIsLoading } = useApplicationContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
