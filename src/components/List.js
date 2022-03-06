@@ -1,6 +1,7 @@
 import { useApplicationContext } from "../context/DataContext";
 import Feed from "./Feed";
 import SpeciesFilter from "./filters/SpeciesFilter";
+import UserFilter from "./filters/UserFilter";
 import useAxiosFetch from "../hooks/useAxiosFetch";
 
 const List = () => {
@@ -12,6 +13,7 @@ const List = () => {
   return (
     <article>
       <SpeciesFilter />
+      <UserFilter />
       {isLoading && !fetchError && (
         <p className="statusMsg">Loading posts...</p>
       )}
