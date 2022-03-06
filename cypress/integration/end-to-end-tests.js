@@ -51,8 +51,6 @@ describe("Test logging in, adding a fishcatch, deleting it and logging out.", ()
         const imageFile = "mackerel.jpg"
         cy.get("#uploadImage").attachFile(imageFile)
         cy.get('button:contains(Save)').click()
-        cy.wait(500)
-        cy.get(".Toastify__toast-body").contains("Catch added")
         cy.get("#search").type("makrill3565221223")
         cy.get(".leaflet-marker-icon").first().click()
         cy.contains("makrill3565221223")
