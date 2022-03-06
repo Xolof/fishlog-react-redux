@@ -1,11 +1,12 @@
-import { useContext } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
-import DataContext from "../context/DataContext";
+import { useApplicationContext } from "../context/DataContext";
+import { useThemeContext } from "../context/ThemeContext";
 import UserMarker from "./UserMarker";
 import PositionMarker from "./PositionMarker";
 
-const LeafletMap = ({ location, setLocation, center }) => {
-  const { tileUrl, userPosition } = useContext(DataContext);
+const AddMap = ({ location, setLocation, center }) => {
+  const { userPosition } = useApplicationContext();
+  const { tileUrl } = useThemeContext();
 
   let userCoordinates = null;
   if (userPosition) {
@@ -34,4 +35,4 @@ const LeafletMap = ({ location, setLocation, center }) => {
   )
 }
 
-export default LeafletMap;
+export default AddMap;

@@ -1,12 +1,10 @@
-
 import { useEffect } from "react";
 import L from "leaflet";
 import { useMap, Marker, Popup } from "react-leaflet";
-import DataContext from "../context/DataContext";
-import { useContext } from "react";
+import { useApplicationContext } from "../context/DataContext";
 
 const UserMarker = () => {
-  const { userPosition, setUserPosition } = useContext(DataContext);
+  const { userPosition, setUserPosition } = useApplicationContext();
 
   const map = useMap();
 

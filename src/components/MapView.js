@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import DataContext from "../context/DataContext";
+import { useApplicationContext } from "../context/DataContext";
 import LeafletMap from "./LeafletMap";
 import { useParams, Link } from "react-router-dom";
 import Search from "./Search";
@@ -9,7 +8,7 @@ const MapView = () => {
   const API_URL = process.env.REACT_APP_API_URL;
   useAxiosFetch(`${API_URL}/api/public_fishcatch`);
 
-  const { searchResults, fetchError, isLoading, fishCatches } = useContext(DataContext);
+  const { searchResults, fetchError, isLoading, fishCatches } = useApplicationContext();
     
   const id = useParams().id;
 

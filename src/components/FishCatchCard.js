@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import DataContext from "../context/DataContext";
+import { useApplicationContext } from "../context/DataContext";
 
 const FishCatchCard = ({ fishCatch }) => {
-  const { API_URL } = useContext(DataContext);
+  const { API_URL } = useApplicationContext();
   const splitPosition = fishCatch.location.split(",");
   const lat = splitPosition[0].slice(0, 4);
   const lon = splitPosition[1].slice(0, 4);

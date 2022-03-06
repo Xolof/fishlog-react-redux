@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import DataContext from "../context/DataContext";
+import { useApplicationContext } from "../context/DataContext";
 
 const Search = () => {
-  const { search, setSearch } = useContext(DataContext);
+  const { search, setSearch } = useApplicationContext();
 
   return (
     <>
