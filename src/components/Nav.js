@@ -1,16 +1,19 @@
 import { NavLink } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
+import { useApplicationContext } from "../context/DataContext";
 import { ToastContainer } from "react-toastify";
 import { infoToast } from "../services/toastService";
 
 const Nav = () => {
   const { userName, setUserName } = useUserContext();
+  const { setMarkerLocation } = useApplicationContext();
 
   function handleLogout(e) {
     e.preventDefault();
     localStorage.removeItem("fishlog-token");
     localStorage.removeItem("fishlog-userName");
     setUserName(false);
+    setMarkerLocation(null);
     infoToast("You logged out.");
   }
 
