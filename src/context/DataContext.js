@@ -6,6 +6,7 @@ export const DataProvider = ({ children }) => {
   const [fishCatches, setFishCatches] = useState([]);
   const [search, setSearch] = useState("");
   const [filterOnUser, setFilterOnUser] = useState("");
+  const [filterOnWeight, setFilterOnWeight] = useState([0, 5000]);
   const [searchResults, setSearchResults] = useState([]);
   const [data, setData] = useState([]);
   const [fetchError, setFetchError] = useState(null);
@@ -21,7 +22,6 @@ export const DataProvider = ({ children }) => {
   }, [data]);
 
   useEffect(() => {
-    console.log(filterOnUser);
     const filteredResults = fishCatches
       .filter((fishCatch) => {
         return fishCatch.species.toLowerCase().includes(search.toLowerCase());
@@ -30,9 +30,15 @@ export const DataProvider = ({ children }) => {
         return fishCatch.username
           .toLowerCase()
           .includes(filterOnUser.toLowerCase());
+      })
+      .filter((fishCatch) => {
+        return (
+          fishCatch.weight > filterOnWeight[0] &&
+          fishCatch.weight < filterOnWeight[1]
+        );
       });
     setSearchResults(filteredResults);
-  }, [fishCatches, search, filterOnUser]);
+  }, [fishCatches, search, filterOnUser, filterOnWeight]);
 
   return (
     <DataContext.Provider
@@ -55,6 +61,8 @@ export const DataProvider = ({ children }) => {
         setMarkerLocation,
         filterOnUser,
         setFilterOnUser,
+        filterOnWeight,
+        setFilterOnWeight,
       }}
     >
       {children}
