@@ -11,7 +11,7 @@ const UserMarker = () => {
   let positionSet = false;
 
   useEffect(() => {
-    map.locate({ watch:true });
+    map.locate({ watch: true });
 
     function onLocationFound(e) {
       if (!userPosition && !positionSet) {
@@ -26,14 +26,17 @@ const UserMarker = () => {
 
   const userIcon = L.icon({
     iconUrl: require("../img/user.png"),
-    iconSize: [25, 25]
+    iconSize: [25, 25],
   });
 
   return userPosition === null ? null : (
     <Marker position={userPosition} icon={userIcon}>
-      <Popup><br />You are here. <br /></Popup>
+      <Popup>
+        <br />
+        You are here. <br />
+      </Popup>
     </Marker>
   );
-}
+};
 
 export default UserMarker;

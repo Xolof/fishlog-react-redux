@@ -18,7 +18,7 @@ const Login = () => {
     try {
       const response = await api.post("/api/login", {
         email,
-        password: passWord
+        password: passWord,
       });
 
       if (response.data.error) {
@@ -33,7 +33,9 @@ const Login = () => {
       if (response.data.token) {
         await response.data.token;
         localStorage.setItem("fishlog-token", response.data.token);
-        const res = await api.get(`${API_URL}/api/get_user?token=${response.data.token}`);
+        const res = await api.get(
+          `${API_URL}/api/get_user?token=${response.data.token}`
+        );
         localStorage.setItem("fishlog-userName", res.data.user.name);
         setUserName(res.data.user.name);
         successToast("You logged in!");
@@ -45,18 +47,15 @@ const Login = () => {
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   return (
     <article>
-      <form
-        className="loginForm"
-        onSubmit={handleSubmit}
-      >
+      <form className="loginForm" onSubmit={handleSubmit}>
         <label htmlFor="email">Email:</label>
         <input
           id="email"
-          type="text" 
+          type="text"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -71,9 +70,11 @@ const Login = () => {
         ></input>
         <button type="submit">Log in</button>
       </form>
-      <p><Link to="/signup">Create a new account</Link></p>
+      <p>
+        <Link to="/signup">Create a new account</Link>
+      </p>
     </article>
-  )
-}
+  );
+};
 
 export default Login;

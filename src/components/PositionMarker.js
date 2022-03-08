@@ -2,14 +2,13 @@ import { Marker, useMapEvents } from "react-leaflet";
 import { useApplicationContext } from "../context/DataContext";
 
 const PositionMarker = ({ location, setLocation }) => {
-
   const { markerLocation, setMarkerLocation } = useApplicationContext();
 
   useMapEvents({
     click(e) {
       setMarkerLocation(e.latlng);
       setLocation(`${e.latlng.lat},${e.latlng.lng}`);
-    }
+    },
   });
 
   if (location && typeof location === "string") {
@@ -19,9 +18,7 @@ const PositionMarker = ({ location, setLocation }) => {
 
   const position = markerLocation ?? location ?? null;
 
-  return position ? (
-    <Marker position={position}></Marker>
-  ) : null;
-}
+  return position ? <Marker position={position}></Marker> : null;
+};
 
 export default PositionMarker;

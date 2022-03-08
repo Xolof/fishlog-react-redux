@@ -6,18 +6,17 @@ const Header = ({ title }) => {
 
   return (
     <>
-      { isLoading ?
+      {isLoading ? (
         <div className="loader">
           <div className="loading"></div>
         </div>
-        : null
-      }
+      ) : null}
       <header className="Header">
         <h1>{title}</h1>
         <UserStatus userName={userName} />
       </header>
     </>
-  )
-}
+  );
+};
 
 export default Header;

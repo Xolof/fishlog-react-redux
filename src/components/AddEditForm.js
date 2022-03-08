@@ -11,13 +11,10 @@ const AddEditForm = ({
   setDate,
   uploadImages,
   setUploadImages,
-  previewImageUrls
+  previewImageUrls,
 }) => {
   return (
-    <form
-      className="addForm"
-      onSubmit={handleSubmit}
-    >
+    <form className="addForm" onSubmit={handleSubmit}>
       <label htmlFor="species">Species:</label>
       <input
         id="species"
@@ -31,7 +28,7 @@ const AddEditForm = ({
       <label htmlFor="length">Length (cm):</label>
       <input
         id="length"
-        type="number" 
+        type="number"
         min="0"
         max="9999"
         required
@@ -51,31 +48,33 @@ const AddEditForm = ({
       <label htmlFor="date">Date:</label>
       <input
         id="date"
-        type="date" 
+        type="date"
         required
         value={date}
         onChange={(e) => setDate(e.target.value)}
       />
-      <label htmlFor="uploadImage" id="uploadImageLabel">{formRole === "add" ? "Add image" : "Change image"}</label>
+      <label htmlFor="uploadImage" id="uploadImageLabel">
+        {formRole === "add" ? "Add image" : "Change image"}
+      </label>
       <input
-
         required={formRole === "add"}
         value={formRole === "add" ? uploadImages[0] : ""}
-
         id="uploadImage"
         type="file"
         onChange={(e) => {
-          setUploadImages(...e.target.files)
+          setUploadImages(...e.target.files);
         }}
       />
-      {
-        previewImageUrls.length > 0 ?
-          <img src={previewImageUrls} alt="uploadPreviewImage" className="uploadPreviewImage" />
-          : null
-      }
+      {previewImageUrls.length > 0 ? (
+        <img
+          src={previewImageUrls}
+          alt="uploadPreviewImage"
+          className="uploadPreviewImage"
+        />
+      ) : null}
       <button type="submit">Save</button>
     </form>
-  )
-}
+  );
+};
 
 export default AddEditForm;

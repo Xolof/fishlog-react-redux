@@ -27,28 +27,12 @@ function App() {
             <Header title="React Fishlog" />
             <Nav />
             <Routes>
-              <Route
-                path="/"
-                element={<List />}
-              />
-              <Route
-                path="/add"
-                element={<Add />}
-              />
-              <Route
-                path="/edit/:id"
-                element={<Edit />}
-              />
-              <Route
-                path="/map/:id"
-                element={<MapView />}
-              />
-              <Route path="/login" element={
-                <Login />
-              } />
-              <Route path="/signup" element={
-                <Signup />
-              } />
+              <Route path="/" element={<List />} />
+              <Route path="/add" element={<Add />} />
+              <Route path="/edit/:id" element={<Edit />} />
+              <Route path="/map/:id" element={<MapView />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
               <Route path="/about" element={<About />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
@@ -61,5 +45,3 @@ function App() {
 }
 
 export default App;
-
-

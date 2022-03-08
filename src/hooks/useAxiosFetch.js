@@ -13,7 +13,7 @@ const useAxiosFetch = (dataUrl) => {
       setIsLoading(true);
       try {
         const res = await axios.get(url, {
-          cancelToken: source.token
+          cancelToken: source.token,
         });
         if (isMounted) {
           setData(res.data);
@@ -27,17 +27,17 @@ const useAxiosFetch = (dataUrl) => {
       } finally {
         isMounted && setIsLoading(false);
       }
-    }
+    };
 
     fetchData(dataUrl);
 
     const cleanUp = () => {
       isMounted = false;
       source.cancel();
-    }
+    };
 
     return cleanUp;
   }, [dataUrl]);
-}
+};
 
 export default useAxiosFetch;
