@@ -70,15 +70,15 @@ const LeafletMap = ({ searchResults, showId }) => {
         <UserMarker />
         {searchResults
           ? searchResults.map((fishCatch) => {
-              const splitPosition = fishCatch.location.split(",");
-              const lat = splitPosition[0];
-              const lon = splitPosition[1];
+            const splitPosition = fishCatch.location.split(",");
+            const lat = splitPosition[0];
+            const lon = splitPosition[1];
 
-              return (
-                <Marker position={[lat, lon]} key={fishCatch.id}>
-                  <Popup>
-                    <FishCatchCard fishCatch={fishCatch} />
-                    {fishCatch.username ===
+            return (
+              <Marker position={[lat, lon]} key={fishCatch.id}>
+                <Popup>
+                  <FishCatchCard fishCatch={fishCatch} />
+                  {fishCatch.username ===
                     localStorage.getItem("fishlog-userName") ? (
                       <>
                         <button
@@ -95,10 +95,10 @@ const LeafletMap = ({ searchResults, showId }) => {
                         </button>
                       </>
                     ) : null}
-                  </Popup>
-                </Marker>
-              );
-            })
+                </Popup>
+              </Marker>
+            );
+          })
           : null}
       </MapContainer>
     </>
