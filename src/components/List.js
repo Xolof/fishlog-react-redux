@@ -3,6 +3,7 @@ import Feed from "./Feed";
 import SpeciesFilter from "./filters/SpeciesFilter";
 import UserFilter from "./filters/UserFilter";
 import WeightFilter from "./filters/WeightFilter";
+import LengthFilter from "./filters/LengthFilter";
 import useAxiosFetch from "../hooks/useAxiosFetch";
 
 const List = () => {
@@ -15,9 +16,8 @@ const List = () => {
     <article>
       <SpeciesFilter />
       <UserFilter />
-
       <WeightFilter />
-
+      <LengthFilter />
       {isLoading && !fetchError && (
         <p className="statusMsg">Loading posts...</p>
       )}

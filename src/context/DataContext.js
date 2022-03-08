@@ -7,6 +7,7 @@ export const DataProvider = ({ children }) => {
   const [search, setSearch] = useState("");
   const [filterOnUser, setFilterOnUser] = useState("");
   const [filterOnWeight, setFilterOnWeight] = useState([0, 5000]);
+  const [filterOnLength, setFilterOnLength] = useState([0, 500]);
   const [searchResults, setSearchResults] = useState([]);
   const [data, setData] = useState([]);
   const [fetchError, setFetchError] = useState(null);
@@ -22,6 +23,7 @@ export const DataProvider = ({ children }) => {
   }, [data]);
 
   useEffect(() => {
+    // Chaina med &&
     const filteredResults = fishCatches
       .filter((fishCatch) => {
         return fishCatch.species.toLowerCase().includes(search.toLowerCase());
@@ -36,9 +38,15 @@ export const DataProvider = ({ children }) => {
           fishCatch.weight > filterOnWeight[0] &&
           fishCatch.weight < filterOnWeight[1]
         );
+      })
+      .filter((fishCatch) => {
+        return (
+          fishCatch.length > filterOnLength[0] &&
+          fishCatch.length < filterOnLength[1]
+        );
       });
     setSearchResults(filteredResults);
-  }, [fishCatches, search, filterOnUser, filterOnWeight]);
+  }, [fishCatches, search, filterOnUser, filterOnWeight, filterOnLength]);
 
   return (
     <DataContext.Provider
@@ -63,6 +71,8 @@ export const DataProvider = ({ children }) => {
         setFilterOnUser,
         filterOnWeight,
         setFilterOnWeight,
+        filterOnLength,
+        setFilterOnLength,
       }}
     >
       {children}
