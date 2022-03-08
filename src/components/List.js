@@ -1,10 +1,7 @@
 import { useApplicationContext } from "../context/DataContext";
 import Feed from "./Feed";
-import SpeciesFilter from "./filters/SpeciesFilter";
-import UserFilter from "./filters/UserFilter";
-import WeightFilter from "./filters/WeightFilter";
-import LengthFilter from "./filters/LengthFilter";
 import useAxiosFetch from "../hooks/useAxiosFetch";
+import Filters from "./filters/Filters";
 
 const List = () => {
   const { searchResults, fetchError, isLoading } = useApplicationContext();
@@ -14,10 +11,7 @@ const List = () => {
 
   return (
     <article>
-      <SpeciesFilter />
-      <UserFilter />
-      <WeightFilter />
-      <LengthFilter />
+      <Filters />
       {isLoading && !fetchError && (
         <p className="statusMsg">Loading posts...</p>
       )}

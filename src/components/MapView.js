@@ -1,7 +1,7 @@
 import { useApplicationContext } from "../context/DataContext";
 import LeafletMap from "./LeafletMap";
 import { useParams, Link } from "react-router-dom";
-import SpeciesFilter from "./filters/SpeciesFilter";
+import Filters from "./filters/Filters";
 import useAxiosFetch from "../hooks/useAxiosFetch";
 
 const MapView = () => {
@@ -27,7 +27,7 @@ const MapView = () => {
 
   return (
     <article>
-      <SpeciesFilter />
+      <Filters />
       {isLoading && !fetchError && <p className="statusMsg">Loading...</p>}
       {fetchError && <p className="error">Could not get data</p>}
       {!isLoading &&
