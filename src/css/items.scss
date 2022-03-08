@@ -1,21 +1,21 @@
 .catchList {
-    img {
-      width: 50%;
-      height: auto;
-    }
-    list-style: none;
-    padding: 0;
-    li{
-      border-bottom: 1px solid $third-color;
-      padding: 0 0 0.5em 0;
-    }
+  img {
+    width: 50%;
+    height: auto;
   }
-  
+  list-style: none;
+  padding: 0;
+  li {
+    border-bottom: 1px solid $third-color;
+    padding: 0 0 0.5em 0;
+  }
+}
+
 .fishCatchCard {
-    img {
-        width: 100%;
-        height: auto;
-    }
-    padding-bottom: 0.5em;
-    border-bottom: 1px solid $first-color;
+  img {
+    width: 100%;
+    height: auto;
+  }
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid $first-color;
 }
