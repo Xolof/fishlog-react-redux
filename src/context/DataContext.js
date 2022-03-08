@@ -6,7 +6,7 @@ export const DataProvider = ({ children }) => {
   const [fishCatches, setFishCatches] = useState([]);
   const [search, setSearch] = useState("");
   const [filterOnUser, setFilterOnUser] = useState("");
-  const [filterOnWeight, setFilterOnWeight] = useState([0, 5000]);
+  const [filterOnWeight, setFilterOnWeight] = useState([0, 10000]);
   const [filterOnLength, setFilterOnLength] = useState([0, 500]);
   const [searchResults, setSearchResults] = useState([]);
   const [data, setData] = useState([]);
