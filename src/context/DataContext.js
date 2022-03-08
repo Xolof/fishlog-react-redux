@@ -23,28 +23,16 @@ export const DataProvider = ({ children }) => {
   }, [data]);
 
   useEffect(() => {
-    // Chaina med &&
-    const filteredResults = fishCatches
-      .filter((fishCatch) => {
-        return fishCatch.species.toLowerCase().includes(search.toLowerCase());
-      })
-      .filter((fishCatch) => {
-        return fishCatch.username
-          .toLowerCase()
-          .includes(filterOnUser.toLowerCase());
-      })
-      .filter((fishCatch) => {
-        return (
-          fishCatch.weight > filterOnWeight[0] &&
-          fishCatch.weight < filterOnWeight[1]
-        );
-      })
-      .filter((fishCatch) => {
-        return (
-          fishCatch.length > filterOnLength[0] &&
-          fishCatch.length < filterOnLength[1]
-        );
-      });
+    const filteredResults = fishCatches.filter((fishCatch) => {
+      return (
+        fishCatch.species.toLowerCase().includes(search.toLowerCase()) &&
+        fishCatch.username.toLowerCase().includes(filterOnUser.toLowerCase()) &&
+        fishCatch.weight > filterOnWeight[0] &&
+        fishCatch.weight < filterOnWeight[1] &&
+        fishCatch.length > filterOnLength[0] &&
+        fishCatch.length < filterOnLength[1]
+      );
+    });
     setSearchResults(filteredResults);
   }, [fishCatches, search, filterOnUser, filterOnWeight, filterOnLength]);
 
