@@ -30,13 +30,10 @@ const MapView = () => {
       <Filters />
       {isLoading && !fetchError && <p className="statusMsg">Loading...</p>}
       {fetchError && <p className="error">Could not get data</p>}
-      {!isLoading &&
-        !fetchError &&
-        (searchResults.length ? (
-          <LeafletMap searchResults={searchResults} showId={parseInt(id)} />
-        ) : (
-          <p>Nothing found.</p>
-        ))}
+      {searchResults.length < 1 && <p>No results.</p>}
+      {!isLoading && !fetchError && (
+        <LeafletMap searchResults={searchResults} showId={parseInt(id)} />
+      )}
     </article>
   );
 };
