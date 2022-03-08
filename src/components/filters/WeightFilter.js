@@ -28,7 +28,6 @@ const WeightFilter = () => {
   ];
 
   const updateRange = (e, data) => {
-    console.log(data);
     setFilterOnWeight(data);
   };
 
