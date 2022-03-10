@@ -4,7 +4,7 @@ const Footer = () => {
     <footer>
       <p>&copy; Xolof {dateObj.getFullYear()}</p>
     </footer>
-  )
-}
+  );
+};
 
 export default Footer;

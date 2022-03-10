@@ -17,22 +17,17 @@ const AddEditMap = ({ location, setLocation, center }) => {
 
   return (
     <>
-      <MapContainer
-        center={mapCenter} zoom={9}
-      >
+      <MapContainer center={mapCenter} zoom={9}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url={tileUrl}
           className="map-tiles"
         />
         <UserMarker />
-        <PositionMarker
-          location={location}
-          setLocation={setLocation}
-        />
+        <PositionMarker location={location} setLocation={setLocation} />
       </MapContainer>
     </>
-  )
-}
+  );
+};
 
 export default AddEditMap;

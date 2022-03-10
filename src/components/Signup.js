@@ -18,7 +18,7 @@ const Signup = () => {
       const response = await api.post("/api/register", {
         name,
         email,
-        password: passWord
+        password: passWord,
       });
 
       if (response.data.error) {
@@ -41,19 +41,16 @@ const Signup = () => {
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   return (
     <article>
       <h2>Create an account</h2>
-      <form
-        className="signupForm"
-        onSubmit={handleSubmit}
-      >
+      <form className="signupForm" onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
         <input
           id="name"
-          type="text" 
+          type="text"
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -61,7 +58,7 @@ const Signup = () => {
         <label htmlFor="email">Email:</label>
         <input
           id="email"
-          type="text" 
+          type="text"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -77,7 +74,7 @@ const Signup = () => {
         <button type="submit">Sign up</button>
       </form>
     </article>
-  )
-}
+  );
+};
 
 export default Signup;

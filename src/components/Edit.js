@@ -17,21 +17,21 @@ const Edit = () => {
   const [uploadImages, setUploadImages] = useState([]);
   const [previewImageUrls, setPreviewImageUrls] = useState([]);
   const [date, setDate] = useState("");
-  const { fishCatches, setFishCatches, API_URL, setIsLoading, setSearch } = useApplicationContext();
+  const { fishCatches, setFishCatches, API_URL, setIsLoading, setSearch } =
+    useApplicationContext();
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id;
 
   useEffect(() => {
     setIsLoading(true);
-    async function fetchCatch () {
+    async function fetchCatch() {
       try {
-        const res = await api.get(
-          `/api/fishcatch/${id}`, {
-            headers: {
-              "Authorization": "Bearer " + localStorage.getItem("fishlog-token")
-            }
-          });
+        const res = await api.get(`/api/fishcatch/${id}`, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("fishlog-token"),
+          },
+        });
         setSpecies(res.data.species);
         setLength(res.data.length);
         setWeight(res.data.weight);
@@ -45,13 +45,12 @@ const Edit = () => {
         const imageUrl = `${API_URL}${res.data.imageurl}`;
         setPreviewImageUrls([imageUrl]);
       } catch (err) {
-        setError(err)
-    
+        setError(err);
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
     }
-    fetchCatch();        
+    fetchCatch();
   }, []);
 
   useEffect(() => {
@@ -60,9 +59,7 @@ const Edit = () => {
   }, [uploadImages]);
 
   if (error) {
-    return (
-      <NotFound />
-    )
+    return <NotFound />;
   }
 
   const handleSubmit = async (e) => {
@@ -79,11 +76,11 @@ const Edit = () => {
       length,
       weight,
       location,
-      date
+      date,
     };
 
     if (uploadImages.size) {
-      data.uploadImage = uploadImages;        
+      data.uploadImage = uploadImages;
     }
 
     const formData = new FormData();
@@ -92,68 +89,71 @@ const Edit = () => {
     }
 
     try {
-      const response = await api.post(
-        `/api/update/${id}`,
-        formData,
-        {
-          headers: {
-            "Authorization": "Bearer " + localStorage.getItem("fishlog-token")
-          }
-        }
-      );
+      const response = await api.post(`/api/update/${id}`, formData, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("fishlog-token"),
+        },
+      });
 
       await response.data;
       const newCatch = response.data.data;
       newCatch.username = localStorage.getItem("fishlog-userName");
 
-      setFishCatches(fishCatches.map(item => {
-        return parseInt(item.id) === parseInt(newCatch.id) ? newCatch : item;
-      }));
+      setFishCatches(
+        fishCatches.map((item) => {
+          return parseInt(item.id) === parseInt(newCatch.id) ? newCatch : item;
+        })
+      );
 
       successToast("Catch updated");
       setSearch("");
       navigate(`/map/${response.data.data.id}`);
     } catch (err) {
-      console.error(err)
+      console.error(err);
       console.error(`Error: ${err.message}`);
       errorToast("Could not update catch, please check your data.");
-
     }
-  }
+  };
 
   if (!localStorage.getItem("fishlog-token")) {
     return (
       <article>
         <h1>Edit</h1>
-        <p><Link to="/login">Login</Link> to be able to edit a catch.</p>
+        <p>
+          <Link to="/login">Login</Link> to be able to edit a catch.
+        </p>
       </article>
-    )
+    );
   }
 
-  return (
-    mapCenter ?
-      <article>
-        <h2>Edit</h2>
-        <p>Click the map to set position.</p>
-        <AddEditMap location={location} setLocation={setLocation} center={mapCenter} />
-        <AddEditForm
-          formRole="edit"
-          handleSubmit={handleSubmit}
-          species={species}
-          setSpecies={setSpecies}
-          length={length}
-          setLength={setLength}
-          weight={weight}
-          setWeight={setWeight}
-          date={date}
-          setDate={setDate}
-          uploadImages={uploadImages}
-          setUploadImages={setUploadImages}
-          previewImageUrls={previewImageUrls}
-        />
-      </article>
-      : <p>Loading...</p>
-  )
-}
+  return mapCenter ? (
+    <article>
+      <h2>Edit</h2>
+      <p>Click the map to set position.</p>
+      <AddEditMap
+        location={location}
+        setLocation={setLocation}
+        center={mapCenter}
+      />
+      <AddEditForm
+        formRole="edit"
+        handleSubmit={handleSubmit}
+        species={species}
+        setSpecies={setSpecies}
+        length={length}
+        setLength={setLength}
+        weight={weight}
+        setWeight={setWeight}
+        date={date}
+        setDate={setDate}
+        uploadImages={uploadImages}
+        setUploadImages={setUploadImages}
+        previewImageUrls={previewImageUrls}
+      />
+    </article>
+  ) : (
+    <p>Loading...</p>
+  );
+};
 
 export default Edit;

@@ -14,7 +14,8 @@ const Add = () => {
   const [uploadImages, setUploadImages] = useState([]);
   const [previewImageUrls, setPreviewImageUrls] = useState([]);
   const [date, setDate] = useState("");
-  const { fishCatches, setFishCatches, setIsLoading, setSearch } = useApplicationContext();
+  const { fishCatches, setFishCatches, setIsLoading, setSearch } =
+    useApplicationContext();
   const username = localStorage.getItem("fishlog-userName");
   const navigate = useNavigate();
 
@@ -40,7 +41,7 @@ const Add = () => {
       uploadImage,
       username,
       location,
-      date
+      date,
     };
 
     const formData = new FormData();
@@ -50,15 +51,11 @@ const Add = () => {
 
     setIsLoading(true);
     try {
-      const response = await api.post(
-        "/api/create",
-        formData,
-        {
-          headers: {
-            "Authorization": "Bearer " + localStorage.getItem("fishlog-token")
-          }
-        }
-      );
+      const response = await api.post("/api/create", formData, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("fishlog-token"),
+        },
+      });
 
       await response.data;
       const newCatch = response.data.data;
@@ -68,21 +65,23 @@ const Add = () => {
       setSearch("");
       navigate(`/map/${response.data.data.id}`);
     } catch (err) {
-      console.error(err)
-      console.error(`Error: ${err.message}`);
       errorToast("Could not add catch, please check your data.");
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   if (!localStorage.getItem("fishlog-token")) {
     return (
       <article>
-        <p><Link to="/login">Login</Link> to be able to add a catch.</p>
-        <p>Or <Link to="/signup">create an account.</Link></p>
+        <p>
+          <Link to="/login">Login</Link> to be able to add a catch.
+        </p>
+        <p>
+          Or <Link to="/signup">create an account.</Link>
+        </p>
       </article>
-    )
+    );
   }
 
   return (
@@ -105,7 +104,7 @@ const Add = () => {
         previewImageUrls={previewImageUrls}
       />
     </article>
-  )
-}
+  );
+};
 
 export default Add;

@@ -1,67 +1,68 @@
 form {
-    input {
-      display: block;
-      width: 100%;
-      padding: 1em;
-      margin-bottom: 0.2em;
-      color: $first-color;
-      background-color: $fourth-color;
-    }
-    button {
-      background-color: $fourth-color;
-      margin-top: 1.2em;
-      display: block;
-      width: 100%;
-      border: 1px solid $first-color;
-      padding: 1em;
-      color: $first-color;
-      cursor: pointer;
-      &:hover {
-        color: $fourth-color;
-        background-color: $third-color;
-      }
-      text-align: center;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all ease 0.2s;
-    }
-  }
-  
-  #search {
-    margin-bottom: 1em;
+  input {
     display: block;
     width: 100%;
     padding: 1em;
+    margin-bottom: 0.2em;
     color: $first-color;
     background-color: $fourth-color;
   }
-  
-  .uploadPreviewImage {
+  button {
+    background-color: $fourth-color;
+    margin-top: 1.2em;
     display: block;
     width: 100%;
-  }
-  
-  #uploadImage {
-    opacity: 0;
-    width: 0.1px;
-    height: 0.1px;
-    position: absolute;
-  }
-  
-  #uploadImageLabel {
-      display: block;
-      font-size: 1em;
-      padding: 1em;
-      width: 100%;
-      text-align: center;
-      margin: 1em 0 0.8em;
-      background: $first-color;
+    border: 1px solid $first-color;
+    padding: 1em;
+    color: $first-color;
+    cursor: pointer;
+    &:hover {
       color: $fourth-color;
-      border-radius: 2px;
-      border: 1px solid $first-color;
-      transition: all ease 0.2s;
-      &:hover {
-          background: $third-color;
-          cursor: pointer;
-      }
+      background-color: $third-color;
+    }
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all ease 0.2s;
   }
+}
+
+#species,
+#user {
+  margin-bottom: 1em;
+  display: block;
+  width: 100%;
+  padding: 1em;
+  color: $first-color;
+  background-color: $fourth-color;
+}
+
+.uploadPreviewImage {
+  display: block;
+  width: 100%;
+}
+
+#uploadImage {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+
+#uploadImageLabel {
+  display: block;
+  font-size: 1em;
+  padding: 1em;
+  width: 100%;
+  text-align: center;
+  margin: 1em 0 0.8em;
+  background: $first-color;
+  color: $fourth-color;
+  border-radius: 2px;
+  border: 1px solid $first-color;
+  transition: all ease 0.2s;
+  &:hover {
+    background: $third-color;
+    cursor: pointer;
+  }
+}

@@ -20,30 +20,38 @@ const Nav = () => {
       <nav>
         <ul className="navLinks">
           <li>
-            <NavLink to="/add" activeclassname="active">Add</NavLink>
+            <NavLink to="/add" activeclassname="active">
+              Add
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/" activeclassname="active">List</NavLink>
+            <NavLink to="/" activeclassname="active">
+              List
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/map/all" activeclassname="active">Map</NavLink>
+            <NavLink to="/map/all" activeclassname="active">
+              Map
+            </NavLink>
           </li>
           <li>
-            {
-              userName ?
-                <button
-                  onClick={handleLogout}
-                >Logout</button> :
-                <NavLink to="/login" activeclassname="active">Login</NavLink>
-            }
+            {userName ? (
+              <button onClick={handleLogout}>Logout</button>
+            ) : (
+              <NavLink to="/login" activeclassname="active">
+                Login
+              </NavLink>
+            )}
           </li>
           <li>
-            <NavLink to="/about" activeclassname="active">About</NavLink>
+            <NavLink to="/about" activeclassname="active">
+              About
+            </NavLink>
           </li>
         </ul>
       </nav>
     </>
-  )
-}
+  );
+};
 
 export default Nav;

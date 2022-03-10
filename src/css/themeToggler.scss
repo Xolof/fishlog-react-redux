@@ -1,34 +1,34 @@
 .themeToggler {
-    width: 100%;
-    height: 1.7em;
-    display: block;
-    margin-top: 0.4em;
-    position: relative;
+  width: 100%;
+  height: 1.7em;
+  display: block;
+  margin-top: 0.4em;
+  position: relative;
 }
 
 .themeToggleContainer {
-    width: 3em;
-    height: 100%;
-    border: 1px solid $first-color;
-    border-radius: 15px;
-    cursor: pointer;
-    float: right;
-    background-color: $fourth-color;
-    padding: 0;
+  width: 3em;
+  height: 100%;
+  border: 1px solid $first-color;
+  border-radius: 15px;
+  cursor: pointer;
+  float: right;
+  background-color: $fourth-color;
+  padding: 0;
 }
 
 .themeToggleButton {
-    width: 1.5em;
-    height: 1.5em;
-    border-radius: 50%;
-    transition: 0.2s all ease;
-    position: relative;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  transition: 0.2s all ease;
+  position: relative;
 }
 
 .left {
-    left: 0;
+  left: 0;
 }
 
 .right {
-    left: 1.3em;
+  left: 1.3em;
 }

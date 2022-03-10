@@ -5,9 +5,11 @@ const Feed = ({ fishCatches }) => {
     <>
       {fishCatches
         .sort((a, b) => b.id - a.id)
-        .map(fishCatch => (<FishCatchCard fishCatch={fishCatch} key={fishCatch.id}/>))}
+        .map((fishCatch) => (
+          <FishCatchCard fishCatch={fishCatch} key={fishCatch.id} />
+        ))}
     </>
-  )
-}
+  );
+};
 
 export default Feed;

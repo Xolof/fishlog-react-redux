@@ -7,7 +7,7 @@ export default () => {
   const { setUserName } = useUserContext;
   const navigate = useNavigate();
 
-  function parseJwt (token) {
+  function parseJwt(token) {
     try {
       return JSON.parse(atob(token.split(".")[1]));
     } catch (e) {
@@ -15,7 +15,7 @@ export default () => {
     }
   }
 
-  function AuthVerify () {
+  function AuthVerify() {
     const decodedJwt = parseJwt(localStorage.getItem("fishlog-token"));
     if (decodedJwt.exp * 1000 > Date.now()) {
       return true;
@@ -23,12 +23,12 @@ export default () => {
     return false;
   }
 
-  function logOut () {
+  function logOut() {
     navigate("/");
     localStorage.removeItem("fishlog-token");
     localStorage.removeItem("fishlog-userName");
     setUserName(false);
-    infoToast("You have been logged out due to inactivity.");  
+    infoToast("You have been logged out due to inactivity.");
   }
 
   function handleUserAction(e) {
@@ -41,7 +41,7 @@ export default () => {
       logOut();
     }
   }
-  
+
   useEffect(() => {
     document.addEventListener("click", handleUserAction);
     document.addEventListener("keydown", handleUserAction);
@@ -53,8 +53,8 @@ export default () => {
       document.removeEventListener("keydown", handleUserAction);
       document.removeEventListener("mousemove", handleUserAction);
       document.removeEventListener("scroll", handleUserAction);
-    }
+    };
   }, []);
 
   return null;
-}
+};

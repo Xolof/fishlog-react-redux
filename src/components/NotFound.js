@@ -7,7 +7,7 @@ const NotFound = () => {
       <h2>Not found</h2>
       <Link to="/">Go to homepage</Link>
     </article>
-  )
-}
+  );
+};
 
 export default NotFound;
