@@ -2,12 +2,21 @@ import { createContext, useContext, useState, useEffect } from "react";
 
 const DataContext = createContext({});
 
+const maxWeightFilter = 10000;
+const maxLengthFilter = 500;
+
 export const DataProvider = ({ children }) => {
   const [fishCatches, setFishCatches] = useState([]);
   const [filterOnSpecies, setFilterOnSpecies] = useState("");
   const [filterOnUser, setFilterOnUser] = useState("");
-  const [filterOnWeight, setFilterOnWeight] = useState({ min: 0, max: 10000 });
-  const [filterOnLength, setFilterOnLength] = useState({ min: 0, max: 500 });
+  const [filterOnWeight, setFilterOnWeight] = useState({
+    min: 0,
+    max: maxWeightFilter,
+  });
+  const [filterOnLength, setFilterOnLength] = useState({
+    min: 0,
+    max: maxLengthFilter,
+  });
   const [searchResults, setSearchResults] = useState([]);
   const [data, setData] = useState([]);
   const [fetchError, setFetchError] = useState(null);
@@ -23,18 +32,29 @@ export const DataProvider = ({ children }) => {
   }, [data]);
 
   useEffect(() => {
-    const filteredResults = fishCatches.filter((fishCatch) => {
+    let filteredResults = fishCatches.filter((fishCatch) => {
       return (
         fishCatch.species
           .toLowerCase()
           .includes(filterOnSpecies.toLowerCase()) &&
         fishCatch.username.toLowerCase().includes(filterOnUser.toLowerCase()) &&
         fishCatch.weight > filterOnWeight.min &&
-        fishCatch.weight < filterOnWeight.max &&
-        fishCatch.length > filterOnLength.min &&
-        fishCatch.length < filterOnLength.max
+        fishCatch.length > filterOnLength.min
       );
     });
+
+    if (filterOnWeight.max < maxWeightFilter) {
+      filteredResults = filteredResults.filter((fishCatch) => {
+        return fishCatch.weight < filterOnWeight.max;
+      });
+    }
+
+    if (filterOnLength.max < maxLengthFilter) {
+      filteredResults = filteredResults.filter((fishCatch) => {
+        return fishCatch.length < filterOnLength.max;
+      });
+    }
+
     setSearchResults(filteredResults);
   }, [
     fishCatches,
