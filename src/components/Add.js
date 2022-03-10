@@ -14,7 +14,7 @@ const Add = () => {
   const [uploadImages, setUploadImages] = useState([]);
   const [previewImageUrls, setPreviewImageUrls] = useState([]);
   const [date, setDate] = useState("");
-  const { fishCatches, setFishCatches, setIsLoading, setSearch } =
+  const { fishCatches, setFishCatches, setIsLoading, setFilterOnSpecies } =
     useApplicationContext();
   const username = localStorage.getItem("fishlog-userName");
   const navigate = useNavigate();
@@ -62,9 +62,10 @@ const Add = () => {
       newCatch.username = localStorage.getItem("fishlog-userName");
       setFishCatches([...fishCatches, response.data.data]);
       successToast("Catch added!");
-      setSearch("");
+      setFilterOnSpecies("");
       navigate(`/map/${response.data.data.id}`);
     } catch (err) {
+      console.log(err);
       errorToast("Could not add catch, please check your data.");
     } finally {
       setIsLoading(false);
