@@ -17,8 +17,13 @@ const Edit = () => {
   const [uploadImages, setUploadImages] = useState([]);
   const [previewImageUrls, setPreviewImageUrls] = useState([]);
   const [date, setDate] = useState("");
-  const { fishCatches, setFishCatches, API_URL, setIsLoading, setSearch } =
-    useApplicationContext();
+  const {
+    fishCatches,
+    setFishCatches,
+    API_URL,
+    setIsLoading,
+    setFilterOnSpecies,
+  } = useApplicationContext();
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id;
@@ -106,7 +111,7 @@ const Edit = () => {
       );
 
       successToast("Catch updated");
-      setSearch("");
+      setFilterOnSpecies("");
       navigate(`/map/${response.data.data.id}`);
     } catch (err) {
       console.error(err);
