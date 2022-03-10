@@ -65,8 +65,6 @@ const Add = () => {
       setSearch("");
       navigate(`/map/${response.data.data.id}`);
     } catch (err) {
-      console.error(err);
-      console.error(`Error: ${err.message}`);
       errorToast("Could not add catch, please check your data.");
     } finally {
       setIsLoading(false);
