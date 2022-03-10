@@ -1,18 +1,18 @@
 import { useApplicationContext } from "../../context/DataContext";
 
 const SpeciesFilter = () => {
-  const { search, setSearch } = useApplicationContext();
+  const { filterOnSpecies, setFilterOnSpecies } = useApplicationContext();
 
   return (
     <>
-      <label htmlFor="search">Search: </label>
+      <label htmlFor="species">Species: </label>
       <input
         type="search"
-        name="search"
-        id="search"
-        value={search}
+        name="species"
+        id="species"
+        value={filterOnSpecies}
         onChange={(e) => {
-          setSearch(e.target.value);
+          setFilterOnSpecies(e.target.value);
         }}
       />
     </>

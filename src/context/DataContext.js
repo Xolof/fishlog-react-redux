@@ -4,7 +4,7 @@ const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
   const [fishCatches, setFishCatches] = useState([]);
-  const [search, setSearch] = useState("");
+  const [filterOnSpecies, setFilterOnSpecies] = useState("");
   const [filterOnUser, setFilterOnUser] = useState("");
   const [filterOnWeight, setFilterOnWeight] = useState([0, 10000]);
   const [filterOnLength, setFilterOnLength] = useState([0, 500]);
@@ -25,7 +25,9 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     const filteredResults = fishCatches.filter((fishCatch) => {
       return (
-        fishCatch.species.toLowerCase().includes(search.toLowerCase()) &&
+        fishCatch.species
+          .toLowerCase()
+          .includes(filterOnSpecies.toLowerCase()) &&
         fishCatch.username.toLowerCase().includes(filterOnUser.toLowerCase()) &&
         fishCatch.weight > filterOnWeight[0] &&
         fishCatch.weight < filterOnWeight[1] &&
@@ -34,13 +36,19 @@ export const DataProvider = ({ children }) => {
       );
     });
     setSearchResults(filteredResults);
-  }, [fishCatches, search, filterOnUser, filterOnWeight, filterOnLength]);
+  }, [
+    fishCatches,
+    filterOnSpecies,
+    filterOnUser,
+    filterOnWeight,
+    filterOnLength,
+  ]);
 
   return (
     <DataContext.Provider
       value={{
-        search,
-        setSearch,
+        filterOnSpecies,
+        setFilterOnSpecies,
         searchResults,
         fetchError,
         setFetchError,
