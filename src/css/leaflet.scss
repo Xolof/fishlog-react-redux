@@ -61,3 +61,20 @@
 .leaflet-popup-tip {
   background-color: $fourth-color;
 }
+
+.mapWrapper {
+  position: relative;
+}
+
+.noResults {
+  background-color: $third-color;
+  color: $fourth-color;
+  font-weight: bold;
+  text-align: center;
+  padding: 1em;
+  margin: 0;
+  position: absolute;
+  z-index: 10000;
+  left: 0;
+  right: 0;
+}
