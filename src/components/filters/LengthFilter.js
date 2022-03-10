@@ -32,12 +32,12 @@ const LengthFilter = () => {
   const { filterOnLength, setFilterOnLength } = useApplicationContext();
 
   const updateRange = (e, data) => {
-    setFilterOnLength(data);
+    setFilterOnLength({ min: data[0], max: data[1] });
   };
 
   return (
     <Slider
-      value={filterOnLength}
+      value={[filterOnLength.min, filterOnLength.max]}
       onChange={updateRange}
       marks={labels}
       min={0}

@@ -28,12 +28,12 @@ const WeightFilter = () => {
   const { filterOnWeight, setFilterOnWeight } = useApplicationContext();
 
   const updateRange = (e, data) => {
-    setFilterOnWeight(data);
+    setFilterOnWeight({ min: data[0], max: data[1] });
   };
 
   return (
     <Slider
-      value={filterOnWeight}
+      value={[filterOnWeight.min, filterOnWeight.max]}
       onChange={updateRange}
       marks={labels}
       min={0}

@@ -6,8 +6,8 @@ export const DataProvider = ({ children }) => {
   const [fishCatches, setFishCatches] = useState([]);
   const [filterOnSpecies, setFilterOnSpecies] = useState("");
   const [filterOnUser, setFilterOnUser] = useState("");
-  const [filterOnWeight, setFilterOnWeight] = useState([0, 10000]);
-  const [filterOnLength, setFilterOnLength] = useState([0, 500]);
+  const [filterOnWeight, setFilterOnWeight] = useState({ min: 0, max: 10000 });
+  const [filterOnLength, setFilterOnLength] = useState({ min: 0, max: 500 });
   const [searchResults, setSearchResults] = useState([]);
   const [data, setData] = useState([]);
   const [fetchError, setFetchError] = useState(null);
@@ -29,10 +29,10 @@ export const DataProvider = ({ children }) => {
           .toLowerCase()
           .includes(filterOnSpecies.toLowerCase()) &&
         fishCatch.username.toLowerCase().includes(filterOnUser.toLowerCase()) &&
-        fishCatch.weight > filterOnWeight[0] &&
-        fishCatch.weight < filterOnWeight[1] &&
-        fishCatch.length > filterOnLength[0] &&
-        fishCatch.length < filterOnLength[1]
+        fishCatch.weight > filterOnWeight.min &&
+        fishCatch.weight < filterOnWeight.max &&
+        fishCatch.length > filterOnLength.min &&
+        fishCatch.length < filterOnLength.max
       );
     });
     setSearchResults(filteredResults);
