@@ -22,7 +22,7 @@ const Edit = () => {
     setFishCatches,
     API_URL,
     setIsLoading,
-    filterOnSpecies,
+    setFilterOnSpecies,
   } = useApplicationContext();
   const navigate = useNavigate();
   const params = useParams();
@@ -111,7 +111,7 @@ const Edit = () => {
       );
 
       successToast("Catch updated");
-      filterOnSpecies("");
+      setFilterOnSpecies("");
       navigate(`/map/${response.data.data.id}`);
     } catch (err) {
       console.error(err);
