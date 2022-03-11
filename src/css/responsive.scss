@@ -8,6 +8,15 @@ $desktop: 1025px;
       flex-flow: row;
     }
   }
+
+  .leaflet-popup-content {
+    .fishCatchCard {
+      margin-top: 0.5em;
+      img {
+        margin: 0.5em auto;
+      }
+    }
+  }
 }
 
 @media (min-width: $tablet) {
