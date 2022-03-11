@@ -1,8 +1,4 @@
 .catchList {
-  img {
-    width: 50%;
-    height: auto;
-  }
   list-style: none;
   padding: 0;
   li {
@@ -12,10 +8,43 @@
 }
 
 .fishCatchCard {
+  padding-top: 1em;
+  .content {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    .catchInfo {
+      width: 50%;
+    }
+  }
+
   img {
     width: 100%;
     height: auto;
+    display: block;
+    margin-bottom: 0.5em;
   }
   padding-bottom: 0.5em;
   border-bottom: 1px solid $first-color;
+
+  button {
+    width: 48%;
+    cursor: pointer;
+    padding: 0.4em;
+    transition: 0.2s all ease;
+    border: $fourth-color 2px solid;
+    background-color: $first-color;
+    color: $fourth-color;
+  }
+  .editButton {
+    &:hover {
+      background-color: $third-color;
+    }
+  }
+  .deleteButton {
+    float: right;
+    &:hover {
+      background-color: $danger;
+    }
+  }
 }
