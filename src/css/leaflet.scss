@@ -18,30 +18,10 @@
       width: 150px;
       height: auto;
       display: block;
-      margin: 0 auto;
+      margin: 0 auto 0.5em;
       border: 2px solid $first-color;
     }
     border-bottom: none;
-  }
-  button {
-    width: 48%;
-    cursor: pointer;
-    padding: 0.4em;
-    transition: 0.2s all ease;
-    border: $fourth-color 2px solid;
-    background-color: $first-color;
-    color: $fourth-color;
-  }
-  .editButton {
-    &:hover {
-      background-color: $third-color;
-    }
-  }
-  .deleteButton {
-    float: right;
-    &:hover {
-      background-color: $danger;
-    }
   }
 }
 
