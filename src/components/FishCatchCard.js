@@ -39,15 +39,19 @@ const FishCatchCard = ({ fishCatch }) => {
 
   return (
     <section className="fishCatchCard">
-      <h3>{fishCatch.species}</h3>
-      <p>{fishCatch.length} cm</p>
-      <p>{fishCatch.weight} g</p>
-      <p>
-        {lat} {lon}
-      </p>
-      <p className="postDate">{fishCatch.date}</p>
-      <p>Caught by {fishCatch.username}</p>
-      <img src={`${API_URL}${fishCatch.imageurl}`} alt={fishCatch.species} />
+      <div className="content">
+        <div className="catchInfo">
+          <h3>{fishCatch.species}</h3>
+          <p>{fishCatch.length} cm</p>
+          <p>{fishCatch.weight} g</p>
+          <p>
+            {lat} {lon}
+          </p>
+          <p className="postDate">{fishCatch.date}</p>
+          <p>Caught by {fishCatch.username}</p>
+        </div>
+        <img src={`${API_URL}${fishCatch.imageurl}`} alt={fishCatch.species} />
+      </div>
       {fishCatch.username === localStorage.getItem("fishlog-userName") ? (
         <>
           <button

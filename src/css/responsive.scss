@@ -2,6 +2,14 @@ $mobile: 481px;
 $tablet: 641px;
 $desktop: 1025px;
 
+@media (min-width: $mobile) {
+  .fishCatchCard {
+    .content {
+      flex-flow: row;
+    }
+  }
+}
+
 @media (min-width: $tablet) {
   .uploadPreviewImage {
     display: block;
@@ -11,6 +19,7 @@ $desktop: 1025px;
   .fishCatchCard {
     img {
       width: 50%;
+      height: auto;
     }
   }
 }
