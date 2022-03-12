@@ -40,16 +40,34 @@ const FishCatchCard = ({ fishCatch }) => {
   return (
     <section className="fishCatchCard">
       <div className="content">
-        <div className="catchInfo">
-          <h3>{fishCatch.species}</h3>
-          <p>{fishCatch.length} cm</p>
-          <p>{fishCatch.weight} g</p>
-          <p>
-            {lat} {lon}
-          </p>
-          <p className="postDate">{fishCatch.date}</p>
-          <p>Caught by {fishCatch.username}</p>
-        </div>
+        <table className="catchInfo">
+          <tr>
+            <th>Species:</th>
+            <th>{fishCatch.species}</th>
+          </tr>
+          <tr>
+            <td>Length:</td>
+            <td>{fishCatch.length} cm</td>
+          </tr>
+          <tr>
+            <td>Weight:</td>
+            <td>{fishCatch.weight} g</td>
+          </tr>
+          <tr>
+            <td>Position:</td>
+            <td>
+              {lat}, {lon}
+            </td>
+          </tr>
+          <tr>
+            <td>Date:</td>
+            <td>{fishCatch.date}</td>
+          </tr>
+          <tr>
+            <td>User:</td>
+            <td>{fishCatch.username}</td>
+          </tr>
+        </table>
         <img src={`${API_URL}${fishCatch.imageurl}`} alt={fishCatch.species} />
       </div>
       {fishCatch.username === localStorage.getItem("fishlog-userName") ? (
