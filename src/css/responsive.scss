@@ -17,6 +17,14 @@ $desktop: 1025px;
       }
     }
   }
+
+  .leaflet-popup-content {
+    .fishCatchCard {
+      img {
+        width: 150px;
+      }
+    }
+  }
 }
 
 @media (min-width: $tablet) {
