@@ -24,6 +24,9 @@ const Edit = () => {
     setIsLoading,
     setFilterOnSpecies,
     setMarkerLocation,
+    setFilterOnUser,
+    setFilterOnWeight,
+    setFilterOnLength,
   } = useApplicationContext();
   const navigate = useNavigate();
   const params = useParams();
@@ -117,6 +120,15 @@ const Edit = () => {
 
       successToast("Catch updated");
       setFilterOnSpecies("");
+      setFilterOnUser("");
+      setFilterOnWeight({
+        min: 0,
+        max: 10000,
+      });
+      setFilterOnLength({
+        min: 0,
+        max: 500,
+      });
       navigate(`/map/${response.data.data.id}`);
     } catch (err) {
       console.error(err);

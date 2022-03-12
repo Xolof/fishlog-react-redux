@@ -20,6 +20,9 @@ const Add = () => {
     setIsLoading,
     setFilterOnSpecies,
     setMarkerLocation,
+    setFilterOnUser,
+    setFilterOnWeight,
+    setFilterOnLength,
   } = useApplicationContext();
   const username = localStorage.getItem("fishlog-userName");
   const navigate = useNavigate();
@@ -72,6 +75,15 @@ const Add = () => {
       setFishCatches([...fishCatches, response.data.data]);
       successToast("Catch added!");
       setFilterOnSpecies("");
+      setFilterOnUser("");
+      setFilterOnWeight({
+        min: 0,
+        max: 10000,
+      });
+      setFilterOnLength({
+        min: 0,
+        max: 500,
+      });
       navigate(`/map/${response.data.data.id}`);
     } catch (err) {
       console.log(err);
