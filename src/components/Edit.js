@@ -23,10 +23,15 @@ const Edit = () => {
     API_URL,
     setIsLoading,
     setFilterOnSpecies,
+    setMarkerLocation,
   } = useApplicationContext();
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id;
+
+  useEffect(() => {
+    setMarkerLocation(null);
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);

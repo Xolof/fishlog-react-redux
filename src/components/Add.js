@@ -14,10 +14,19 @@ const Add = () => {
   const [uploadImages, setUploadImages] = useState([]);
   const [previewImageUrls, setPreviewImageUrls] = useState([]);
   const [date, setDate] = useState("");
-  const { fishCatches, setFishCatches, setIsLoading, setFilterOnSpecies } =
-    useApplicationContext();
+  const {
+    fishCatches,
+    setFishCatches,
+    setIsLoading,
+    setFilterOnSpecies,
+    setMarkerLocation,
+  } = useApplicationContext();
   const username = localStorage.getItem("fishlog-userName");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setMarkerLocation(null);
+  }, []);
 
   useEffect(() => {
     if (uploadImages.length < 1) return;
