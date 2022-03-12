@@ -1,9 +1,10 @@
+import { useApplicationContext } from "../context/DataContext";
 import { useUserContext } from "../context/UserContext";
 import UserStatus from "./UserStatus";
 
 const Header = ({ title }) => {
-  const { userName, isLoading } = useUserContext();
-
+  const { userName } = useUserContext();
+  const { isLoading } = useApplicationContext();
   return (
     <>
       {isLoading ? (
