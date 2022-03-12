@@ -17,15 +17,15 @@ nav {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 10000;
+  z-index: 5000;
   top: 0;
   padding-top: 1.5em;
-  background-color: blueviolet; //$fourth-color;
+  background-color: $fourth-color;
 }
 
 .navLinks {
   margin: 0;
-  padding: 0 0 1em 0;
+  padding: 0;
   display: flex;
   list-style: none;
   li {
