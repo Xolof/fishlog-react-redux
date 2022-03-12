@@ -1,20 +1,33 @@
 header {
-  margin-top: 0;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   position: relative;
+  * {
+    margin-bottom: 0;
+  }
 }
 
 article {
   flex: 1;
 }
 
+nav {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  top: 0;
+  padding-top: 1.5em;
+  background-color: blueviolet; //$fourth-color;
+}
+
 .navLinks {
+  margin: 0;
   padding: 0 0 1em 0;
   display: flex;
   list-style: none;
-  width: 100%;
   li {
     width: 20%;
     button {
@@ -38,6 +51,7 @@ article {
     border: 1px solid $first-color;
     padding: 1em 0;
     color: $first-color;
+    background-color: $fourth-color;
     cursor: pointer;
     &:hover {
       color: $fourth-color;

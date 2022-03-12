@@ -28,6 +28,17 @@ $desktop: 1025px;
 }
 
 @media (min-width: $tablet) {
+  header {
+    * {
+      margin-bottom: 1em;
+    }
+  }
+
+  nav {
+    top: 0;
+    padding-top: 0;
+  }
+
   .uploadPreviewImage {
     display: block;
     width: 50%;
