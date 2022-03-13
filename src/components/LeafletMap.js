@@ -68,8 +68,7 @@ const LeafletMap = ({ searchResults, showId }) => {
                 setCurrentFishCatch(null);
               }}
             >
-              <div className="bar1"></div>
-              <div className="bar2"></div>
+              &#10005;
             </button>
             <FishCatchCard fishCatch={currentFishCatch} />
           </div>
