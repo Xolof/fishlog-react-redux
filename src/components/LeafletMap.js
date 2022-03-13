@@ -62,7 +62,7 @@ const LeafletMap = ({ searchResults, showId }) => {
       {currentFishCatch && (
         <>
           <div className="fishCatchPopup">
-            <div
+            <button
               className="closeButton"
               onClick={() => {
                 setCurrentFishCatch(null);
@@ -70,7 +70,7 @@ const LeafletMap = ({ searchResults, showId }) => {
             >
               <div className="bar1"></div>
               <div className="bar2"></div>
-            </div>
+            </button>
             <FishCatchCard fishCatch={currentFishCatch} />
           </div>
         </>
