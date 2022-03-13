@@ -1,12 +1,14 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import FishCatchCard from "./FishCatchCard";
 import { useApplicationContext } from "../context/DataContext";
 import { useThemeContext } from "../context/ThemeContext";
 import UserMarker from "./UserMarker";
+import { useState } from "react";
 
 const LeafletMap = ({ searchResults, showId }) => {
   const { fishCatches, userPosition } = useApplicationContext();
   const { tileUrl } = useThemeContext();
+  const [currentFishCatch, setCurrentFishCatch] = useState(null);
 
   const showCatch = fishCatches.filter(
     (item) => parseInt(item.id) === parseInt(showId)
@@ -44,15 +46,35 @@ const LeafletMap = ({ searchResults, showId }) => {
             const lon = splitPosition[1];
 
             return (
-              <Marker position={[lat, lon]} key={fishCatch.id}>
-                <Popup>
-                  <FishCatchCard fishCatch={fishCatch} />
-                </Popup>
-              </Marker>
+              <Marker
+                position={[lat, lon]}
+                key={fishCatch.id}
+                eventHandlers={{
+                  click: () => {
+                    setCurrentFishCatch(fishCatch);
+                  },
+                }}
+              ></Marker>
             );
           })
           : null}
       </MapContainer>
+      {currentFishCatch && (
+        <>
+          <div className="fishCatchPopup">
+            <div
+              className="closeButton"
+              onClick={() => {
+                setCurrentFishCatch(null);
+              }}
+            >
+              <div className="bar1"></div>
+              <div className="bar2"></div>
+            </div>
+            <FishCatchCard fishCatch={currentFishCatch} />
+          </div>
+        </>
+      )}
     </>
   );
 };

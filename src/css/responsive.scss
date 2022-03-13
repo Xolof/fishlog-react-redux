@@ -25,6 +25,13 @@ $desktop: 1025px;
       }
     }
   }
+
+  .fishCatchPopup {
+    padding-top: 0.4em;
+    section {
+      padding-top: 2.8em;
+    }
+  }
 }
 
 @media (min-width: $tablet) {

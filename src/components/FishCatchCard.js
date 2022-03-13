@@ -41,32 +41,36 @@ const FishCatchCard = ({ fishCatch }) => {
     <section className="fishCatchCard">
       <div className="content">
         <table className="catchInfo">
-          <tr>
-            <th>Species:</th>
-            <th>{fishCatch.species}</th>
-          </tr>
-          <tr>
-            <td>Length:</td>
-            <td>{fishCatch.length} cm</td>
-          </tr>
-          <tr>
-            <td>Weight:</td>
-            <td>{fishCatch.weight} g</td>
-          </tr>
-          <tr>
-            <td>Position:</td>
-            <td>
-              {lat}, {lon}
-            </td>
-          </tr>
-          <tr>
-            <td>Date:</td>
-            <td>{fishCatch.date}</td>
-          </tr>
-          <tr>
-            <td>User:</td>
-            <td>{fishCatch.username}</td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Species:</th>
+              <th>{fishCatch.species}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Length:</td>
+              <td>{fishCatch.length} cm</td>
+            </tr>
+            <tr>
+              <td>Weight:</td>
+              <td>{fishCatch.weight} g</td>
+            </tr>
+            <tr>
+              <td>Position:</td>
+              <td>
+                {lat}, {lon}
+              </td>
+            </tr>
+            <tr>
+              <td>Date:</td>
+              <td>{fishCatch.date}</td>
+            </tr>
+            <tr>
+              <td>User:</td>
+              <td>{fishCatch.username}</td>
+            </tr>
+          </tbody>
         </table>
         <img src={`${API_URL}${fishCatch.imageurl}`} alt={fishCatch.species} />
       </div>
