@@ -85,6 +85,8 @@
     position: absolute;
     right: 1em;
     transform: rotate(45deg);
+    border: none;
+    background-color: $fourth-color;
     cursor: pointer;
     .bar1 {
       -ms-transform: translate(0, -50%);
@@ -98,10 +100,10 @@
       border-radius: 10px;
     }
     .bar2 {
-      transform: translate(-50%, 0);
       width: 8px;
       background: $first-color;
       position: absolute;
+      top: 0;
       left: 50%;
       z-index: 99999;
       height: 100%;
