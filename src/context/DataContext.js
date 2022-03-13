@@ -1,9 +1,12 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import getTodaysDate from "../services/getTodaysDate";
 
 const DataContext = createContext({});
 
 const maxWeightFilter = 10000;
 const maxLengthFilter = 500;
+
+const todaysDate = getTodaysDate();
 
 export const DataProvider = ({ children }) => {
   const [fishCatches, setFishCatches] = useState([]);
@@ -17,6 +20,9 @@ export const DataProvider = ({ children }) => {
     min: 0,
     max: maxLengthFilter,
   });
+
+  const [filterOnDateFrom, setFilterOnDateFrom] = useState("1970-01-01");
+  const [filterOnDateTo, setFilterOnDateTo] = useState(todaysDate);
   const [searchResults, setSearchResults] = useState([]);
   const [data, setData] = useState([]);
   const [fetchError, setFetchError] = useState(null);
@@ -39,7 +45,9 @@ export const DataProvider = ({ children }) => {
           .includes(filterOnSpecies.toLowerCase()) &&
         fishCatch.username.toLowerCase().includes(filterOnUser.toLowerCase()) &&
         fishCatch.weight > filterOnWeight.min &&
-        fishCatch.length > filterOnLength.min
+        fishCatch.length > filterOnLength.min &&
+        fishCatch.date >= filterOnDateFrom &&
+        fishCatch.date <= filterOnDateTo
       );
     });
 
@@ -62,6 +70,8 @@ export const DataProvider = ({ children }) => {
     filterOnUser,
     filterOnWeight,
     filterOnLength,
+    filterOnDateFrom,
+    filterOnDateTo,
   ]);
 
   return (
@@ -89,6 +99,10 @@ export const DataProvider = ({ children }) => {
         setFilterOnWeight,
         filterOnLength,
         setFilterOnLength,
+        filterOnDateFrom,
+        setFilterOnDateFrom,
+        filterOnDateTo,
+        setFilterOnDateTo,
       }}
     >
       {children}
