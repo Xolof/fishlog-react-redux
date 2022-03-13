@@ -80,34 +80,17 @@
     border: none;
   }
   .closeButton {
-    width: 2em;
-    height: 2em;
     position: absolute;
-    right: 1em;
-    transform: rotate(45deg);
+    right: 0.4em;
+    padding: 0;
     border: none;
-    background-color: $fourth-color;
+    background-color: transparent;
     cursor: pointer;
-    .bar1 {
-      -ms-transform: translate(0, -50%);
-      transform: translate(0, -50%);
-      height: 8px;
-      background: $first-color;
-      position: absolute;
-      top: 50%;
-      z-index: 99999;
-      width: 100%;
-      border-radius: 10px;
-    }
-    .bar2 {
-      width: 8px;
-      background: $first-color;
-      position: absolute;
-      top: 0;
-      left: 50%;
-      z-index: 99999;
-      height: 100%;
-      border-radius: 10px;
+    font-weight: bold;
+    font-size: 2.5em;
+    color: $first-color;
+    &:hover {
+      color: $third-color;
     }
   }
 }
