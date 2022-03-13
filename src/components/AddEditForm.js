@@ -1,3 +1,5 @@
+import getTodaysDate from "../services/getTodaysDate";
+
 const AddEditForm = ({
   formRole,
   handleSubmit,
@@ -50,6 +52,7 @@ const AddEditForm = ({
         id="date"
         type="date"
         required
+        max={getTodaysDate()}
         value={date}
         onChange={(e) => setDate(e.target.value)}
       />

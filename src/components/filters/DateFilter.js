@@ -1,4 +1,5 @@
 import { useApplicationContext } from "../../context/DataContext";
+import getTodaysDate from "../../services/getTodaysDate";
 
 const DateFilter = () => {
   const { filterOnDateFrom, setFilterOnDateFrom } = useApplicationContext();
@@ -22,6 +23,7 @@ const DateFilter = () => {
         name="to-date"
         id="to-date"
         value={filterOnDateTo}
+        max={getTodaysDate()}
         onChange={(e) => {
           console.log(e.target.value);
           setFilterOnDateTo(e.target.value);
