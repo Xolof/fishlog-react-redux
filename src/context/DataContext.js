@@ -45,11 +45,21 @@ export const DataProvider = ({ children }) => {
           .includes(filterOnSpecies.toLowerCase()) &&
         fishCatch.username.toLowerCase().includes(filterOnUser.toLowerCase()) &&
         fishCatch.weight > filterOnWeight.min &&
-        fishCatch.length > filterOnLength.min &&
-        fishCatch.date >= filterOnDateFrom &&
-        fishCatch.date <= filterOnDateTo
+        fishCatch.length > filterOnLength.min
       );
     });
+
+    if (filterOnDateFrom !== "") {
+      filteredResults = filteredResults.filter((fishCatch) => {
+        return fishCatch.date >= filterOnDateFrom;
+      });
+    }
+
+    if (filterOnDateTo !== "") {
+      filteredResults = filteredResults.filter((fishCatch) => {
+        return fishCatch.date <= filterOnDateTo;
+      });
+    }
 
     if (filterOnWeight.max < maxWeightFilter) {
       filteredResults = filteredResults.filter((fishCatch) => {
