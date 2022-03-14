@@ -1,0 +1,51 @@
+@import "colors.scss";
+
+.filterWrapper {
+  transition: 0.2s all ease;
+  overflow: hidden;
+}
+
+.filterHeader {
+  width: auto;
+  margin-right: 1em;
+}
+
+.filterHeaderWrapper {
+  display: flex;
+}
+
+.fullHeight {
+  max-height: 100vh;
+}
+
+.zeroHeight {
+  max-height: 0vh;
+}
+
+.toggleFiltersButton {
+  color: $first-color;
+  background-color: $fourth-color;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    color: $third-color;
+  }
+}
+
+.chevronUp {
+  &::before {
+    content: "\2039";
+    width: 0;
+  }
+  transform: rotate(90deg);
+  font-size: 2.5em;
+}
+
+.chevronDown {
+  &::before {
+    content: "\203A";
+    width: 0;
+  }
+  transform: rotate(90deg);
+  font-size: 2.5em;
+}
