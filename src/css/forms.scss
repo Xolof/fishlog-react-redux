@@ -66,3 +66,14 @@ form {
     cursor: pointer;
   }
 }
+
+#from-date,
+#to-date {
+  display: block;
+  width: 100%;
+  padding: 1em;
+  margin-bottom: 0.2em;
+  color: $first-color;
+  background-color: $fourth-color;
+  margin-bottom: 1em;
+}
