@@ -7,6 +7,7 @@ import DateFilter from "./DateFilter";
 const Filters = () => {
   return (
     <>
+      <h3>Filters</h3>
       <SpeciesFilter />
       <UserFilter />
       <WeightFilter />
