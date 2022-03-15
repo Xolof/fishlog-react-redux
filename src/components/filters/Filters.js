@@ -12,7 +12,7 @@ const Filters = () => {
   return (
     <section className="filters">
       <div className="filterHeaderWrapper">
-        <h3 className="filterHeader">Filters</h3>
+        <h3 className="filterHeader">Options</h3>
         <button
           className={
             showFilters
