@@ -20,9 +20,10 @@ export const DataProvider = ({ children }) => {
     min: 0,
     max: maxLengthFilter,
   });
-
   const [filterOnDateFrom, setFilterOnDateFrom] = useState("1970-01-01");
   const [filterOnDateTo, setFilterOnDateTo] = useState(todaysDate);
+  const [sortBy, setSortBy] = useState("date");
+  const [sortOrder, setSortOrder] = useState("DESC");
   const [searchResults, setSearchResults] = useState([]);
   const [data, setData] = useState([]);
   const [fetchError, setFetchError] = useState(null);
@@ -49,6 +50,61 @@ export const DataProvider = ({ children }) => {
       );
     });
 
+    switch (sortBy) {
+      case "species":
+      case "username":
+        filteredResults.sort((a, b) => {
+          if (sortOrder === "DESC") {
+            const stringA = a[sortBy].toUpperCase();
+            const stringB = b[sortBy].toUpperCase();
+            if (stringA < stringB) {
+              return -1;
+            }
+            if (stringA > stringB) {
+              return 1;
+            }
+            return 0;
+          }
+          if (sortOrder === "ASC") {
+            const stringA = a[sortBy].toUpperCase();
+            const stringB = b[sortBy].toUpperCase();
+            if (stringA > stringB) {
+              return -1;
+            }
+            if (stringA < stringB) {
+              return 1;
+            }
+            return 0;
+          }
+        });
+        break;
+      case "weight":
+      case "length":
+        filteredResults.sort((a, b) => {
+          if (sortOrder === "DESC") {
+            return parseInt(b[sortBy]) - parseInt(a[sortBy]);
+          }
+          if (sortOrder === "ASC") {
+            return parseInt(a[sortBy]) - parseInt(b[sortBy]);
+          }
+        });
+        break;
+      case "date":
+        filteredResults.sort((a, b) => {
+          const aTime = new Date(a[sortBy]).getTime();
+          const bTime = new Date(b[sortBy]).getTime();
+          console.log(a[sortBy], b[sortBy]);
+          console.log(aTime, bTime);
+          if (sortOrder === "DESC") {
+            return parseInt(bTime) - parseInt(aTime);
+          }
+          if (sortOrder === "ASC") {
+            return parseInt(aTime) - parseInt(bTime);
+          }
+        });
+        break;
+    }
+
     if (filterOnDateFrom !== "") {
       filteredResults = filteredResults.filter((fishCatch) => {
         return fishCatch.date >= filterOnDateFrom;
@@ -72,7 +128,6 @@ export const DataProvider = ({ children }) => {
         return fishCatch.length < filterOnLength.max;
       });
     }
-
     setSearchResults(filteredResults);
   }, [
     fishCatches,
@@ -82,6 +137,8 @@ export const DataProvider = ({ children }) => {
     filterOnLength,
     filterOnDateFrom,
     filterOnDateTo,
+    sortBy,
+    sortOrder,
   ]);
 
   return (
@@ -113,6 +170,10 @@ export const DataProvider = ({ children }) => {
         setFilterOnDateFrom,
         filterOnDateTo,
         setFilterOnDateTo,
+        sortBy,
+        setSortBy,
+        sortOrder,
+        setSortOrder,
       }}
     >
       {children}

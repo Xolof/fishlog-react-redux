@@ -4,6 +4,7 @@ import UserFilter from "./UserFilter";
 import WeightFilter from "./WeightFilter";
 import LengthFilter from "./LengthFilter";
 import DateFilter from "./DateFilter";
+import Sort from "./Sort";
 import "../../css/filters.scss";
 
 const Filters = () => {
@@ -34,6 +35,7 @@ const Filters = () => {
         <WeightFilter />
         <LengthFilter />
         <DateFilter />
+        <Sort />
       </div>
     </section>
   );
