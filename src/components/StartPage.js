@@ -72,7 +72,7 @@ const StartPage = () => {
       </div>
       <h2>{time.day}</h2>
       <h2>
-        {time.year}-{padZero(time.month)}-{padZero(time.date)}
+        {time.year}-{padZero(time.month + 1)}-{padZero(time.date)}
       </h2>
       <h2>
         {padZero(time.hours)}:{padZero(time.minutes)}:{padZero(time.seconds)}
