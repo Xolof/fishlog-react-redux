@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import StartPage from "./components/StartPage";
 import List from "./components/List";
 import MapView from "./components/MapView";
 import Add from "./components/Add";
@@ -27,7 +28,8 @@ function App() {
             <Header title="React Fishlog" />
             <Nav />
             <Routes>
-              <Route path="/" element={<List />} />
+              <Route path="/" element={<StartPage />} />
+              <Route path="/list" element={<List />} />
               <Route path="/add" element={<Add />} />
               <Route path="/edit/:id" element={<Edit />} />
               <Route path="/map/:id" element={<MapView />} />
