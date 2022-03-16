@@ -28,14 +28,6 @@ const StartPage = () => {
   const { fetchError, isLoading, fishCatches, userPosition, setUserPosition } =
     useApplicationContext();
 
-  useEffect(() => {
-    if (!userPosition) {
-      if (window.navigator.geolocation) {
-        window.navigator.geolocation.getCurrentPosition(showPostition);
-      }
-    }
-  }, []);
-
   const [time, setTime] = useState(getTime());
 
   const showPostition = (position) => {
@@ -43,9 +35,26 @@ const StartPage = () => {
     setUserPosition({ lat: latitude, lng: longitude });
   };
 
-  setInterval(() => {
-    setTime(getTime());
-  }, 1000);
+  useEffect(() => {
+    let isMounted = true;
+    setInterval(() => {
+      if (isMounted) {
+        setTime(getTime());
+      }
+    }, 1000);
+
+    if (!userPosition && isMounted) {
+      if (window.navigator.geolocation) {
+        window.navigator.geolocation.getCurrentPosition(showPostition);
+      }
+    }
+
+    const cleanUp = () => {
+      isMounted = false;
+    };
+
+    return cleanUp;
+  }, []);
 
   return (
     <article className="startPage">
@@ -74,7 +83,6 @@ const StartPage = () => {
           <p>
             {userPosition.lat} {userPosition.lng}
           </p>
-          {/* <h2>Current weather</h2> */}
         </>
       )}
     </article>
