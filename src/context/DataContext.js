@@ -27,7 +27,7 @@ export const DataProvider = ({ children }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [data, setData] = useState([]);
   const [fetchError, setFetchError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [markerLocation, setMarkerLocation] = useState(null);
 
   const API_URL = process.env.REACT_APP_API_URL;
@@ -51,58 +51,56 @@ export const DataProvider = ({ children }) => {
     });
 
     switch (sortBy) {
-      case "species":
-      case "username":
-        filteredResults.sort((a, b) => {
-          if (sortOrder === "DESC") {
-            const stringA = a[sortBy].toUpperCase();
-            const stringB = b[sortBy].toUpperCase();
-            if (stringA < stringB) {
-              return -1;
-            }
-            if (stringA > stringB) {
-              return 1;
-            }
-            return 0;
+    case "species":
+    case "username":
+      filteredResults.sort((a, b) => {
+        if (sortOrder === "DESC") {
+          const stringA = a[sortBy].toUpperCase();
+          const stringB = b[sortBy].toUpperCase();
+          if (stringA < stringB) {
+            return -1;
           }
-          if (sortOrder === "ASC") {
-            const stringA = a[sortBy].toUpperCase();
-            const stringB = b[sortBy].toUpperCase();
-            if (stringA > stringB) {
-              return -1;
-            }
-            if (stringA < stringB) {
-              return 1;
-            }
-            return 0;
+          if (stringA > stringB) {
+            return 1;
           }
-        });
-        break;
-      case "weight":
-      case "length":
-        filteredResults.sort((a, b) => {
-          if (sortOrder === "DESC") {
-            return parseInt(b[sortBy]) - parseInt(a[sortBy]);
+          return 0;
+        }
+        if (sortOrder === "ASC") {
+          const stringA = a[sortBy].toUpperCase();
+          const stringB = b[sortBy].toUpperCase();
+          if (stringA > stringB) {
+            return -1;
           }
-          if (sortOrder === "ASC") {
-            return parseInt(a[sortBy]) - parseInt(b[sortBy]);
+          if (stringA < stringB) {
+            return 1;
           }
-        });
-        break;
-      case "date":
-        filteredResults.sort((a, b) => {
-          const aTime = new Date(a[sortBy]).getTime();
-          const bTime = new Date(b[sortBy]).getTime();
-          console.log(a[sortBy], b[sortBy]);
-          console.log(aTime, bTime);
-          if (sortOrder === "DESC") {
-            return parseInt(bTime) - parseInt(aTime);
-          }
-          if (sortOrder === "ASC") {
-            return parseInt(aTime) - parseInt(bTime);
-          }
-        });
-        break;
+          return 0;
+        }
+      });
+      break;
+    case "weight":
+    case "length":
+      filteredResults.sort((a, b) => {
+        if (sortOrder === "DESC") {
+          return parseInt(b[sortBy]) - parseInt(a[sortBy]);
+        }
+        if (sortOrder === "ASC") {
+          return parseInt(a[sortBy]) - parseInt(b[sortBy]);
+        }
+      });
+      break;
+    case "date":
+      filteredResults.sort((a, b) => {
+        const aTime = new Date(a[sortBy]).getTime();
+        const bTime = new Date(b[sortBy]).getTime();
+        if (sortOrder === "DESC") {
+          return parseInt(bTime) - parseInt(aTime);
+        }
+        if (sortOrder === "ASC") {
+          return parseInt(aTime) - parseInt(bTime);
+        }
+      });
+      break;
     }
 
     if (filterOnDateFrom !== "") {

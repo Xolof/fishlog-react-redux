@@ -23,12 +23,17 @@ const Nav = () => {
       <nav>
         <ul className="navLinks">
           <li>
+            <NavLink to="/" activeclassname="active">
+              Home
+            </NavLink>
+          </li>
+          <li>
             <NavLink to="/add" activeclassname="active">
               Add
             </NavLink>
           </li>
           <li>
-            <NavLink to="/" activeclassname="active">
+            <NavLink to="/list" activeclassname="active">
               List
             </NavLink>
           </li>
