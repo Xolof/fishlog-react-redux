@@ -70,6 +70,7 @@ const StartPage = () => {
               <FishCatchCard fishCatch={fishCatch} key={fishCatch.id} />
             ))}
       </div>
+      <h2>There are {fishCatches.length} catches.</h2>
       <h2>{time.day}</h2>
       <h2>
         {time.year}-{padZero(time.month + 1)}-{padZero(time.date)}
