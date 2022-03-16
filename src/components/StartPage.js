@@ -58,6 +58,13 @@ const StartPage = () => {
 
   return (
     <article className="startPage">
+      <h2>{time.day}</h2>
+      <h2>
+        {time.year}-{padZero(time.month + 1)}-{padZero(time.date)}
+      </h2>
+      <h2>
+        {padZero(time.hours)}:{padZero(time.minutes)}:{padZero(time.seconds)}
+      </h2>
       <h2>Latest catches</h2>
       <div className="fishCatches">
         {isLoading && !fetchError && <p className="statusMsg">Loading...</p>}
@@ -71,13 +78,6 @@ const StartPage = () => {
             ))}
       </div>
       <h2>There are {fishCatches.length} catches.</h2>
-      <h2>{time.day}</h2>
-      <h2>
-        {time.year}-{padZero(time.month + 1)}-{padZero(time.date)}
-      </h2>
-      <h2>
-        {padZero(time.hours)}:{padZero(time.minutes)}:{padZero(time.seconds)}
-      </h2>
       {userPosition && (
         <>
           <h2>Your position:</h2>
