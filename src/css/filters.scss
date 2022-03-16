@@ -49,3 +49,23 @@
   transform: rotate(90deg);
   font-size: 2.5em;
 }
+
+.sortContainer {
+  span {
+    width: 49%;
+    label {
+      width: 15%;
+      text-align: center;
+      padding: 0 1 0 0;
+    }
+    #sortBy,
+    #sortOrder {
+      width: 100%;
+      padding: 1em;
+      color: $first-color;
+      background-color: $fourth-color;
+    }
+  }
+  display: flex;
+  justify-content: space-between;
+}

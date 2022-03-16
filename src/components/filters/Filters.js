@@ -4,6 +4,7 @@ import UserFilter from "./UserFilter";
 import WeightFilter from "./WeightFilter";
 import LengthFilter from "./LengthFilter";
 import DateFilter from "./DateFilter";
+import Sort from "./Sort";
 import "../../css/filters.scss";
 
 const Filters = () => {
@@ -12,7 +13,7 @@ const Filters = () => {
   return (
     <section className="filters">
       <div className="filterHeaderWrapper">
-        <h3 className="filterHeader">Filters</h3>
+        <h3 className="filterHeader">Options</h3>
         <button
           className={
             showFilters
@@ -34,6 +35,7 @@ const Filters = () => {
         <WeightFilter />
         <LengthFilter />
         <DateFilter />
+        <Sort />
       </div>
     </section>
   );
