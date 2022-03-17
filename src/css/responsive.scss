@@ -54,7 +54,7 @@ $desktop: 1025px;
   .fishCatchCard {
     img {
       width: 50%;
-      height: auto;
+      max-height: 38vh;
     }
   }
 }
