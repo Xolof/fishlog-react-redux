@@ -59,8 +59,11 @@ const StartPage = () => {
   return (
     <article className="startPage">
       <h3>
-        {padZero(time.hours)}:{padZero(time.minutes)}:{padZero(time.seconds)}
-        {time.day} {time.year}-{padZero(time.month + 1)}-{padZero(time.date)}
+        {`${padZero(time.hours)}:${padZero(time.minutes)}:${padZero(
+          time.seconds
+        )} ${time.day} ${time.year}-${padZero(time.month + 1)}-${padZero(
+          time.date
+        )}`}
       </h3>
       <h2>Latest catches</h2>
       <div className="fishCatches">
@@ -69,6 +72,11 @@ const StartPage = () => {
         {!isLoading &&
           !fetchError &&
           fishCatches
+            .sort((a, b) => {
+              const aTime = new Date(a.date).getTime();
+              const bTime = new Date(b.date).getTime();
+              return parseInt(bTime) - parseInt(aTime);
+            })
             .slice(0, 4)
             .map((fishCatch) => (
               <FishCatchCard fishCatch={fishCatch} key={fishCatch.id} />
