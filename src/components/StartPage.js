@@ -69,6 +69,11 @@ const StartPage = () => {
         {!isLoading &&
           !fetchError &&
           fishCatches
+            .sort((a, b) => {
+              const aTime = new Date(a.date).getTime();
+              const bTime = new Date(b.date).getTime();
+              return parseInt(bTime) - parseInt(aTime);
+            })
             .slice(0, 4)
             .map((fishCatch) => (
               <FishCatchCard fishCatch={fishCatch} key={fishCatch.id} />
