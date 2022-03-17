@@ -10,24 +10,22 @@ const useAxiosFetch = (dataUrl) => {
     const source = axios.CancelToken.source();
 
     const fetchData = async (url) => {
-      setTimeout(async () => {
-        try {
-          const res = await axios.get(url, {
-            cancelToken: source.token,
-          });
-          if (isMounted) {
-            setData(res.data);
-            setFetchError(null);
-          }
-        } catch (err) {
-          if (isMounted) {
-            setFetchError(err.message);
-            setData([]);
-          }
-        } finally {
-          isMounted && setIsLoading(false);
+      try {
+        const res = await axios.get(url, {
+          cancelToken: source.token,
+        });
+        if (isMounted) {
+          setData(res.data);
+          setFetchError(null);
         }
-      }, 1000);
+      } catch (err) {
+        if (isMounted) {
+          setFetchError(err.message);
+          setData([]);
+        }
+      } finally {
+        isMounted && setIsLoading(false);
+      }
     };
 
     fetchData(dataUrl);
