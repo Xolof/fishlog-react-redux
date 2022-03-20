@@ -6,6 +6,9 @@ $desktop: 1025px;
   .fishCatchCard {
     .content {
       flex-flow: row;
+      .catchInfo {
+        margin-right: 1em;
+      }
     }
   }
 
