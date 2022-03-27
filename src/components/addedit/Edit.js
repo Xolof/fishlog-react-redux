@@ -1,11 +1,16 @@
 import AddEditMap from "./AddEditMap";
 import AddEditForm from "./AddEditForm";
-import NotFound from "./NotFound";
+import NotFound from "../NotFound";
 import { useState, useEffect } from "react";
-import api from "../api/api";
-import { useApplicationContext } from "../context/DataContext";
+import api from "../../api/api";
+import { useApplicationContext } from "../../context/DataContext";
+import { useUserContext } from "../../context/UserContext";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { successToast, infoToast, errorToast } from "../services/toastService";
+import {
+  successToast,
+  infoToast,
+  errorToast,
+} from "../../services/toastService";
 
 const Edit = () => {
   const [location, setLocation] = useState("");
@@ -23,11 +28,11 @@ const Edit = () => {
     API_URL,
     setIsLoading,
     setFilterOnSpecies,
-    setMarkerLocation,
     setFilterOnUser,
     setFilterOnWeight,
     setFilterOnLength,
   } = useApplicationContext();
+  const { setMarkerLocation } = useUserContext();
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id;

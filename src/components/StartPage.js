@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useApplicationContext } from "../context/DataContext";
 import useAxiosFetch from "../hooks/useAxiosFetch";
-import FishCatchCard from "./FishCatchCard";
+import FishCatchCard from "./items/FishCatchCard";
 
 const getTime = () => {
   const now = new Date();

@@ -28,11 +28,8 @@ export const DataProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [markerLocation, setMarkerLocation] = useState(null);
 
   const API_URL = process.env.REACT_APP_API_URL;
-
-  const [userPosition, setUserPosition] = useState(null);
 
   useEffect(() => {
     setFishCatches(data);
@@ -154,10 +151,6 @@ export const DataProvider = ({ children }) => {
         data,
         setData,
         API_URL,
-        userPosition,
-        setUserPosition,
-        markerLocation,
-        setMarkerLocation,
         filterOnUser,
         setFilterOnUser,
         filterOnWeight,

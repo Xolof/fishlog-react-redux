@@ -1,5 +1,5 @@
-import { useApplicationContext } from "../context/DataContext";
-import { useUserContext } from "../context/UserContext";
+import { useApplicationContext } from "../../context/DataContext";
+import { useUserContext } from "../../context/UserContext";
 import UserStatus from "./UserStatus";
 import { useLocation } from "react-router-dom";
 

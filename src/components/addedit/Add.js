@@ -1,10 +1,15 @@
 import AddEditMap from "./AddEditMap";
 import AddEditForm from "./AddEditForm";
 import { useState, useEffect } from "react";
-import api from "../api/api";
-import { useApplicationContext } from "../context/DataContext";
+import api from "../../api/api";
+import { useApplicationContext } from "../../context/DataContext";
 import { useNavigate, Link } from "react-router-dom";
-import { successToast, infoToast, errorToast } from "../services/toastService";
+import {
+  successToast,
+  infoToast,
+  errorToast,
+} from "../../services/toastService";
+import { useUserContext } from "../../context/UserContext";
 
 const Add = () => {
   const [location, setLocation] = useState("");
@@ -19,11 +24,11 @@ const Add = () => {
     setFishCatches,
     setIsLoading,
     setFilterOnSpecies,
-    setMarkerLocation,
     setFilterOnUser,
     setFilterOnWeight,
     setFilterOnLength,
   } = useApplicationContext();
+  const { setMarkerLocation } = useUserContext();
   const username = localStorage.getItem("fishlog-userName");
   const navigate = useNavigate();
 

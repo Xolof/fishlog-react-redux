@@ -7,11 +7,18 @@ export const UserDataProvider = ({ children }) => {
     localStorage.getItem("fishlog-userName")
   );
 
+  const [userPosition, setUserPosition] = useState(null);
+  const [markerLocation, setMarkerLocation] = useState(null);
+
   return (
     <UserContext.Provider
       value={{
         userName,
         setUserName,
+        userPosition,
+        setUserPosition,
+        markerLocation,
+        setMarkerLocation,
       }}
     >
       {children}

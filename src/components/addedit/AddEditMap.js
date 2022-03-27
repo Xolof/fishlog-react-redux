@@ -1,11 +1,11 @@
 import { MapContainer, TileLayer } from "react-leaflet";
-import { useApplicationContext } from "../context/DataContext";
-import { useThemeContext } from "../context/ThemeContext";
-import UserMarker from "./UserMarker";
-import PositionMarker from "./PositionMarker";
+import { useUserContext } from "../../context/UserContext";
+import { useThemeContext } from "../../context/ThemeContext";
+import UserMarker from "../markers/UserMarker";
+import PositionMarker from "../markers/PositionMarker";
 
 const AddEditMap = ({ location, setLocation, center }) => {
-  const { userPosition } = useApplicationContext();
+  const { userPosition } = useUserContext();
   const { tileUrl } = useThemeContext();
 
   let userCoordinates = null;
