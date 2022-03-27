@@ -33,10 +33,14 @@ export default () => {
 
   function handleUserAction(e) {
     if (!localStorage.getItem("fishlog-token")) {
+      console.log("VERIFYTOKEN: no token found");
       return;
     }
 
+    console.log("VERIFYTOKEN: verifying");
+
     if (!AuthVerify()) {
+      console.log("VERIFYTOKEN: notverified");
       e.preventDefault();
       logOut();
     }

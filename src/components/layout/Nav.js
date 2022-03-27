@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import { useUserContext } from "../context/UserContext";
+import { useUserContext } from "../../context/UserContext";
 import { ToastContainer } from "react-toastify";
-import { infoToast } from "../services/toastService";
+import { infoToast } from "../../services/toastService";
 
 const Nav = () => {
   const { userName, setUserName, setMarkerLocation } = useUserContext();
