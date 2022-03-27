@@ -1,13 +1,14 @@
+import { useSelector } from "react-redux";
 import { useApplicationContext } from "../../context/DataContext";
-import { useUserContext } from "../../context/UserContext";
 import UserStatus from "./UserStatus";
 import { useLocation } from "react-router-dom";
+import { selectUsername } from "../../slices/userSlice";
 
 const Header = ({ title }) => {
-  const { userName } = useUserContext();
   const { isLoading } = useApplicationContext();
   const location = useLocation();
   const notLoadingRoutes = ["/add", "/login", "/about"];
+  const userName = useSelector(selectUsername);
 
   return (
     <>
