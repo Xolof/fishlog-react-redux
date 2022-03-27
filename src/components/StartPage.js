@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useApplicationContext } from "../context/DataContext";
+import { useUserContext } from "../context/UserContext";
 import useAxiosFetch from "../hooks/useAxiosFetch";
 import FishCatchCard from "./items/FishCatchCard";
 
@@ -25,8 +26,8 @@ const StartPage = () => {
   const API_URL = process.env.REACT_APP_API_URL;
   useAxiosFetch(`${API_URL}/api/public_fishcatch`);
 
-  const { fetchError, isLoading, fishCatches, userPosition, setUserPosition } =
-    useApplicationContext();
+  const { fetchError, isLoading, fishCatches } = useApplicationContext();
+  const { userPosition, setUserPosition } = useUserContext();
 
   const [time, setTime] = useState(getTime());
 
