@@ -9,9 +9,11 @@ import {
   infoToast,
   errorToast,
 } from "../../services/toastService";
-import { useUserContext } from "../../context/UserContext";
+import { setMarkerLocation } from "../../slices/userSlice";
+import { useDispatch } from "react-redux";
 
 const Add = () => {
+  const dispatch = useDispatch();
   const [location, setLocation] = useState("");
   const [species, setSpecies] = useState("");
   const [length, setLength] = useState("");
@@ -28,12 +30,11 @@ const Add = () => {
     setFilterOnWeight,
     setFilterOnLength,
   } = useApplicationContext();
-  const { setMarkerLocation } = useUserContext();
   const username = localStorage.getItem("fishlog-userName");
   const navigate = useNavigate();
 
   useEffect(() => {
-    setMarkerLocation(null);
+    dispatch(setMarkerLocation(null));
   }, []);
 
   useEffect(() => {

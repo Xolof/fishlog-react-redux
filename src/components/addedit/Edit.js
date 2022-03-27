@@ -4,13 +4,14 @@ import NotFound from "../NotFound";
 import { useState, useEffect } from "react";
 import api from "../../api/api";
 import { useApplicationContext } from "../../context/DataContext";
-import { useUserContext } from "../../context/UserContext";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import {
   successToast,
   infoToast,
   errorToast,
 } from "../../services/toastService";
+import { setMarkerLocation } from "../../slices/userSlice";
+import { useDispatch } from "react-redux";
 
 const Edit = () => {
   const [location, setLocation] = useState("");
@@ -32,13 +33,13 @@ const Edit = () => {
     setFilterOnWeight,
     setFilterOnLength,
   } = useApplicationContext();
-  const { setMarkerLocation } = useUserContext();
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id;
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setMarkerLocation(null);
+    dispatch(setMarkerLocation(null));
   }, []);
 
   useEffect(() => {

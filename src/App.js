@@ -15,7 +15,7 @@ import { Route, Routes } from "react-router-dom";
 import { DataProvider } from "./context/DataContext";
 import { UserDataProvider } from "./context/UserContext";
 import { ThemeDataProvider } from "./context/ThemeContext";
-import VerifyToken from "./services/VerifyToken";
+// import VerifyToken from "./services/VerifyToken";
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
       <DataProvider>
         <UserDataProvider>
           <ThemeDataProvider>
-            <VerifyToken />
+            {/* <VerifyToken /> */}
             <ThemeToggler />
             <Header title="React Fishlog" />
             <Nav />
