@@ -1,7 +1,7 @@
-import { useApplicationContext } from "../context/DataContext";
+import { useApplicationContext } from "../../context/DataContext";
 import Feed from "./Feed";
-import useAxiosFetch from "../hooks/useAxiosFetch";
-import Filters from "./filters/Filters";
+import useAxiosFetch from "../../hooks/useAxiosFetch";
+import Filters from "../filters/Filters";
 
 const List = () => {
   const { searchResults, fetchError, isLoading } = useApplicationContext();

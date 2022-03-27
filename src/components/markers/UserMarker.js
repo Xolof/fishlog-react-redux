@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import L from "leaflet";
 import { useMap, Marker, Popup } from "react-leaflet";
-import { useUserContext } from "../context/UserContext";
+import { useUserContext } from "../../context/UserContext";
 
 const UserMarker = () => {
   const { userPosition, setUserPosition } = useUserContext();
@@ -25,7 +25,7 @@ const UserMarker = () => {
   }, [map]);
 
   const userIcon = L.icon({
-    iconUrl: require("../img/user.png"),
+    iconUrl: require("../../img/user.png"),
     iconSize: [25, 25],
   });
 

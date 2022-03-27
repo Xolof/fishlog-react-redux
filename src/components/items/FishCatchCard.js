@@ -1,6 +1,6 @@
-import { useApplicationContext } from "../context/DataContext";
-import { successToast, errorToast } from "../services/toastService";
-import api from "../api/api";
+import { useApplicationContext } from "../../context/DataContext";
+import { successToast, errorToast } from "../../services/toastService";
+import api from "../../api/api";
 import { useNavigate } from "react-router-dom";
 
 const FishCatchCard = ({ fishCatch }) => {

@@ -1,9 +1,9 @@
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
-import FishCatchCard from "./FishCatchCard";
-import { useApplicationContext } from "../context/DataContext";
-import { useUserContext } from "../context/UserContext";
-import { useThemeContext } from "../context/ThemeContext";
-import UserMarker from "./UserMarker";
+import FishCatchCard from "../items/FishCatchCard";
+import { useApplicationContext } from "../../context/DataContext";
+import { useUserContext } from "../../context/UserContext";
+import { useThemeContext } from "../../context/ThemeContext";
+import UserMarker from "../markers/UserMarker";
 import { useState } from "react";
 
 const LeafletMap = ({ searchResults, showId }) => {
@@ -43,22 +43,22 @@ const LeafletMap = ({ searchResults, showId }) => {
         <UserMarker />
         {searchResults
           ? searchResults.map((fishCatch) => {
-            const splitPosition = fishCatch.location.split(",");
-            const lat = splitPosition[0];
-            const lon = splitPosition[1];
+              const splitPosition = fishCatch.location.split(",");
+              const lat = splitPosition[0];
+              const lon = splitPosition[1];
 
-            return (
-              <Marker
-                position={[lat, lon]}
-                key={fishCatch.id}
-                eventHandlers={{
-                  click: () => {
-                    setCurrentFishCatch(fishCatch);
-                  },
-                }}
-              ></Marker>
-            );
-          })
+              return (
+                <Marker
+                  position={[lat, lon]}
+                  key={fishCatch.id}
+                  eventHandlers={{
+                    click: () => {
+                      setCurrentFishCatch(fishCatch);
+                    },
+                  }}
+                ></Marker>
+              );
+            })
           : null}
       </MapContainer>
       {currentFishCatch && (

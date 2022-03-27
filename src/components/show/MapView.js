@@ -1,8 +1,8 @@
-import { useApplicationContext } from "../context/DataContext";
-import LeafletMap from "./LeafletMap";
+import { useApplicationContext } from "../../context/DataContext";
+import LeafletMap from "./showMap";
 import { useParams, Link } from "react-router-dom";
-import Filters from "./filters/Filters";
-import useAxiosFetch from "../hooks/useAxiosFetch";
+import Filters from "../filters/Filters";
+import useAxiosFetch from "../../hooks/useAxiosFetch";
 
 const MapView = () => {
   const API_URL = process.env.REACT_APP_API_URL;

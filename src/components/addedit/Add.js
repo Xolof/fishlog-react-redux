@@ -1,27 +1,27 @@
 import AddEditMap from "./AddEditMap";
 import AddEditForm from "./AddEditForm";
-import NotFound from "./NotFound";
 import { useState, useEffect } from "react";
-import api from "../api/api";
-import { useApplicationContext } from "../context/DataContext";
-import { useUserContext } from "../context/UserContext";
-import { useNavigate, useParams, Link } from "react-router-dom";
-import { successToast, infoToast, errorToast } from "../services/toastService";
+import api from "../../api/api";
+import { useApplicationContext } from "../../context/DataContext";
+import { useNavigate, Link } from "react-router-dom";
+import {
+  successToast,
+  infoToast,
+  errorToast,
+} from "../../services/toastService";
+import { useUserContext } from "../../context/UserContext";
 
-const Edit = () => {
+const Add = () => {
   const [location, setLocation] = useState("");
   const [species, setSpecies] = useState("");
   const [length, setLength] = useState("");
   const [weight, setWeight] = useState("");
-  const [error, setError] = useState(null);
-  const [mapCenter, setMapCenter] = useState(null);
   const [uploadImages, setUploadImages] = useState([]);
   const [previewImageUrls, setPreviewImageUrls] = useState([]);
   const [date, setDate] = useState("");
   const {
     fishCatches,
     setFishCatches,
-    API_URL,
     setIsLoading,
     setFilterOnSpecies,
     setFilterOnUser,
@@ -29,52 +29,17 @@ const Edit = () => {
     setFilterOnLength,
   } = useApplicationContext();
   const { setMarkerLocation } = useUserContext();
+  const username = localStorage.getItem("fishlog-userName");
   const navigate = useNavigate();
-  const params = useParams();
-  const id = params.id;
 
   useEffect(() => {
     setMarkerLocation(null);
   }, []);
 
   useEffect(() => {
-    setIsLoading(true);
-    async function fetchCatch() {
-      try {
-        const res = await api.get(`/api/fishcatch/${id}`, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("fishlog-token"),
-          },
-        });
-        setSpecies(res.data.species);
-        setLength(res.data.length);
-        setWeight(res.data.weight);
-        setDate(res.data.date);
-        setLocation(res.data.location);
-        const splitPosition = res.data.location.split(",");
-        const lat = parseFloat(splitPosition[0]);
-        const lon = parseFloat(splitPosition[1]);
-        setLocation([lat, lon]);
-        setMapCenter([lat, lon]);
-        const imageUrl = `${API_URL}${res.data.imageurl}`;
-        setPreviewImageUrls([imageUrl]);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchCatch();
-  }, []);
-
-  useEffect(() => {
     if (uploadImages.length < 1) return;
     setPreviewImageUrls(URL.createObjectURL(uploadImages));
   }, [uploadImages]);
-
-  if (error) {
-    return <NotFound />;
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,26 +49,26 @@ const Edit = () => {
       return;
     }
 
+    const uploadImage = uploadImages;
+
     const data = {
-      id,
       species,
       length,
       weight,
+      uploadImage,
+      username,
       location,
       date,
     };
-
-    if (uploadImages.size) {
-      data.uploadImage = uploadImages;
-    }
 
     const formData = new FormData();
     for (const key in data) {
       formData.append(key, data[key]);
     }
 
+    setIsLoading(true);
     try {
-      const response = await api.post(`/api/update/${id}`, formData, {
+      const response = await api.post("/api/create", formData, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("fishlog-token"),
         },
@@ -112,14 +77,8 @@ const Edit = () => {
       await response.data;
       const newCatch = response.data.data;
       newCatch.username = localStorage.getItem("fishlog-userName");
-
-      setFishCatches(
-        fishCatches.map((item) => {
-          return parseInt(item.id) === parseInt(newCatch.id) ? newCatch : item;
-        })
-      );
-
-      successToast("Catch updated");
+      setFishCatches([...fishCatches, response.data.data]);
+      successToast("Catch added!");
       setFilterOnSpecies("");
       setFilterOnUser("");
       setFilterOnWeight({
@@ -132,34 +91,32 @@ const Edit = () => {
       });
       navigate(`/map/${response.data.data.id}`);
     } catch (err) {
-      console.error(err);
-      console.error(`Error: ${err.message}`);
-      errorToast("Could not update catch, please check your data.");
+      console.log(err);
+      errorToast("Could not add catch, please check your data.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   if (!localStorage.getItem("fishlog-token")) {
     return (
       <article>
-        <h1>Edit</h1>
         <p>
-          <Link to="/login">Login</Link> to be able to edit a catch.
+          <Link to="/login">Login</Link> to be able to add a catch.
+        </p>
+        <p>
+          Or <Link to="/signup">create an account.</Link>
         </p>
       </article>
     );
   }
 
-  return mapCenter ? (
+  return (
     <article>
-      <h2>Edit</h2>
       <p>Click the map to set position.</p>
-      <AddEditMap
-        location={location}
-        setLocation={setLocation}
-        center={mapCenter}
-      />
+      <AddEditMap location={location} setLocation={setLocation} />
       <AddEditForm
-        formRole="edit"
+        formRole="add"
         handleSubmit={handleSubmit}
         species={species}
         setSpecies={setSpecies}
@@ -174,9 +131,7 @@ const Edit = () => {
         previewImageUrls={previewImageUrls}
       />
     </article>
-  ) : (
-    <p>Loading...</p>
   );
 };
 
-export default Edit;
+export default Add;
