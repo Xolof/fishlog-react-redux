@@ -1,10 +1,11 @@
 import { useEffect } from "react";
-import { useUserContext } from "../context/UserContext";
 import { infoToast } from "./toastService";
 import { useNavigate } from "react-router-dom";
+import { setUserName } from "../slices/userSlice";
+import { useDispatch } from "react-redux";
 
 export default () => {
-  const { setUserName } = useUserContext;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   function parseJwt(token) {
@@ -27,7 +28,7 @@ export default () => {
     navigate("/");
     localStorage.removeItem("fishlog-token");
     localStorage.removeItem("fishlog-userName");
-    setUserName(false);
+    dispatch(setUserName(false));
     infoToast("You have been logged out due to inactivity.");
   }
 

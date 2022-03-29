@@ -13,7 +13,7 @@ export const userSlice = createSlice({
     setUserName: (state, action) => {
       state.name = action.payload;
     },
-    setPosition: (state, action) => {
+    setUserPosition: (state, action) => {
       state.position = action.payload;
     },
     setMarkerLocation: (state, action) => {
@@ -22,11 +22,15 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUserName, setPosition, setMarkerLocation } =
+export const { setUserName, setUserPosition, setMarkerLocation } =
   userSlice.actions;
 
 export const selectUsername = (state) => {
   return state.user.name;
+};
+
+export const selectUserPosition = (state) => {
+  return state.user.position;
 };
 
 export const selectMarkerLocation = (state) => {

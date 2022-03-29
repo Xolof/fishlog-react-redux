@@ -13,34 +13,31 @@ import NotFound from "./components/NotFound";
 import ThemeToggler from "./components/layout/ThemeToggler";
 import { Route, Routes } from "react-router-dom";
 import { DataProvider } from "./context/DataContext";
-import { UserDataProvider } from "./context/UserContext";
 import { ThemeDataProvider } from "./context/ThemeContext";
-// import VerifyToken from "./services/VerifyToken";
+import VerifyToken from "./services/VerifyToken";
 
 function App() {
   return (
     <div className="App">
       <DataProvider>
-        <UserDataProvider>
-          <ThemeDataProvider>
-            {/* <VerifyToken /> */}
-            <ThemeToggler />
-            <Header title="React Fishlog" />
-            <Nav />
-            <Routes>
-              <Route path="/" element={<StartPage />} />
-              <Route path="/list" element={<List />} />
-              <Route path="/add" element={<Add />} />
-              <Route path="/edit/:id" element={<Edit />} />
-              <Route path="/map/:id" element={<MapView />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/about" element={<About />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <Footer />
-          </ThemeDataProvider>
-        </UserDataProvider>
+        <ThemeDataProvider>
+          <VerifyToken />
+          <ThemeToggler />
+          <Header title="React Fishlog" />
+          <Nav />
+          <Routes>
+            <Route path="/" element={<StartPage />} />
+            <Route path="/list" element={<List />} />
+            <Route path="/add" element={<Add />} />
+            <Route path="/edit/:id" element={<Edit />} />
+            <Route path="/map/:id" element={<MapView />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Footer />
+        </ThemeDataProvider>
       </DataProvider>
     </div>
   );
