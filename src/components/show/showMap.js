@@ -1,17 +1,34 @@
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import FishCatchCard from "../items/FishCatchCard";
 import { useApplicationContext } from "../../context/DataContext";
-import { useThemeContext } from "../../context/ThemeContext";
 import UserMarker from "../markers/UserMarker";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectUserPosition } from "../../slices/userSlice";
+import { selectDarkTheme } from "../../slices/themeSlice";
 
 const LeafletMap = ({ searchResults, showId }) => {
   const { fishCatches } = useApplicationContext();
   const userPosition = useSelector(selectUserPosition);
-  const { tileUrl } = useThemeContext();
   const [currentFishCatch, setCurrentFishCatch] = useState(null);
+  const darkTheme = useSelector(selectDarkTheme);
+
+  const lightTileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+  const darkTileUrl = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
+  const [tileUrl, setTileUrl] = useState(
+    darkTheme ? darkTileUrl : lightTileUrl
+  );
+
+  useEffect(() => {
+    setTileUrl(darkTheme ? darkTileUrl : lightTileUrl);
+    const root = document.documentElement;
+    root?.style.setProperty(
+      "--map-tiles-filter",
+      darkTheme
+        ? "brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7)"
+        : "none"
+    );
+  }, [darkTheme]);
 
   const showCatch = fishCatches.filter(
     (item) => parseInt(item.id) === parseInt(showId)
@@ -44,22 +61,22 @@ const LeafletMap = ({ searchResults, showId }) => {
         <UserMarker />
         {searchResults
           ? searchResults.map((fishCatch) => {
-            const splitPosition = fishCatch.location.split(",");
-            const lat = splitPosition[0];
-            const lon = splitPosition[1];
+              const splitPosition = fishCatch.location.split(",");
+              const lat = splitPosition[0];
+              const lon = splitPosition[1];
 
-            return (
-              <Marker
-                position={[lat, lon]}
-                key={fishCatch.id}
-                eventHandlers={{
-                  click: () => {
-                    setCurrentFishCatch(fishCatch);
-                  },
-                }}
-              ></Marker>
-            );
-          })
+              return (
+                <Marker
+                  position={[lat, lon]}
+                  key={fishCatch.id}
+                  eventHandlers={{
+                    click: () => {
+                      setCurrentFishCatch(fishCatch);
+                    },
+                  }}
+                ></Marker>
+              );
+            })
           : null}
       </MapContainer>
       {currentFishCatch && (
