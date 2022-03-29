@@ -1,6 +1,8 @@
-# Fishlog React
+# Fishlog React Redux
 
 The Fishlog app allows the users to save information about the fish they caught. The user can search for catches and view them on a map.
+
+This repo uses React and Redux.
 
 ## Install
 

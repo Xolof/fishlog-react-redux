@@ -1,12 +1,15 @@
 import { Marker, useMapEvents } from "react-leaflet";
-import { useUserContext } from "../../context/UserContext";
+import { setMarkerLocation } from "../../slices/userSlice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { selectMarkerLocation } from "../../slices/userSlice";
 
 const PositionMarker = ({ location, setLocation }) => {
-  const { markerLocation, setMarkerLocation } = useUserContext();
+  const dispatch = useDispatch();
 
   useMapEvents({
     click(e) {
-      setMarkerLocation(e.latlng);
+      dispatch(setMarkerLocation(e.latlng));
       setLocation(`${e.latlng.lat},${e.latlng.lng}`);
     },
   });
@@ -15,6 +18,8 @@ const PositionMarker = ({ location, setLocation }) => {
     const splitPosition = location.split(",");
     location = [splitPosition[0], splitPosition[1]];
   }
+
+  const markerLocation = useSelector(selectMarkerLocation);
 
   const position = markerLocation ?? location ?? null;
 

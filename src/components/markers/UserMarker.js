@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import L from "leaflet";
 import { useMap, Marker, Popup } from "react-leaflet";
-import { useUserContext } from "../../context/UserContext";
+import { useSelector } from "react-redux";
+import { selectUserPosition, setUserPosition } from "../../slices/userSlice";
+import { useDispatch } from "react-redux";
 
 const UserMarker = () => {
-  const { userPosition, setUserPosition } = useUserContext();
-
+  const dispatch = useDispatch();
+  const userPosition = useSelector(selectUserPosition);
   const map = useMap();
 
   let positionSet = false;
@@ -18,7 +20,7 @@ const UserMarker = () => {
         map.flyTo(e.latlng, map.getZoom());
       }
       positionSet = true;
-      setUserPosition(e.latlng);
+      dispatch(setUserPosition(e.latlng));
     }
 
     map.on("locationfound", onLocationFound);

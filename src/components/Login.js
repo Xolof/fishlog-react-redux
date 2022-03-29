@@ -2,15 +2,16 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../api/api";
 import { useApplicationContext } from "../context/DataContext";
-import { useUserContext } from "../context/UserContext";
 import { successToast, errorToast } from "../services/toastService";
+import { setUserName } from "../slices/userSlice";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [passWord, setPassWord] = useState("");
   const { API_URL, setIsLoading } = useApplicationContext();
-  const { setUserName } = useUserContext();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +38,7 @@ const Login = () => {
           `${API_URL}/api/get_user?token=${response.data.token}`
         );
         localStorage.setItem("fishlog-userName", res.data.user.name);
-        setUserName(res.data.user.name);
+        dispatch(setUserName(res.data.user.name));
         successToast("You logged in!");
         navigate("/map/all");
       }

@@ -1,17 +1,24 @@
+import { useSelector } from "react-redux";
+import {
+  selectUsername,
+  setUserName,
+  setMarkerLocation,
+} from "../../slices/userSlice";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { useUserContext } from "../../context/UserContext";
 import { ToastContainer } from "react-toastify";
 import { infoToast } from "../../services/toastService";
 
 const Nav = () => {
-  const { userName, setUserName, setMarkerLocation } = useUserContext();
+  const dispatch = useDispatch();
+  const userName = useSelector(selectUsername);
 
   function handleLogout(e) {
     e.preventDefault();
     localStorage.removeItem("fishlog-token");
     localStorage.removeItem("fishlog-userName");
-    setUserName(false);
-    setMarkerLocation(null);
+    dispatch(setUserName(false));
+    dispatch(setMarkerLocation(null));
     infoToast("You have been logged out.");
   }
 
