@@ -1,9 +1,14 @@
 import { useEffect } from "react";
 import axios from "axios";
-import { useApplicationContext } from "../context/DataContext";
+import { useDispatch } from "react-redux";
+import {
+  setFishCatches,
+  setFetchError,
+  setIsLoading,
+} from "../slices/dataSlice";
 
 const useAxiosFetch = (dataUrl) => {
-  const { setData, setFetchError, setIsLoading } = useApplicationContext();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let isMounted = true;
@@ -15,16 +20,16 @@ const useAxiosFetch = (dataUrl) => {
           cancelToken: source.token,
         });
         if (isMounted) {
-          setData(res.data);
-          setFetchError(null);
+          dispatch(setFishCatches(res.data));
+          dispatch(setFetchError(null));
         }
       } catch (err) {
         if (isMounted) {
-          setFetchError(err.message);
-          setData([]);
+          dispatch(setFetchError(err.message));
+          dispatch(setFishCatches([]));
         }
       } finally {
-        isMounted && setIsLoading(false);
+        isMounted && dispatch(setIsLoading(false));
       }
     };
 
