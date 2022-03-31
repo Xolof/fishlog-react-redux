@@ -1,10 +1,17 @@
-import { useApplicationContext } from "../../context/DataContext";
+import {
+  selectSearchResults,
+  selectFetchError,
+  selectIsLoading,
+} from "../../slices/dataSlice";
 import Feed from "./Feed";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 import Filters from "../filters/Filters";
+import { useSelector } from "react-redux";
 
 const List = () => {
-  const { searchResults, fetchError, isLoading } = useApplicationContext();
+  const searchResults = useSelector(selectSearchResults);
+  const fetchError = useSelector(selectFetchError);
+  const isLoading = useSelector(selectIsLoading);
 
   const API_URL = process.env.REACT_APP_API_URL;
   useAxiosFetch(`${API_URL}/api/public_fishcatch`);

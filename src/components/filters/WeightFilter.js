@@ -1,5 +1,11 @@
 import { Slider } from "@material-ui/core";
-import { useApplicationContext } from "../../context/DataContext";
+import {
+  selectFilterOnWeightMin,
+  selectFilterOnWeightMax,
+  setFilterOnWeightMin,
+  setFilterOnWeightMax,
+} from "../../slices/dataSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const labels = [
   {
@@ -25,15 +31,18 @@ const labels = [
 ];
 
 const WeightFilter = () => {
-  const { filterOnWeight, setFilterOnWeight } = useApplicationContext();
+  const dispatch = useDispatch();
+  const filterOnWeightMin = useSelector(selectFilterOnWeightMin);
+  const filterOnWeightMax = useSelector(selectFilterOnWeightMax);
 
   const updateRange = (e, data) => {
-    setFilterOnWeight({ min: data[0], max: data[1] });
+    dispatch(setFilterOnWeightMin(data[0]));
+    dispatch(setFilterOnWeightMax(data[1]));
   };
 
   return (
     <Slider
-      value={[filterOnWeight.min, filterOnWeight.max]}
+      value={[filterOnWeightMin, filterOnWeightMax]}
       onChange={updateRange}
       marks={labels}
       min={0}

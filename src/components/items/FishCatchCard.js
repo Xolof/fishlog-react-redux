@@ -1,18 +1,25 @@
-import { useApplicationContext } from "../../context/DataContext";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectAPI_URL,
+  selectFishCatches,
+  setFishCatches,
+  setIsLoading,
+} from "../../slices/dataSlice";
 import { successToast, errorToast } from "../../services/toastService";
 import api from "../../api/api";
 import { useNavigate } from "react-router-dom";
 
 const FishCatchCard = ({ fishCatch }) => {
   const navigate = useNavigate();
-  const { API_URL } = useApplicationContext();
   const splitPosition = fishCatch.location.split(",");
   const lat = splitPosition[0].slice(0, 4);
   const lon = splitPosition[1].slice(0, 4);
-  const { fishCatches, setFishCatches, setIsLoading } = useApplicationContext();
+  const API_URL = useSelector(selectAPI_URL);
+  const fishCatches = useSelector(selectFishCatches);
+  const dispatch = useDispatch();
 
   async function handleDelete(id) {
-    setIsLoading(true);
+    dispatch(setIsLoading(true));
     try {
       const response = await api.delete(`/api/delete/${id}`, {
         headers: {
@@ -21,11 +28,10 @@ const FishCatchCard = ({ fishCatch }) => {
       });
 
       await response.data;
-      setFishCatches(
-        fishCatches.filter((item) => {
-          return parseInt(item.id) !== parseInt(id);
-        })
-      );
+      fishCatches.filter((item) => {
+        return parseInt(item.id) !== parseInt(id);
+      });
+      dispatch(setFishCatches(fishCatches));
       successToast("Catch deleted!");
       navigate("/map/all");
     } catch (err) {
@@ -33,7 +39,7 @@ const FishCatchCard = ({ fishCatch }) => {
       console.error(`Error: ${err.message}`);
       errorToast("Could not delete catch.");
     } finally {
-      setIsLoading(false);
+      dispatch(setIsLoading(false));
     }
   }
 

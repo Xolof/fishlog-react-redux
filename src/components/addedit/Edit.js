@@ -3,7 +3,6 @@ import AddEditForm from "./AddEditForm";
 import NotFound from "../NotFound";
 import { useState, useEffect } from "react";
 import api from "../../api/api";
-import { useApplicationContext } from "../../context/DataContext";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import {
   successToast,
@@ -11,7 +10,19 @@ import {
   errorToast,
 } from "../../services/toastService";
 import { setMarkerLocation } from "../../slices/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectFishCatches,
+  selectAPI_URL,
+  setFishCatches,
+  setIsLoading,
+  setFilterOnSpecies,
+  setFilterOnUser,
+  setFilterOnWeightMax,
+  setFilterOnWeightMin,
+  setFilterOnLengthMax,
+  setFilterOnLengthMin,
+} from "../../slices/dataSlice";
 
 const Edit = () => {
   const [location, setLocation] = useState("");
@@ -23,20 +34,12 @@ const Edit = () => {
   const [uploadImages, setUploadImages] = useState([]);
   const [previewImageUrls, setPreviewImageUrls] = useState([]);
   const [date, setDate] = useState("");
-  const {
-    fishCatches,
-    setFishCatches,
-    API_URL,
-    setIsLoading,
-    setFilterOnSpecies,
-    setFilterOnUser,
-    setFilterOnWeight,
-    setFilterOnLength,
-  } = useApplicationContext();
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id;
   const dispatch = useDispatch();
+  const fishCatches = useSelector(selectFishCatches);
+  const API_URL = useSelector(selectAPI_URL);
 
   useEffect(() => {
     dispatch(setMarkerLocation(null));
@@ -127,14 +130,10 @@ const Edit = () => {
       successToast("Catch updated");
       setFilterOnSpecies("");
       setFilterOnUser("");
-      setFilterOnWeight({
-        min: 0,
-        max: 10000,
-      });
-      setFilterOnLength({
-        min: 0,
-        max: 500,
-      });
+      setFilterOnWeightMin(0);
+      setFilterOnWeightMax(10000);
+      setFilterOnLengthMin(0);
+      setFilterOnLengthMax(500);
       navigate(`/map/${response.data.data.id}`);
     } catch (err) {
       console.error(err);

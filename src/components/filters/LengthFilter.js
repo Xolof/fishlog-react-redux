@@ -1,5 +1,11 @@
 import { Slider } from "@material-ui/core";
-import { useApplicationContext } from "../../context/DataContext";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectFilterOnLengthMin,
+  setFilterOnLengthMin,
+  selectFilterOnLengthMax,
+  setFilterOnLengthMax,
+} from "../../slices/dataSlice";
 
 const labels = [
   {
@@ -29,15 +35,18 @@ const labels = [
 ];
 
 const LengthFilter = () => {
-  const { filterOnLength, setFilterOnLength } = useApplicationContext();
+  const dispatch = useDispatch();
 
+  const filterOnLengthMin = useSelector(selectFilterOnLengthMin);
+  const filterOnLengthMax = useSelector(selectFilterOnLengthMax);
   const updateRange = (e, data) => {
-    setFilterOnLength({ min: data[0], max: data[1] });
+    dispatch(setFilterOnLengthMin(data[0]));
+    dispatch(setFilterOnLengthMax(data[1]));
   };
 
   return (
     <Slider
-      value={[filterOnLength.min, filterOnLength.max]}
+      value={[filterOnLengthMin, filterOnLengthMax]}
       onChange={updateRange}
       marks={labels}
       min={0}

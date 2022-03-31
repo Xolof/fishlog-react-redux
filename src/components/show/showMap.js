@@ -1,14 +1,14 @@
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import FishCatchCard from "../items/FishCatchCard";
-import { useApplicationContext } from "../../context/DataContext";
 import UserMarker from "../markers/UserMarker";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectUserPosition } from "../../slices/userSlice";
 import { selectDarkTheme } from "../../slices/themeSlice";
+import { selectFishCatches } from "../../slices/dataSlice";
 
 const LeafletMap = ({ searchResults, showId }) => {
-  const { fishCatches } = useApplicationContext();
+  const fishCatches = useSelector(selectFishCatches);
   const userPosition = useSelector(selectUserPosition);
   const [currentFishCatch, setCurrentFishCatch] = useState(null);
   const darkTheme = useSelector(selectDarkTheme);

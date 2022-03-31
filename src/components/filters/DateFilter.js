@@ -1,9 +1,17 @@
-import { useApplicationContext } from "../../context/DataContext";
+import { useDispatch, useSelector } from "react-redux";
 import getTodaysDate from "../../services/getTodaysDate";
+import {
+  selectFilterOnDateFrom,
+  setFilterOnDateFrom,
+  selectFilterOnDateTo,
+  setFilterOnDateTo,
+} from "../../slices/dataSlice";
 
 const DateFilter = () => {
-  const { filterOnDateFrom, setFilterOnDateFrom } = useApplicationContext();
-  const { filterOnDateTo, setFilterOnDateTo } = useApplicationContext();
+  const filterOnDateFrom = useSelector(selectFilterOnDateFrom);
+  const filterOnDateTo = useSelector(selectFilterOnDateTo);
+
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -14,7 +22,7 @@ const DateFilter = () => {
         id="from-date"
         value={filterOnDateFrom}
         onChange={(e) => {
-          setFilterOnDateFrom(e.target.value);
+          dispatch(setFilterOnDateFrom(e.target.value));
         }}
       />
       <label htmlFor="to-date">To date: </label>
@@ -26,7 +34,7 @@ const DateFilter = () => {
         max={getTodaysDate()}
         onChange={(e) => {
           console.log(e.target.value);
-          setFilterOnDateTo(e.target.value);
+          dispatch(setFilterOnDateTo(e.target.value));
         }}
       />
     </>

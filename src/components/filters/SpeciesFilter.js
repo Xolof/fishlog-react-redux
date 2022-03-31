@@ -1,7 +1,12 @@
-import { useApplicationContext } from "../../context/DataContext";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectFilterOnSpecies,
+  setFilterOnSpecies,
+} from "../../slices/dataSlice";
 
 const SpeciesFilter = () => {
-  const { filterOnSpecies, setFilterOnSpecies } = useApplicationContext();
+  const dispatch = useDispatch();
+  const filterOnSpecies = useSelector(selectFilterOnSpecies);
 
   return (
     <>
@@ -12,7 +17,7 @@ const SpeciesFilter = () => {
         id="species"
         value={filterOnSpecies}
         onChange={(e) => {
-          setFilterOnSpecies(e.target.value);
+          dispatch(setFilterOnSpecies(e.target.value));
         }}
       />
     </>
