@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import useAxiosFetch from "../hooks/useAxiosFetch";
 import FishCatchCard from "./items/FishCatchCard";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectUserPosition, setUserPosition } from "../slices/userSlice";
-import { useDispatch } from "react-redux";
 import {
   selectFishCatches,
   selectFetchError,
