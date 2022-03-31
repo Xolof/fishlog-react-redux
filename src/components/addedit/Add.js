@@ -2,7 +2,18 @@ import AddEditMap from "./AddEditMap";
 import AddEditForm from "./AddEditForm";
 import { useState, useEffect } from "react";
 import api from "../../api/api";
-import { useApplicationContext } from "../../context/DataContext";
+import {
+  selectFishCatches,
+  setFishCatches,
+  setIsLoading,
+  setFilterOnSpecies,
+  setFilterOnUser,
+  setFilterOnWeightMin,
+  setFilterOnWeightMax,
+  setFilterOnLengthMin,
+  setFilterOnLengthMax,
+} from "../../slices/dataSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import {
   successToast,
@@ -10,7 +21,6 @@ import {
   errorToast,
 } from "../../services/toastService";
 import { setMarkerLocation } from "../../slices/userSlice";
-import { useDispatch } from "react-redux";
 
 const Add = () => {
   const dispatch = useDispatch();
@@ -21,17 +31,9 @@ const Add = () => {
   const [uploadImages, setUploadImages] = useState([]);
   const [previewImageUrls, setPreviewImageUrls] = useState([]);
   const [date, setDate] = useState("");
-  const {
-    fishCatches,
-    setFishCatches,
-    setIsLoading,
-    setFilterOnSpecies,
-    setFilterOnUser,
-    setFilterOnWeight,
-    setFilterOnLength,
-  } = useApplicationContext();
   const username = localStorage.getItem("fishlog-userName");
   const navigate = useNavigate();
+  const fishCatches = useSelector(selectFishCatches);
 
   useEffect(() => {
     dispatch(setMarkerLocation(null));
@@ -78,18 +80,14 @@ const Add = () => {
       await response.data;
       const newCatch = response.data.data;
       newCatch.username = localStorage.getItem("fishlog-userName");
-      setFishCatches([...fishCatches, response.data.data]);
+      dispatch(setFishCatches([...fishCatches, response.data.data]));
       successToast("Catch added!");
-      setFilterOnSpecies("");
-      setFilterOnUser("");
-      setFilterOnWeight({
-        min: 0,
-        max: 10000,
-      });
-      setFilterOnLength({
-        min: 0,
-        max: 500,
-      });
+      dispatch(setFilterOnSpecies(""));
+      dispatch(setFilterOnUser(""));
+      dispatch(setFilterOnWeightMin(0));
+      dispatch(setFilterOnWeightMax(10000));
+      dispatch(setFilterOnLengthMin(0));
+      dispatch(setFilterOnLengthMax(500));
       navigate(`/map/${response.data.data.id}`);
     } catch (err) {
       console.log(err);
