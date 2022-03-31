@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../api/api";
-import { useApplicationContext } from "../context/DataContext";
 import { successToast, errorToast } from "../services/toastService";
 import { setUserName } from "../slices/userSlice";
-import { useDispatch } from "react-redux";
+import { selectAPI_URL, setIsLoading } from "../slices/dataSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [passWord, setPassWord] = useState("");
-  const { API_URL, setIsLoading } = useApplicationContext();
   const dispatch = useDispatch();
+  const API_URL = useSelector(selectAPI_URL);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    dispatch(setIsLoading(true));
     try {
       const response = await api.post("/api/login", {
         email,
@@ -46,7 +46,7 @@ const Login = () => {
       console.error(`Error: ${err.message}`);
       errorToast("Login failed, please check username and password.");
     } finally {
-      setIsLoading(false);
+      dispatch(setIsLoading(false));
     }
   };
 
