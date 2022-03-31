@@ -1,7 +1,6 @@
 import { Marker, useMapEvents } from "react-leaflet";
 import { setMarkerLocation } from "../../slices/userSlice";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectMarkerLocation } from "../../slices/userSlice";
 
 const PositionMarker = ({ location, setLocation }) => {
