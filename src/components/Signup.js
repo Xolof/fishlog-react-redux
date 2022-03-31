@@ -1,19 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
-import { useApplicationContext } from "../context/DataContext";
 import { successToast, errorToast } from "../services/toastService";
+import { setIsLoading } from "../slices/dataSlice";
+import { useDispatch } from "react-redux";
 
 const Signup = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [passWord, setPassWord] = useState("");
   const [name, setName] = useState("");
-  const { setIsLoading } = useApplicationContext();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    dispatch(setIsLoading(true));
     try {
       const response = await api.post("/api/register", {
         name,
@@ -39,7 +40,7 @@ const Signup = () => {
       console.error(`Error: ${err.message}`);
       errorToast("Signup failed.");
     } finally {
-      setIsLoading(false);
+      dispatch(setIsLoading(false));
     }
   };
 
