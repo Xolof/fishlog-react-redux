@@ -1,5 +1,5 @@
 {
-  "name": "react-fishlog",
+  "name": "react-redux-fishlog",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

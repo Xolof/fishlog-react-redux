@@ -19,7 +19,7 @@ function App() {
     <div className="App">
       <VerifyToken />
       <ThemeToggler />
-      <Header title="React Fishlog" />
+      <Header title="React-Redux Fishlog" />
       <Nav />
       <Routes>
         <Route path="/" element={<StartPage />} />
