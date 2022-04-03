@@ -26,8 +26,6 @@ export const themeSlice = createSlice({
 export const setDarkTheme = createAsyncThunk(
   "theme/setThemeThunk",
   (isActive, thunkAPI) => {
-    console.log(thunkAPI);
-
     const root = document.documentElement;
 
     root?.style.setProperty("--first-color", isActive ? "#feffdf" : "#262833");
