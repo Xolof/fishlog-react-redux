@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import {
   selectUsername,
   setUserName,
-  setMarkerLocation,
+  setMarkerLat,
 } from "../../slices/userSlice";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -18,7 +18,7 @@ const Nav = () => {
     localStorage.removeItem("fishlog-token");
     localStorage.removeItem("fishlog-userName");
     dispatch(setUserName(false));
-    dispatch(setMarkerLocation(null));
+    dispatch(setMarkerLat(null));
     infoToast("You have been logged out.");
   }
 

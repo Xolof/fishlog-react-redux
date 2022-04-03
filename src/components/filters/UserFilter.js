@@ -1,7 +1,9 @@
-import { useApplicationContext } from "../../context/DataContext";
+import { selectFilterOnUser, setFilterOnUser } from "../../slices/dataSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const UserFilter = () => {
-  const { filterOnUser, setFilterOnUser } = useApplicationContext();
+  const filterOnUser = useSelector(selectFilterOnUser);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -12,7 +14,7 @@ const UserFilter = () => {
         id="user"
         value={filterOnUser}
         onChange={(e) => {
-          setFilterOnUser(e.target.value);
+          dispatch(setFilterOnUser(e.target.value));
         }}
       />
     </>

@@ -1,8 +1,16 @@
-import { useApplicationContext } from "../../context/DataContext";
+import {
+  selectSortOrder,
+  setSortOrder,
+  selectSortBy,
+  setSortBy,
+} from "../../slices/dataSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Sort = () => {
-  const { sortBy, setSortBy } = useApplicationContext();
-  const { sortOrder, setSortOrder } = useApplicationContext();
+  const sortOrder = useSelector(selectSortOrder);
+  const sortBy = useSelector(selectSortBy);
+
+  const dispatch = useDispatch();
 
   return (
     <div className="sortContainer">
@@ -13,7 +21,7 @@ const Sort = () => {
           id="sortBy"
           value={sortBy}
           onChange={(e) => {
-            setSortBy(e.target.value);
+            dispatch(setSortBy(e.target.value));
           }}
         >
           <option value="species">Species</option>
@@ -30,7 +38,7 @@ const Sort = () => {
           id="sortOrder"
           value={sortOrder}
           onChange={(e) => {
-            setSortOrder(e.target.value);
+            dispatch(setSortOrder(e.target.value));
           }}
         >
           <option value="ASC">Ascending</option>

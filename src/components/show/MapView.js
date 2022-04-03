@@ -1,15 +1,23 @@
-import { useApplicationContext } from "../../context/DataContext";
+import {
+  selectSearchResults,
+  selectFetchError,
+  selectIsLoading,
+  selectFishCatches,
+} from "../../slices/dataSlice";
 import LeafletMap from "./showMap";
 import { useParams, Link } from "react-router-dom";
 import Filters from "../filters/Filters";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
+import { useSelector } from "react-redux";
 
 const MapView = () => {
   const API_URL = process.env.REACT_APP_API_URL;
   useAxiosFetch(`${API_URL}/api/public_fishcatch`);
 
-  const { searchResults, fetchError, isLoading, fishCatches } =
-    useApplicationContext();
+  const searchResults = useSelector(selectSearchResults);
+  const fetchError = useSelector(selectFetchError);
+  const isLoading = useSelector(selectIsLoading);
+  const fishCatches = useSelector(selectFishCatches);
 
   const id = useParams().id;
 

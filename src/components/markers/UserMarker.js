@@ -2,12 +2,18 @@ import { useEffect } from "react";
 import L from "leaflet";
 import { useMap, Marker, Popup } from "react-leaflet";
 import { useSelector } from "react-redux";
-import { selectUserPosition, setUserPosition } from "../../slices/userSlice";
+import {
+  selectUserLat,
+  selectUserLng,
+  setUserLat,
+  setUserLng,
+} from "../../slices/userSlice";
 import { useDispatch } from "react-redux";
 
 const UserMarker = () => {
   const dispatch = useDispatch();
-  const userPosition = useSelector(selectUserPosition);
+  const userLat = useSelector(selectUserLat);
+  const userLng = useSelector(selectUserLng);
   const map = useMap();
 
   let positionSet = false;
@@ -16,11 +22,12 @@ const UserMarker = () => {
     map.locate({ watch: true });
 
     function onLocationFound(e) {
-      if (!userPosition && !positionSet) {
+      if ((!userLat || !userLng) && !positionSet) {
         map.flyTo(e.latlng, map.getZoom());
       }
       positionSet = true;
-      dispatch(setUserPosition(e.latlng));
+      dispatch(setUserLat(e.latlng.lat));
+      dispatch(setUserLng(e.latlng.lng));
     }
 
     map.on("locationfound", onLocationFound);
@@ -31,8 +38,8 @@ const UserMarker = () => {
     iconSize: [25, 25],
   });
 
-  return userPosition === null ? null : (
-    <Marker position={userPosition} icon={userIcon}>
+  return userLat === null ? null : (
+    <Marker position={[userLat, userLng]} icon={userIcon}>
       <Popup>
         <br />
         You are here. <br />

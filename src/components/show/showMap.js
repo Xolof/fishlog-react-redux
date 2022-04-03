@@ -1,15 +1,16 @@
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import FishCatchCard from "../items/FishCatchCard";
-import { useApplicationContext } from "../../context/DataContext";
 import UserMarker from "../markers/UserMarker";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectUserPosition } from "../../slices/userSlice";
+import { selectUserLat, selectUserLng } from "../../slices/userSlice";
 import { selectDarkTheme } from "../../slices/themeSlice";
+import { selectFishCatches } from "../../slices/dataSlice";
 
 const LeafletMap = ({ searchResults, showId }) => {
-  const { fishCatches } = useApplicationContext();
-  const userPosition = useSelector(selectUserPosition);
+  const fishCatches = useSelector(selectFishCatches);
+  const userLat = useSelector(selectUserLat);
+  const userLng = useSelector(selectUserLng);
   const [currentFishCatch, setCurrentFishCatch] = useState(null);
   const darkTheme = useSelector(selectDarkTheme);
 
@@ -44,9 +45,7 @@ const LeafletMap = ({ searchResults, showId }) => {
     mapPosition = [lat, lon];
     zoom = 14;
   } else {
-    mapPosition = userPosition
-      ? [userPosition.lat, userPosition.lng]
-      : [55.8, 12.5];
+    mapPosition = userLat && userLng ? [userLat, userLng] : [55.8, 12.5];
     zoom = 8;
   }
 
@@ -61,22 +60,22 @@ const LeafletMap = ({ searchResults, showId }) => {
         <UserMarker />
         {searchResults
           ? searchResults.map((fishCatch) => {
-              const splitPosition = fishCatch.location.split(",");
-              const lat = splitPosition[0];
-              const lon = splitPosition[1];
+            const splitPosition = fishCatch.location.split(",");
+            const lat = splitPosition[0];
+            const lon = splitPosition[1];
 
-              return (
-                <Marker
-                  position={[lat, lon]}
-                  key={fishCatch.id}
-                  eventHandlers={{
-                    click: () => {
-                      setCurrentFishCatch(fishCatch);
-                    },
-                  }}
-                ></Marker>
-              );
-            })
+            return (
+              <Marker
+                position={[lat, lon]}
+                key={fishCatch.id}
+                eventHandlers={{
+                  click: () => {
+                    setCurrentFishCatch(fishCatch);
+                  },
+                }}
+              ></Marker>
+            );
+          })
           : null}
       </MapContainer>
       {currentFishCatch && (
