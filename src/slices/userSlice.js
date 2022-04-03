@@ -2,8 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   name: localStorage.getItem("fishlog-userName"),
-  position: null,
-  markerLocation: null,
+  userLat: null,
+  userLng: null,
+  markerLat: null,
+  markerLng: null,
 };
 
 export const userSlice = createSlice({
@@ -13,28 +15,47 @@ export const userSlice = createSlice({
     setUserName: (state, action) => {
       state.name = action.payload;
     },
-    setUserPosition: (state, action) => {
-      state.position = action.payload;
+    setUserLat: (state, action) => {
+      state.userLat = action.payload;
     },
-    setMarkerLocation: (state, action) => {
-      state.markerLocation = action.payload;
+    setUserLng: (state, action) => {
+      state.userLng = action.payload;
+    },
+    setMarkerLat: (state, action) => {
+      state.markerLat = action.payload;
+    },
+    setMarkerLng: (state, action) => {
+      state.markerLng = action.payload;
     },
   },
 });
 
-export const { setUserName, setUserPosition, setMarkerLocation } =
-  userSlice.actions;
+export const {
+  setUserName,
+  setUserLat,
+  setUserLng,
+  setMarkerLat,
+  setMarkerLng,
+} = userSlice.actions;
 
 export const selectUsername = (state) => {
   return state.user.name;
 };
 
-export const selectUserPosition = (state) => {
-  return state.user.position;
+export const selectUserLat = (state) => {
+  return state.user.userLat;
 };
 
-export const selectMarkerLocation = (state) => {
-  return state.user.markerLocation;
+export const selectUserLng = (state) => {
+  return state.user.userLat;
+};
+
+export const selectMarkerLat = (state) => {
+  return state.user.markerLat;
+};
+
+export const selectMarkerLng = (state) => {
+  return state.user.markerLng;
 };
 
 export default userSlice.reducer;

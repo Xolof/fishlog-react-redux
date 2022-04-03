@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import useAxiosFetch from "../hooks/useAxiosFetch";
 import FishCatchCard from "./items/FishCatchCard";
 import { useSelector, useDispatch } from "react-redux";
-import { selectUserPosition, setUserPosition } from "../slices/userSlice";
+import {
+  selectUserLat,
+  selectUserLng,
+  setUserLat,
+  setUserLng,
+} from "../slices/userSlice";
 import {
   selectFishCatches,
   selectFetchError,
@@ -30,7 +35,8 @@ const padZero = (num) => {
 const StartPage = () => {
   const dispatch = useDispatch();
 
-  const userPosition = useSelector(selectUserPosition);
+  const userLat = useSelector(selectUserLat);
+  const userLng = useSelector(selectUserLng);
 
   const API_URL = process.env.REACT_APP_API_URL;
   useAxiosFetch(`${API_URL}/api/public_fishcatch`);
@@ -43,7 +49,8 @@ const StartPage = () => {
 
   const showPosition = (position) => {
     const { latitude, longitude } = position.coords;
-    dispatch(setUserPosition({ lat: latitude, lng: longitude }));
+    dispatch(setUserLat(latitude));
+    dispatch(setUserLng(longitude));
   };
 
   useEffect(() => {
@@ -54,7 +61,7 @@ const StartPage = () => {
       }
     }, 1000);
 
-    if (!userPosition && isMounted) {
+    if ((!userLat || !userLng) && isMounted) {
       if (window.navigator.geolocation) {
         window.navigator.geolocation.getCurrentPosition(showPosition);
       }
@@ -94,11 +101,11 @@ const StartPage = () => {
             ))}
       </div>
       <h3>There are {fishCatches.length} catches.</h3>
-      {userPosition && (
+      {userLat && userLng && (
         <>
           <h2>Your position:</h2>
           <p>
-            {userPosition.lat} {userPosition.lng}
+            {userLat} {userLng}
           </p>
         </>
       )}

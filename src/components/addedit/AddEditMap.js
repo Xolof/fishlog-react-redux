@@ -2,12 +2,18 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import UserMarker from "../markers/UserMarker";
 import PositionMarker from "../markers/PositionMarker";
 import { useSelector } from "react-redux";
-import { selectUserPosition } from "../../slices/userSlice";
+import {
+  selectUserLat,
+  selectUserLng,
+  selectMarkerLat,
+  selectMarkerLng,
+} from "../../slices/userSlice";
 import { selectDarkTheme } from "../../slices/themeSlice";
 import { useEffect, useState } from "react";
 
-const AddEditMap = ({ location, setLocation, center }) => {
-  const userPosition = useSelector(selectUserPosition);
+const AddEditMap = ({ center }) => {
+  const userLat = useSelector(selectUserLat);
+  const userLng = useSelector(selectUserLng);
   const darkTheme = useSelector(selectDarkTheme);
 
   const lightTileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
@@ -28,11 +34,14 @@ const AddEditMap = ({ location, setLocation, center }) => {
   }, [darkTheme]);
 
   let userCoordinates = null;
-  if (userPosition) {
-    userCoordinates = [userPosition.lat, userPosition.lng];
+  if (userLat && userLng) {
+    userCoordinates = [userLat, userLng];
   }
 
   const mapCenter = center ?? userCoordinates ?? [56, 12.6];
+
+  const markerLat = useSelector(selectMarkerLat);
+  const markerLng = useSelector(selectMarkerLng);
 
   return (
     <>
@@ -43,7 +52,7 @@ const AddEditMap = ({ location, setLocation, center }) => {
           className="map-tiles"
         />
         <UserMarker />
-        <PositionMarker location={location} setLocation={setLocation} />
+        <PositionMarker location={[markerLat, markerLng]} />
       </MapContainer>
     </>
   );

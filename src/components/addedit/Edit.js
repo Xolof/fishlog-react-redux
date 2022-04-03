@@ -9,7 +9,12 @@ import {
   infoToast,
   errorToast,
 } from "../../services/toastService";
-import { setMarkerLocation } from "../../slices/userSlice";
+import {
+  setMarkerLat,
+  setMarkerLng,
+  selectMarkerLat,
+  selectMarkerLng,
+} from "../../slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectFishCatches,
@@ -25,7 +30,6 @@ import {
 } from "../../slices/dataSlice";
 
 const Edit = () => {
-  const [location, setLocation] = useState("");
   const [species, setSpecies] = useState("");
   const [length, setLength] = useState("");
   const [weight, setWeight] = useState("");
@@ -40,9 +44,12 @@ const Edit = () => {
   const dispatch = useDispatch();
   const fishCatches = useSelector(selectFishCatches);
   const API_URL = useSelector(selectAPI_URL);
+  const markerLat = useSelector(selectMarkerLat);
+  const markerLng = useSelector(selectMarkerLng);
 
   useEffect(() => {
-    dispatch(setMarkerLocation(null));
+    dispatch(setMarkerLat(null));
+    dispatch(setMarkerLng(null));
   }, []);
 
   useEffect(() => {
@@ -58,12 +65,12 @@ const Edit = () => {
         setLength(res.data.length);
         setWeight(res.data.weight);
         setDate(res.data.date);
-        setLocation(res.data.location);
         const splitPosition = res.data.location.split(",");
         const lat = parseFloat(splitPosition[0]);
         const lon = parseFloat(splitPosition[1]);
-        setLocation([lat, lon]);
         setMapCenter([lat, lon]);
+        dispatch(setMarkerLat(lat));
+        dispatch(setMarkerLng(lon));
         const imageUrl = `${API_URL}${res.data.imageurl}`;
         setPreviewImageUrls([imageUrl]);
       } catch (err) {
@@ -86,6 +93,12 @@ const Edit = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let location = null;
+
+    if (markerLat && markerLng) {
+      location = markerLat.toString() + "," + markerLng.toString();
+    }
 
     if (!location) {
       infoToast("Please set the location by clicking on the map.");
@@ -121,11 +134,11 @@ const Edit = () => {
       const newCatch = response.data.data;
       newCatch.username = localStorage.getItem("fishlog-userName");
 
-      setFishCatches(
-        fishCatches.map((item) => {
-          return parseInt(item.id) === parseInt(newCatch.id) ? newCatch : item;
-        })
-      );
+      const updatedFishCatches = fishCatches.map((item) => {
+        return parseInt(item.id) === parseInt(newCatch.id) ? newCatch : item;
+      });
+
+      dispatch(setFishCatches(updatedFishCatches));
 
       successToast("Catch updated");
       setFilterOnSpecies("");
@@ -157,11 +170,7 @@ const Edit = () => {
     <article>
       <h2>Edit</h2>
       <p>Click the map to set position.</p>
-      <AddEditMap
-        location={location}
-        setLocation={setLocation}
-        center={mapCenter}
-      />
+      <AddEditMap center={mapCenter} />
       <AddEditForm
         formRole="edit"
         handleSubmit={handleSubmit}

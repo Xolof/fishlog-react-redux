@@ -28,10 +28,10 @@ const FishCatchCard = ({ fishCatch }) => {
       });
 
       await response.data;
-      fishCatches.filter((item) => {
+      const updatedFishCatches = fishCatches.filter((item) => {
         return parseInt(item.id) !== parseInt(id);
       });
-      dispatch(setFishCatches(fishCatches));
+      dispatch(setFishCatches(updatedFishCatches));
       successToast("Catch deleted!");
       navigate("/map/all");
     } catch (err) {

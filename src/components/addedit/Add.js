@@ -20,11 +20,15 @@ import {
   infoToast,
   errorToast,
 } from "../../services/toastService";
-import { setMarkerLocation } from "../../slices/userSlice";
+import {
+  setMarkerLat,
+  setMarkerLng,
+  selectMarkerLat,
+  selectMarkerLng,
+} from "../../slices/userSlice";
 
 const Add = () => {
   const dispatch = useDispatch();
-  const [location, setLocation] = useState("");
   const [species, setSpecies] = useState("");
   const [length, setLength] = useState("");
   const [weight, setWeight] = useState("");
@@ -34,15 +38,20 @@ const Add = () => {
   const username = localStorage.getItem("fishlog-userName");
   const navigate = useNavigate();
   const fishCatches = useSelector(selectFishCatches);
+  const markerLat = useSelector(selectMarkerLat);
+  const markerLng = useSelector(selectMarkerLng);
 
   useEffect(() => {
-    dispatch(setMarkerLocation(null));
+    dispatch(setMarkerLat(null));
+    dispatch(setMarkerLng(null));
   }, []);
 
   useEffect(() => {
     if (uploadImages.length < 1) return;
     setPreviewImageUrls(URL.createObjectURL(uploadImages));
   }, [uploadImages]);
+
+  const location = [markerLat, markerLng];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -113,7 +122,7 @@ const Add = () => {
   return (
     <article>
       <p>Click the map to set position.</p>
-      <AddEditMap location={location} setLocation={setLocation} />
+      <AddEditMap />
       <AddEditForm
         formRole="add"
         handleSubmit={handleSubmit}
