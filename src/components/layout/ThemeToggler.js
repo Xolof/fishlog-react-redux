@@ -12,16 +12,10 @@ const ThemeToggler = () => {
   }
 
   useEffect(() => {
-    const root = document.documentElement;
-
-    root?.style.setProperty("--first-color", darkTheme ? "#feffdf" : "#262833");
-
-    root?.style.setProperty("--third-color", darkTheme ? "#97cba9" : "#404040");
-
-    root?.style.setProperty("--fourth-color", darkTheme ? "#262833" : "#fff");
-
-    localStorage.setItem("fishlog-theme", darkTheme ? "dark" : "light");
-  }, [darkTheme]);
+    const darkThemeInitiallyActive =
+      localStorage.getItem("fishlog-theme") === "dark" ? true : false;
+    dispatch(setDarkTheme(darkThemeInitiallyActive));
+  }, []);
 
   return (
     <div className="themeToggler">
