@@ -8,30 +8,12 @@ import {
   selectMarkerLat,
   selectMarkerLng,
 } from "../../slices/userSlice";
-import { selectDarkTheme } from "../../slices/themeSlice";
-import { useEffect, useState } from "react";
+import { selectTileUrl } from "../../slices/themeSlice";
 
 const AddEditMap = ({ center }) => {
   const userLat = useSelector(selectUserLat);
   const userLng = useSelector(selectUserLng);
-  const darkTheme = useSelector(selectDarkTheme);
-
-  const lightTileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-  const darkTileUrl = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
-  const [tileUrl, setTileUrl] = useState(
-    darkTheme ? darkTileUrl : lightTileUrl
-  );
-
-  useEffect(() => {
-    setTileUrl(darkTheme ? darkTileUrl : lightTileUrl);
-    const root = document.documentElement;
-    root?.style.setProperty(
-      "--map-tiles-filter",
-      darkTheme
-        ? "brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7)"
-        : "none"
-    );
-  }, [darkTheme]);
+  const tileUrl = useSelector(selectTileUrl);
 
   let userCoordinates = null;
   if (userLat && userLng) {
