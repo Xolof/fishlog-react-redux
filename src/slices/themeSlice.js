@@ -1,11 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const lightTileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-const darkTileUrl = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
-
 const initialState = {
   darkTheme: localStorage.getItem("fishlog-theme") === "dark" ? true : false,
-  tileUrl: lightTileUrl,
+  tileUrl: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 };
 
 export const themeSlice = createSlice({
@@ -25,7 +22,7 @@ export const themeSlice = createSlice({
 
 export const setDarkTheme = createAsyncThunk(
   "theme/setThemeThunk",
-  (isActive, thunkAPI) => {
+  (isActive) => {
     const root = document.documentElement;
 
     root?.style.setProperty("--first-color", isActive ? "#feffdf" : "#262833");
@@ -33,10 +30,6 @@ export const setDarkTheme = createAsyncThunk(
     root?.style.setProperty("--third-color", isActive ? "#97cba9" : "#404040");
 
     root?.style.setProperty("--fourth-color", isActive ? "#262833" : "#fff");
-
-    thunkAPI.dispatch(
-      themeSlice.setTileUrl(isActive ? darkTileUrl : lightTileUrl)
-    );
 
     root?.style.setProperty(
       "--map-tiles-filter",
