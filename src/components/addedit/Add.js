@@ -99,7 +99,6 @@ const Add = () => {
       dispatch(setFilterOnLengthMax(500));
       navigate(`/map/${response.data.data.id}`);
     } catch (err) {
-      console.log(err);
       errorToast("Could not add catch, please check your data.");
     } finally {
       setIsLoading(false);

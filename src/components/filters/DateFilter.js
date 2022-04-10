@@ -33,7 +33,6 @@ const DateFilter = () => {
         value={filterOnDateTo}
         max={getTodaysDate()}
         onChange={(e) => {
-          console.log(e.target.value);
           dispatch(setFilterOnDateTo(e.target.value));
         }}
       />

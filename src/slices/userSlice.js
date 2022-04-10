@@ -47,7 +47,7 @@ export const selectUserLat = (state) => {
 };
 
 export const selectUserLng = (state) => {
-  return state.user.userLat;
+  return state.user.userLng;
 };
 
 export const selectMarkerLat = (state) => {
