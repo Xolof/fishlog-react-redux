@@ -43,22 +43,22 @@ const LeafletMap = ({ searchResults, showId }) => {
         <UserMarker />
         {searchResults
           ? searchResults.map((fishCatch) => {
-              const splitPosition = fishCatch.location.split(",");
-              const lat = splitPosition[0];
-              const lon = splitPosition[1];
+            const splitPosition = fishCatch.location.split(",");
+            const lat = splitPosition[0];
+            const lon = splitPosition[1];
 
-              return (
-                <Marker
-                  position={[lat, lon]}
-                  key={fishCatch.id}
-                  eventHandlers={{
-                    click: () => {
-                      setCurrentFishCatch(fishCatch);
-                    },
-                  }}
-                ></Marker>
-              );
-            })
+            return (
+              <Marker
+                position={[lat, lon]}
+                key={fishCatch.id}
+                eventHandlers={{
+                  click: () => {
+                    setCurrentFishCatch(fishCatch);
+                  },
+                }}
+              ></Marker>
+            );
+          })
           : null}
       </MapContainer>
       {currentFishCatch && (
