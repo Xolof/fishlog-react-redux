@@ -10,11 +10,20 @@ $desktop: 1025px;
         margin-right: 1em;
       }
       img {
+        margin-top: 0;
         width: 70%;
       }
     }
     button {
       width: 48%;
+    }
+  }
+
+  article >.fishCatchCard {
+    .content {
+      img {
+        width: 100%;
+      }
     }
   }
 
@@ -56,7 +65,6 @@ $desktop: 1025px;
   .fishCatchCard {
     img {
       max-width: 100%;
-      max-height: 38vh;
     }
   }
 }

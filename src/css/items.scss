@@ -12,7 +12,7 @@
   padding: 0.8em;
   height: 50vh;
   .content {
-    height: 80%;
+    height: 86%;
     display: flex;
     flex-flow: column;
     align-items: flex-start;
@@ -28,6 +28,7 @@
       display: block;
       height: 100%;
       width: 100%;
+      margin-top: 1em
     }
   }
 
@@ -37,7 +38,7 @@
     position: absolute;
     bottom: 0.8em;
     height: 10%;
-    width: 46%;
+    width: 48%;
     cursor: pointer;
     padding: 0.4em;
     transition: 0.2s all ease;
@@ -46,16 +47,34 @@
     color: $fourth-color;
   }
   .editButton {
-    left: 0.8em;
+    left: 0;
     &:hover {
       background-color: $third-color;
     }
   }
   .deleteButton {
-    right: 0.8em;
+    right: 0;
     float: right;
     &:hover {
       background-color: $danger;
     }
+  }
+}
+
+.fishCatchPopup {
+  .fishCatchCard {
+    .editButton {
+      left: 0.8em;
+    }
+    .deleteButton {
+      right: 0.8em;
+    }
+  }
+}
+
+article >.fishCatchCard {
+  padding: 0.8em 0;
+  button {
+    width: 49%;
   }
 }
