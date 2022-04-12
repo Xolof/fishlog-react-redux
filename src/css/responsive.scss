@@ -3,6 +3,20 @@ $tablet: 811px;
 $desktop: 1025px;
 
 @media (min-width: $mobile) {
+  .fishCatchPopup {
+    .fishCatchCard {
+      .content {
+        flex-direction: row;
+        .catchInfo {
+          margin-right: 2%;
+        }
+        img {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
   .fishCatchCard {
     button {
       width: 48%;
