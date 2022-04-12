@@ -14,9 +14,14 @@
         display: none;
       }
       img {
-        height: 120px;
+        max-height: 15em;
         object-fit: cover;
         object-position: center;
+      }
+      .content {
+        .catchInfo {
+          margin-right: 2%;
+        }
       }
     }
   }

@@ -1,25 +1,16 @@
 $mobile: 481px;
-$tablet: 641px;
+$tablet: 811px;
 $desktop: 1025px;
 
 @media (min-width: $mobile) {
   .fishCatchCard {
-    .content {
-      flex-flow: row;
-      .catchInfo {
-        margin-right: 1em;
-      }
-      img {
-        margin-top: 0;
-        width: 70%;
-      }
-    }
     button {
       width: 48%;
     }
   }
 
   article >.fishCatchCard {
+    height: 70vh;
     .content {
       img {
         width: 100%;
@@ -62,7 +53,17 @@ $desktop: 1025px;
     width: 50%;
   }
 
+  article >.fishCatchCard {
+    height: 50vh;
+  }
+
   .fishCatchCard {
+    .content {
+      flex-flow: row;
+      img {
+        margin-top: 0;
+      }
+    }
     img {
       max-width: 100%;
     }
