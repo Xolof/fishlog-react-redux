@@ -1,11 +1,12 @@
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import FishCatchCard from "../items/FishCatchCard";
 import UserMarker from "../markers/UserMarker";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { selectUserLat, selectUserLng } from "../../slices/userSlice";
 import { selectTileUrl } from "../../slices/themeSlice";
 import { selectFishCatches } from "../../slices/dataSlice";
+import { CSSTransition } from "react-transition-group";
 
 const LeafletMap = ({ searchResults, showId }) => {
   const fishCatches = useSelector(selectFishCatches);
@@ -13,6 +14,12 @@ const LeafletMap = ({ searchResults, showId }) => {
   const userLng = useSelector(selectUserLng);
   const [currentFishCatch, setCurrentFishCatch] = useState(null);
   const tileUrl = useSelector(selectTileUrl);
+  const [showPopup, setShowPopup] = useState(false);
+  const nodeRef = useRef(null);
+
+  useEffect(() => {
+    currentFishCatch ? setShowPopup(true) : setShowPopup(false);
+  }, [currentFishCatch]);
 
   const showCatch = fishCatches.filter(
     (item) => parseInt(item.id) === parseInt(showId)
@@ -53,6 +60,7 @@ const LeafletMap = ({ searchResults, showId }) => {
                 key={fishCatch.id}
                 eventHandlers={{
                   click: () => {
+                    setCurrentFishCatch(false);
                     setCurrentFishCatch(fishCatch);
                   },
                 }}
@@ -61,21 +69,30 @@ const LeafletMap = ({ searchResults, showId }) => {
           })
           : null}
       </MapContainer>
-      {currentFishCatch && (
-        <>
-          <div className="fishCatchPopup">
+
+      <CSSTransition
+        in={showPopup}
+        timeout={200}
+        classNames="fade"
+        unmountOnExit
+        nodeRef={nodeRef}
+      >
+        {currentFishCatch ? (
+          <div className="fishCatchPopup" ref={nodeRef}>
             <button
               className="closeButton"
               onClick={() => {
-                setCurrentFishCatch(null);
+                setShowPopup(false);
               }}
             >
               &#10005;
             </button>
             <FishCatchCard fishCatch={currentFishCatch} />
           </div>
-        </>
-      )}
+        ) : (
+          <></>
+        )}
+      </CSSTransition>
     </>
   );
 };
