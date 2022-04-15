@@ -4,7 +4,8 @@
     flex-flow: wrap;
     justify-content: space-between;
     .fishCatchCard {
-      padding-top: 0;
+      height: initial;
+      padding: 0;
       margin-bottom: 1em;
       border-bottom: none;
       width: 46%;
@@ -13,9 +14,14 @@
         display: none;
       }
       img {
-        height: 120px;
+        max-height: 15em;
         object-fit: cover;
         object-position: center;
+      }
+      .content {
+        .catchInfo {
+          margin-right: 2%;
+        }
       }
     }
   }
