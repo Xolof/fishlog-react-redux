@@ -82,4 +82,14 @@ $desktop: 1025px;
       max-width: 100%;
     }
   }
+
+  .leaflet-container {
+    height: 60vh;
+  }
+
+  .fishCatchPopup {
+    .fishCatchCard {
+      height: 60vh;
+    }
+  }
 }
