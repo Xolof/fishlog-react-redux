@@ -12,6 +12,15 @@
 
 .filterHeaderWrapper {
   display: flex;
+  justify-content: space-between;
+}
+
+.filterHeader, .sortHeader {
+  font-size: 1em;
+}
+
+.sortHeader {
+  margin-right: 0.2em;
 }
 
 .fullHeight {
@@ -24,7 +33,7 @@
 
 .toggleFiltersButton {
   color: $first-color;
-  background-color: $fourth-color;
+  background-color: transparent;
   border: none;
   cursor: pointer;
   &:hover {
@@ -50,9 +59,15 @@
   font-size: 2.5em;
 }
 
+.filterHeaderContainer {
+  display: flex;
+  width: 25%;
+}
+
 .sortContainer {
+  width: 75%;
   span {
-    width: 49%;
+    width: 40%;
     label {
       width: 15%;
       text-align: center;
@@ -68,5 +83,7 @@
   }
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1em;
+  label {
+    display: none;
+  }
 }

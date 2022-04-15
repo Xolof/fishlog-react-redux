@@ -48,6 +48,10 @@ $desktop: 1025px;
       }
     }
   }
+
+  .filterHeader, .sortHeader {
+    font-size: 1.4em;
+  }
 }
 
 @media (min-width: $tablet) {

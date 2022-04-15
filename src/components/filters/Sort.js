@@ -14,6 +14,7 @@ const Sort = () => {
 
   return (
     <div className="sortContainer">
+      <h3 className="sortHeader">Sort by</h3>
       <span>
         <label htmlFor="sortBy">Sort by:</label>
         <select
