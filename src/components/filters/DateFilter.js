@@ -15,27 +15,31 @@ const DateFilter = () => {
 
   return (
     <>
-      <label htmlFor="from-date">From date: </label>
-      <input
-        type="date"
-        name="from-date"
-        id="from-date"
-        value={filterOnDateFrom}
-        onChange={(e) => {
-          dispatch(setFilterOnDateFrom(e.target.value));
-        }}
-      />
-      <label htmlFor="to-date">To date: </label>
-      <input
-        type="date"
-        name="to-date"
-        id="to-date"
-        value={filterOnDateTo}
-        max={getTodaysDate()}
-        onChange={(e) => {
-          dispatch(setFilterOnDateTo(e.target.value));
-        }}
-      />
+      <div className="filterContainer">
+        <label htmlFor="from-date">From date: </label>
+        <input
+          type="date"
+          name="from-date"
+          id="from-date"
+          value={filterOnDateFrom}
+          onChange={(e) => {
+            dispatch(setFilterOnDateFrom(e.target.value));
+          }}
+        />
+      </div>
+      <div className="filterContainer">
+        <label htmlFor="to-date">To date: </label>
+        <input
+          type="date"
+          name="to-date"
+          id="to-date"
+          value={filterOnDateTo}
+          max={getTodaysDate()}
+          onChange={(e) => {
+            dispatch(setFilterOnDateTo(e.target.value));
+          }}
+        />
+      </div>
     </>
   );
 };

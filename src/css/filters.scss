@@ -3,6 +3,7 @@
 .filterWrapper {
   transition: 0.2s all ease;
   overflow: hidden;
+  margin-top: 1em;
 }
 
 .filterHeader {
@@ -67,7 +68,7 @@
 .sortContainer {
   width: 75%;
   span {
-    width: 40%;
+    width: 38%;
     label {
       width: 15%;
       text-align: center;
@@ -86,4 +87,12 @@
   label {
     display: none;
   }
+}
+
+.filterGroup {
+   display: flex;
+   justify-content: space-between;
+   .filterContainer {
+     width: 49%;
+   }
 }
