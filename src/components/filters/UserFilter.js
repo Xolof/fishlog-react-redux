@@ -6,7 +6,7 @@ const UserFilter = () => {
   const dispatch = useDispatch();
 
   return (
-    <>
+    <div className="filterContainer">
       <label htmlFor="user">User: </label>
       <input
         type="search"
@@ -17,7 +17,7 @@ const UserFilter = () => {
           dispatch(setFilterOnUser(e.target.value));
         }}
       />
-    </>
+    </div>
   );
 };
 

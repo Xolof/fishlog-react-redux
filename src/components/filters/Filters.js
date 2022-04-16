@@ -35,11 +35,15 @@ const Filters = () => {
           showFilters ? "filterWrapper fullHeight" : "filterWrapper zeroHeight"
         }
       >
-        <SpeciesFilter />
-        <UserFilter />
+        <div className="filterGroup">
+          <SpeciesFilter />
+          <UserFilter />
+        </div>
         <WeightFilter />
         <LengthFilter />
-        <DateFilter />
+        <div className="filterGroup">
+          <DateFilter />
+        </div>
       </div>
     </section>
   );

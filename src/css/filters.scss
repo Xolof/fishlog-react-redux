@@ -3,6 +3,7 @@
 .filterWrapper {
   transition: 0.2s all ease;
   overflow: hidden;
+  margin-top: 1em;
 }
 
 .filterHeader {
@@ -86,4 +87,12 @@
   label {
     display: none;
   }
+}
+
+.filterGroup {
+   display: flex;
+   justify-content: space-between;
+   .filterContainer {
+     width: 49%;
+   }
 }

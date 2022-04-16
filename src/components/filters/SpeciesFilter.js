@@ -9,7 +9,7 @@ const SpeciesFilter = () => {
   const filterOnSpecies = useSelector(selectFilterOnSpecies);
 
   return (
-    <>
+    <div className="filterContainer">
       <label htmlFor="species">Species: </label>
       <input
         type="search"
@@ -20,7 +20,7 @@ const SpeciesFilter = () => {
           dispatch(setFilterOnSpecies(e.target.value));
         }}
       />
-    </>
+    </div>
   );
 };
 
