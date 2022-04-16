@@ -52,6 +52,10 @@ $desktop: 1025px;
   .filterHeader, .sortHeader {
     font-size: 1.4em;
   }
+
+  .sortContainer {
+    width: 50%
+  }
 }
 
 @media (min-width: $tablet) {
@@ -95,5 +99,9 @@ $desktop: 1025px;
     .fishCatchCard {
       height: 60vh;
     }
+  }
+
+  .sortContainer {
+    width: 40%
   }
 }

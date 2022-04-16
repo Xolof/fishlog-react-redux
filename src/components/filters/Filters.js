@@ -6,7 +6,6 @@ import LengthFilter from "./LengthFilter";
 import DateFilter from "./DateFilter";
 import Sort from "./Sort";
 import { useLocation } from "react-router-dom";
-import "../../css/filters.scss";
 
 const Filters = () => {
   const [showFilters, setShowFilters] = useState(false);
