@@ -5,13 +5,18 @@ $desktop: 1025px;
 @media (min-width: $mobile) {
   .fishCatchPopup {
     .fishCatchCard {
+      padding: 0.8em;
       .content {
+        font-size: 1em;
         flex-direction: row;
+        justify-content: space-between;
         .catchInfo {
           margin-right: 2%;
         }
         img {
           margin-top: 0;
+          height: 100%;
+          width: 70%;
         }
       }
     }
@@ -19,15 +24,15 @@ $desktop: 1025px;
 
   .fishCatchCard {
     button {
-      width: 48%;
+      width: 49%;
     }
   }
 
   article >.fishCatchCard {
-    height: 70vh;
     .content {
       img {
         width: 100%;
+        height: 25em;
       }
     }
   }
@@ -73,10 +78,6 @@ $desktop: 1025px;
   .uploadPreviewImage {
     display: block;
     width: 50%;
-  }
-
-  article >.fishCatchCard {
-    height: 50vh;
   }
 
   .fishCatchCard {
