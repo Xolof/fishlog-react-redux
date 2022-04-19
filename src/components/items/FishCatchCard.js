@@ -81,7 +81,7 @@ const FishCatchCard = ({ fishCatch }) => {
         <img src={`${API_URL}${fishCatch.imageurl}`} alt={fishCatch.species} />
       </div>
       {fishCatch.username === localStorage.getItem("fishlog-userName") ? (
-        <>
+        <div className="buttons">
           <button
             onClick={() => navigate(`/edit/${fishCatch.id}`)}
             className="editButton"
@@ -94,7 +94,7 @@ const FishCatchCard = ({ fishCatch }) => {
           >
             Delete
           </button>
-        </>
+        </div>
       ) : null}
     </section>
   );
