@@ -4,7 +4,7 @@ import {
   selectIsLoading,
   selectFishCatches,
 } from "../../slices/dataSlice";
-import LeafletMap from "./showMap";
+import LeafletMap from "./leafletMap";
 import { useParams, Link } from "react-router-dom";
 import Filters from "../filters/Filters";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
