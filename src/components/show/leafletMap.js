@@ -60,8 +60,8 @@ const LeafletMap = ({ searchResults, showId }) => {
                 key={fishCatch.id}
                 eventHandlers={{
                   click: () => {
-                    setCurrentFishCatch(false);
-                    setCurrentFishCatch(fishCatch);
+                    const copyOfFishCatch = { ...fishCatch };
+                    setCurrentFishCatch(copyOfFishCatch);
                   },
                 }}
               ></Marker>
