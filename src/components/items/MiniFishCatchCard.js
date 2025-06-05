@@ -6,12 +6,14 @@ const MiniFishCatchCard = ({ fishCatch }) => {
 
   return (
     <section className="miniFishCatchCard">
-      <div className="content">
-        <p>{fishCatch.species} caught by {fishCatch.username}.</p>
-        <div className="imageWrapper">
-          <img src={`${API_URL}${fishCatch.imageurl}`} alt={fishCatch.species} className="miniFishCatchCard-image" />
+      <a href={`/map/${fishCatch.id}`}>
+        <div className="content">
+          <p>{fishCatch.species} caught by {fishCatch.username}.</p>
+          <div className="imageWrapper">
+            <img src={`${API_URL}${fishCatch.imageurl}`} alt={fishCatch.species} className="miniFishCatchCard-image" />
+          </div>
         </div>
-      </div>
+      </a>
     </section>
   );
 };
