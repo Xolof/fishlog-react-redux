@@ -11,11 +11,19 @@
       width: 49%;
       border: 1px solid $third-color;
       border-radius: 4px;
-      img {
-        height: 8em;
-        object-fit: cover;
-        object-position: center;
-        width: 100%;
+      .imageWrapper {
+        overflow: hidden;
+        height: 18em;
+        img {
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          width: 100%;
+          transition: transform 0.3s ease;
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
       }
       .content {
         display: flex;
@@ -24,6 +32,7 @@
           text-align: center;
         }
       }
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
   }
 }
