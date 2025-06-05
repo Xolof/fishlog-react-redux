@@ -150,8 +150,10 @@ const Edit = () => {
       navigate(`/map/${response.data.data.id}`);
     } catch (err) {
       console.error(err);
-      console.error(`Error: ${err.message}`);
-      errorToast("Could not update catch, please check your data.");
+      const errors = err.response.data.error;
+      errors.forEach(error => {
+        errorToast(error);
+      });
     }
   };
 

@@ -87,6 +87,7 @@ const Add = () => {
       });
 
       await response.data;
+
       const newCatch = response.data.data;
       newCatch.username = localStorage.getItem("fishlog-userName");
       dispatch(setFishCatches([...fishCatches, response.data.data]));
@@ -99,7 +100,11 @@ const Add = () => {
       dispatch(setFilterOnLengthMax(500));
       navigate(`/map/${response.data.data.id}`);
     } catch (err) {
-      errorToast("Could not add catch, please check your data.");
+      console.error(err);
+      const errors = err.response.data.error;
+      errors.forEach(error => {
+        errorToast(error);
+      });
     } finally {
       setIsLoading(false);
     }
