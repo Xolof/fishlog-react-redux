@@ -8,7 +8,9 @@ const MiniFishCatchCard = ({ fishCatch }) => {
     <section className="miniFishCatchCard">
       <div className="content">
         <p>{fishCatch.species} caught by {fishCatch.username}.</p>
-        <img src={`${API_URL}${fishCatch.imageurl}`} alt={fishCatch.species} className="miniFishCatchCard-image" />
+        <div className="imageWrapper">
+          <img src={`${API_URL}${fishCatch.imageurl}`} alt={fishCatch.species} className="miniFishCatchCard-image" />
+        </div>
       </div>
     </section>
   );
