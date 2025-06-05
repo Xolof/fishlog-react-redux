@@ -10,7 +10,7 @@ import {
 } from "../../slices/userSlice";
 import { useDispatch } from "react-redux";
 
-const UserMarker = () => {
+const UserMarker = ({positionAlreadySet}) => {
   const dispatch = useDispatch();
   const userLat = useSelector(selectUserLat);
   const userLng = useSelector(selectUserLng);
@@ -22,7 +22,7 @@ const UserMarker = () => {
     map.locate({ watch: true });
 
     function onLocationFound(e) {
-      if ((!userLat || !userLng) && !positionSet) {
+      if ((!userLat || !userLng) && !positionSet && !positionAlreadySet) {
         map.flyTo(e.latlng, map.getZoom());
       }
       positionSet = true;
