@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxiosFetch from "../hooks/useAxiosFetch";
-import FishCatchCard from "./items/FishCatchCard";
+import MiniFishCatchCard from "./items/MiniFishCatchCard";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectUserLat,
@@ -97,7 +97,7 @@ const StartPage = () => {
               return parseInt(bTime) - parseInt(aTime);
             })
             .map((fishCatch) => (
-              <FishCatchCard fishCatch={fishCatch} key={fishCatch.id} />
+              <MiniFishCatchCard fishCatch={fishCatch} key={fishCatch.id} />
             ))}
       </div>
       <h3>There are {fishCatches.length} catches.</h3>

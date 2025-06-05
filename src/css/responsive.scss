@@ -92,6 +92,16 @@ $desktop: 1025px;
     }
   }
 
+  .startPage {
+    .miniFishCatchCard {
+      .content {
+        img {
+          height: 18em;
+        }
+      }
+    }
+  }
+
   .leaflet-container {
     height: 60vh;
   }
