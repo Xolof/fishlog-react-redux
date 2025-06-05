@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import {
   successToast,
-  infoToast,
+  warningToast,
   errorToast,
 } from "../../services/toastService";
 import {
@@ -56,8 +56,8 @@ const Add = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!location) {
-      infoToast("Please set the location by clicking on the map.");
+    if (!markerLat || !markerLng) {
+      warningToast("Please set the location by clicking on the map.");
       return;
     }
 

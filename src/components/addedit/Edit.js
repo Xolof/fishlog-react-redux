@@ -6,7 +6,7 @@ import api from "../../api/api";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import {
   successToast,
-  infoToast,
+  warningToast,
   errorToast,
 } from "../../services/toastService";
 import {
@@ -100,8 +100,8 @@ const Edit = () => {
       location = markerLat.toString() + "," + markerLng.toString();
     }
 
-    if (!location) {
-      infoToast("Please set the location by clicking on the map.");
+    if (!markerLat || !markerLng) {
+      warningToast("Please set the location by clicking on the map.");
       return;
     }
 
