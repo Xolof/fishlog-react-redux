@@ -1,3 +1,5 @@
+@use "colors";
+
 .startPage {
   .fishCatches {
     display: flex;
@@ -9,7 +11,7 @@
       margin-bottom: 1em;
       border-bottom: none;
       width: 49%;
-      border: 1px solid $third-color;
+      border: 1px solid colors.$third-color;
       border-radius: 4px;
       .imageWrapper {
         overflow: hidden;

@@ -1,24 +1,26 @@
+@use "colors";
+
 form {
   input {
     display: block;
     width: 100%;
     padding: 1em;
     margin-bottom: 0.2em;
-    color: $first-color;
-    background-color: $fourth-color;
+    color: colors.$first-color;
+    background-color: colors.$fourth-color;
   }
   button {
-    background-color: $fourth-color;
+    background-color: colors.$fourth-color;
     margin-top: 1.2em;
     display: block;
     width: 100%;
-    border: 1px solid $first-color;
+    border: 1px solid colors.$first-color;
     padding: 1em;
-    color: $first-color;
+    color: colors.$first-color;
     cursor: pointer;
     &:hover {
-      color: $fourth-color;
-      background-color: $third-color;
+      color: colors.$fourth-color;
+      background-color: colors.$third-color;
     }
     text-align: center;
     text-decoration: none;
@@ -33,8 +35,8 @@ form {
   display: block;
   width: 100%;
   padding: 1em;
-  color: $first-color;
-  background-color: $fourth-color;
+  color: colors.$first-color;
+  background-color: colors.$fourth-color;
 }
 
 .uploadPreviewImage {
@@ -56,13 +58,13 @@ form {
   width: 100%;
   text-align: center;
   margin: 1em 0 0.8em;
-  background: $first-color;
-  color: $fourth-color;
+  background: colors.$first-color;
+  color: colors.$fourth-color;
   border-radius: 2px;
-  border: 1px solid $first-color;
+  border: 1px solid colors.$first-color;
   transition: all ease 0.2s;
   &:hover {
-    background: $third-color;
+    background: colors.$third-color;
     cursor: pointer;
   }
 }
@@ -73,7 +75,7 @@ form {
   width: 100%;
   padding: 1em;
   margin-bottom: 0.2em;
-  color: $first-color;
-  background-color: $fourth-color;
+  color: colors.$first-color;
+  background-color: colors.$fourth-color;
   margin-bottom: 1em;
 }

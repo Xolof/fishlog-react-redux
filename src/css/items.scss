@@ -1,8 +1,10 @@
+@use "colors";
+
 .catchList {
   list-style: none;
   padding: 0;
   li {
-    border-bottom: 1px solid $third-color;
+    border-bottom: 1px solid colors.$third-color;
     padding: 0 0 0.5em 0;
   }
 }
@@ -28,7 +30,7 @@
     }
   }
 
-  border-bottom: 1px solid $first-color;
+  border-bottom: 1px solid colors.$first-color;
 
   .buttons {
     margin-top: 0.2em;
@@ -38,22 +40,22 @@
       cursor: pointer;
       padding: 0.4em;
       transition: 0.2s all ease;
-      border: $fourth-color 2px solid;
-      background-color: $first-color;
-      color: $fourth-color;
-      border: 1px solid $first-color;
+      border: colors.$fourth-color 2px solid;
+      background-color: colors.$first-color;
+      color: colors.$fourth-color;
+      border: 1px solid colors.$first-color;
     }
     .editButton {
       left: 0;
       &:hover {
-        background-color: $third-color;
+        background-color: colors.$third-color;
       }
     }
     .deleteButton {
       right: 0;
       float: right;
       &:hover {
-        background-color: $danger;
+        background-color: colors.$danger;
       }
     }
   }

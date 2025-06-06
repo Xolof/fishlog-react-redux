@@ -1,3 +1,5 @@
+@use "colors";
+
 * {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -8,9 +10,9 @@ html {
 }
 
 body {
-  background-color: $fourth-color;
+  background-color: colors.$fourth-color;
   font-family: Arial, Helvetica, sans-serif;
-  color: $first-color;
+  color: colors.$first-color;
 }
 
 .App {
@@ -23,7 +25,7 @@ body {
 }
 
 a {
-  color: $third-color;
+  color: colors.$third-color;
 }
 
 .notFoundArticle {

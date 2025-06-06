@@ -1,4 +1,4 @@
-@import "colors.scss";
+@use "colors.scss";
 
 .filterWrapper {
   transition: 0.2s all ease;
@@ -33,12 +33,12 @@
 }
 
 .toggleFiltersButton {
-  color: $first-color;
+  color: colors.$first-color;
   background-color: transparent;
   border: none;
   cursor: pointer;
   &:hover {
-    color: $third-color;
+    color: colors.$third-color;
   }
 }
 
@@ -78,8 +78,8 @@
     #sortOrder {
       width: 100%;
       padding: 1em;
-      color: $first-color;
-      background-color: $fourth-color;
+      color: colors.$first-color;
+      background-color: colors.$fourth-color;
     }
   }
   display: flex;
