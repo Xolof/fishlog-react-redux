@@ -28,9 +28,6 @@ export const dataSlice = createSlice({
     setFilterOnSpecies: (state, action) => {
       state.filterOnSpecies = action.payload;
     },
-    setSearchResults: (state, action) => {
-      state.searchResults = action.payload;
-    },
     setFetchError: (state, action) => {
       state.fetchError = action.payload;
     },
@@ -72,7 +69,6 @@ export const dataSlice = createSlice({
 
 export const {
   setFilterOnSpecies,
-  setSearchResults,
   setFetchError,
   setIsLoading,
   setFishCatches,
