@@ -14,7 +14,7 @@ import {
   setFilterOnLengthMax,
 } from "../../slices/dataSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   successToast,
   warningToast,
@@ -26,6 +26,7 @@ import {
   selectMarkerLat,
   selectMarkerLng,
 } from "../../slices/userSlice";
+import NotFoundAddEdit from "./NotFoundAddEdit";
 
 const Add = () => {
   const dispatch = useDispatch();
@@ -111,16 +112,7 @@ const Add = () => {
   };
 
   if (!localStorage.getItem("fishlog-token")) {
-    return (
-      <article>
-        <p>
-          <Link to="/login">Login</Link> to be able to add a catch.
-        </p>
-        <p>
-          Or <Link to="/signup">create an account.</Link>
-        </p>
-      </article>
-    );
+    return (<NotFoundAddEdit />);
   }
 
   return (

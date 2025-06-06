@@ -3,7 +3,7 @@ import AddEditForm from "./AddEditForm";
 import NotFound from "../NotFound";
 import { useState, useEffect } from "react";
 import api from "../../api/api";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   successToast,
   warningToast,
@@ -28,6 +28,7 @@ import {
   setFilterOnLengthMax,
   setFilterOnLengthMin,
 } from "../../slices/dataSlice";
+import NotFoundAddEdit from "./NotFoundAddEdit";
 
 const Edit = () => {
   const [species, setSpecies] = useState("");
@@ -158,14 +159,7 @@ const Edit = () => {
   };
 
   if (!localStorage.getItem("fishlog-token")) {
-    return (
-      <article>
-        <h1>Edit</h1>
-        <p>
-          <Link to="/login">Login</Link> to be able to edit a catch.
-        </p>
-      </article>
-    );
+    return (<NotFoundAddEdit />);
   }
 
   return mapCenter ? (
