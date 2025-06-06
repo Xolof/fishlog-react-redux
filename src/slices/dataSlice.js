@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
 
 const maxWeightFilter = 10000;
 const maxLengthFilter = 500;
@@ -86,7 +87,7 @@ export const {
   setSortOrder,
 } = dataSlice.actions;
 
-export const selectSearchResults = (state) => {
+const getSearchResults = (state) => {
   const fishCatches = state.data.fishCatches;
 
   let filteredResults = fishCatches.filter((fishCatch) => {
@@ -185,6 +186,11 @@ export const selectSearchResults = (state) => {
 
   return filteredResults;
 };
+
+export const selectSearchResults = createSelector(
+  [getSearchResults],
+  results => results
+);
 
 export const selectFetchError = (state) => {
   return state.data.fetchError;
