@@ -86,10 +86,6 @@ export const {
   setSortOrder,
 } = dataSlice.actions;
 
-export const selectFilterOnSpecies = (state) => {
-  return state.data.filterOnSpecies;
-};
-
 export const selectSearchResults = (state) => {
   const fishCatches = state.data.fishCatches;
 
@@ -203,6 +199,10 @@ export const selectFishCatches = (state) => {
 };
 export const selectFilterOnUser = (state) => {
   return state.data.filterOnUser;
+};
+
+export const selectFilterOnSpecies = (state) => {
+  return state.data.filterOnSpecies;
 };
 
 export const selectFilterOnWeightMin = (state) => {
