@@ -1,5 +1,5 @@
 import {
-  selectSearchResults,
+  selectSearchResultsSelector,
   selectFetchError,
   selectIsLoading,
 } from "../../slices/dataSlice";
@@ -9,7 +9,7 @@ import Filters from "../filters/Filters";
 import { useSelector } from "react-redux";
 
 const List = () => {
-  const searchResults = useSelector(selectSearchResults);
+  const searchResults = useSelector(selectSearchResultsSelector);
   const fetchError = useSelector(selectFetchError);
   const isLoading = useSelector(selectIsLoading);
 

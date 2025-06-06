@@ -87,109 +87,133 @@ export const {
   setSortOrder,
 } = dataSlice.actions;
 
-const getSearchResults = (state) => {
+export const selectSearchResults = (state) => {
   const fishCatches = state.data.fishCatches;
-
-  let filteredResults = fishCatches.filter((fishCatch) => {
-    return (
-      fishCatch.species
-        .toLowerCase()
-        .includes(state.data.filterOnSpecies.toLowerCase()) &&
-      fishCatch.username
-        .toLowerCase()
-        .includes(state.data.filterOnUser.toLowerCase()) &&
-      fishCatch.weight > state.data.filterOnWeightMin &&
-      fishCatch.length > state.data.filterOnLengthMin
-    );
-  });
-
-  switch (state.data.sortBy) {
-  case "species":
-  case "username":
-    filteredResults.sort((a, b) => {
-      if (state.data.sortOrder === "DESC") {
-        const stringA = a[state.data.sortBy].toUpperCase();
-        const stringB = b[state.data.sortBy].toUpperCase();
-        if (stringA < stringB) {
-          return -1;
-        }
-        if (stringA > stringB) {
-          return 1;
-        }
-        return 0;
-      }
-      if (state.data.sortOrder === "ASC") {
-        const stringA = a[state.data.sortBy].toUpperCase();
-        const stringB = b[state.data.sortBy].toUpperCase();
-        if (stringA > stringB) {
-          return -1;
-        }
-        if (stringA < stringB) {
-          return 1;
-        }
-        return 0;
-      }
-    });
-    break;
-  case "weight":
-  case "length":
-    filteredResults.sort((a, b) => {
-      if (state.data.sortOrder === "DESC") {
-        return (
-          parseInt(b[state.data.sortBy]) - parseInt(a[state.data.sortBy])
-        );
-      }
-      if (state.data.sortOrder === "ASC") {
-        return (
-          parseInt(a[state.data.sortBy]) - parseInt(b[state.data.sortBy])
-        );
-      }
-    });
-    break;
-  case "date":
-    filteredResults.sort((a, b) => {
-      const aTime = new Date(a[state.data.sortBy]).getTime();
-      const bTime = new Date(b[state.data.sortBy]).getTime();
-      if (state.data.sortOrder === "DESC") {
-        return parseInt(bTime) - parseInt(aTime);
-      }
-      if (state.data.sortOrder === "ASC") {
-        return parseInt(aTime) - parseInt(bTime);
-      }
-    });
-    break;
-  }
-
-  if (state.data.filterOnDateFrom !== "") {
-    filteredResults = filteredResults.filter((fishCatch) => {
-      return fishCatch.date >= state.data.filterOnDateFrom;
-    });
-  }
-
-  if (state.data.filterOnDateTo !== "") {
-    filteredResults = filteredResults.filter((fishCatch) => {
-      return fishCatch.date <= state.data.filterOnDateTo;
-    });
-  }
-
-  if (state.data.filterOnWeightMax < maxWeightFilter) {
-    filteredResults = filteredResults.filter((fishCatch) => {
-      return fishCatch.weight < state.data.filterOnWeightMax;
-    });
-  }
-
-  if (state.data.filterOnLengthMax < maxLengthFilter) {
-    filteredResults = filteredResults.filter((fishCatch) => {
-      return fishCatch.length < state.data.filterOnLengthMax;
-    });
-  }
-
-  return filteredResults;
+  return fishCatches;
 };
 
-export const selectSearchResults = createSelector(
-  [getSearchResults],
-  results => results
+export const selectSearchResultsSelector = createSelector(
+  [
+    selectSearchResults,
+    (state) => state.data.filterOnSpecies,
+    (state) => state.data.filterOnUser,
+    (state) => state.data.filterOnWeightMin,
+    (state) => state.data.filterOnWeightMax,
+    (state) => state.data.filterOnLengthMin,
+    (state) => state.data.filterOnLengthMax,
+    (state) => state.data.filterOnDateFrom,
+    (state) => state.data.filterOnDateTo,
+    (state) => state.data.sortBy,
+    (state) => state.data.sortOrder
+  ],
+  (
+    fishCatches,
+    filterOnSpecies,
+    filterOnUser,
+    filterOnWeightMin,
+    filterOnWeightMax,
+    filterOnLengthMin,
+    filterOnLengthMax,
+    filterOnDateFrom,
+    filterOnDateTo,
+    sortBy,
+    sortOrder
+  ) => {
+    let filteredResults = fishCatches.filter((fishCatch) => {
+      return (
+        fishCatch.species
+          .toLowerCase()
+          .includes(filterOnSpecies.toLowerCase()) &&
+        fishCatch.username
+          .toLowerCase()
+          .includes(filterOnUser.toLowerCase()) &&
+        fishCatch.weight > filterOnWeightMin &&
+        fishCatch.length > filterOnLengthMin
+      );
+    });
+
+    switch (sortBy) {
+      case "species":
+      case "username":
+        filteredResults.sort((a, b) => {
+          if (sortOrder === "DESC") {
+            const stringA = a[sortBy].toUpperCase();
+            const stringB = b[sortBy].toUpperCase();
+            if (stringA < stringB) {
+              return -1;
+            }
+            if (stringA > stringB) {
+              return 1;
+            }
+            return 0;
+          }
+          if (sortOrder === "ASC") {
+            const stringA = a[sortBy].toUpperCase();
+            const stringB = b[sortBy].toUpperCase();
+            if (stringA > stringB) {
+              return -1;
+            }
+            if (stringA < stringB) {
+              return 1;
+            }
+            return 0;
+          }
+        });
+        break;
+      case "weight":
+      case "length":
+        filteredResults.sort((a, b) => {
+          if (sortOrder === "DESC") {
+            return (
+              parseInt(b[sortBy]) - parseInt(a[sortBy])
+            );
+          }
+          if (sortOrder === "ASC") {
+            return (
+              parseInt(a[sortBy]) - parseInt(b[sortBy])
+            );
+          }
+        });
+        break;
+      case "date":
+        filteredResults.sort((a, b) => {
+          const aTime = new Date(a[sortBy]).getTime();
+          const bTime = new Date(b[sortBy]).getTime();
+          if (sortOrder === "DESC") {
+            return parseInt(bTime) - parseInt(aTime);
+          }
+          if (sortOrder === "ASC") {
+            return parseInt(aTime) - parseInt(bTime);
+          }
+        });
+        break;
+    }
+
+    if (filterOnDateFrom !== "") {
+      filteredResults = filteredResults.filter((fishCatch) => {
+        return fishCatch.date >= filterOnDateFrom;
+      });
+    }
+
+    if (filterOnDateTo !== "") {
+      filteredResults = filteredResults.filter((fishCatch) => {
+        return fishCatch.date <= filterOnDateTo;
+      });
+    }
+
+    if (filterOnWeightMax < maxWeightFilter) {
+      filteredResults = filteredResults.filter((fishCatch) => {
+        return fishCatch.weight < filterOnWeightMax;
+      });
+    }
+
+    if (filterOnLengthMax < maxLengthFilter) {
+      filteredResults = filteredResults.filter((fishCatch) => {
+        return fishCatch.length < filterOnLengthMax;
+      });
+    }
+    return filteredResults;
+  }
 );
 
 export const selectFetchError = (state) => {
@@ -203,6 +227,7 @@ export const selectIsLoading = (state) => {
 export const selectFishCatches = (state) => {
   return state.data.fishCatches;
 };
+
 export const selectFilterOnUser = (state) => {
   return state.data.filterOnUser;
 };

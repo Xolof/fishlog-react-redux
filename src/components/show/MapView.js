@@ -1,5 +1,5 @@
 import {
-  selectSearchResults,
+  selectSearchResultsSelector,
   selectFetchError,
   selectIsLoading,
   selectFishCatches,
@@ -14,7 +14,7 @@ const MapView = () => {
   const API_URL = process.env.REACT_APP_API_URL;
   useAxiosFetch(`${API_URL}/api/public_fishcatch`);
 
-  const searchResults = useSelector(selectSearchResults);
+  const searchResults = useSelector(selectSearchResultsSelector);
   const fetchError = useSelector(selectFetchError);
   const isLoading = useSelector(selectIsLoading);
   const fishCatches = useSelector(selectFishCatches);
