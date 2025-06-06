@@ -89,6 +89,7 @@ export const {
 export const selectFilterOnSpecies = (state) => {
   return state.data.filterOnSpecies;
 };
+
 export const selectSearchResults = (state) => {
   const fishCatches = state.data.fishCatches;
 
@@ -188,42 +189,54 @@ export const selectSearchResults = (state) => {
 
   return filteredResults;
 };
+
 export const selectFetchError = (state) => {
   return state.data.fetchError;
 };
+
 export const selectIsLoading = (state) => {
   return state.data.isLoading;
 };
+
 export const selectFishCatches = (state) => {
   return state.data.fishCatches;
 };
 export const selectFilterOnUser = (state) => {
   return state.data.filterOnUser;
 };
+
 export const selectFilterOnWeightMin = (state) => {
   return state.data.filterOnWeightMin;
 };
+
 export const selectFilterOnWeightMax = (state) => {
   return state.data.filterOnWeightMax;
 };
+
 export const selectFilterOnLengthMin = (state) => {
   return state.data.filterOnLengthMin;
 };
+
 export const selectFilterOnLengthMax = (state) => {
   return state.data.filterOnLengthMax;
 };
+
 export const selectFilterOnDateFrom = (state) => {
   return state.data.filterOnDateFrom;
 };
+
 export const selectFilterOnDateTo = (state) => {
   return state.data.filterOnDateTo;
 };
+
 export const selectSortBy = (state) => {
   return state.data.sortBy;
 };
+
 export const selectSortOrder = (state) => {
   return state.data.sortOrder;
 };
+
 export const selectAPI_URL = (state) => {
   return state.data.API_URL;
 };
