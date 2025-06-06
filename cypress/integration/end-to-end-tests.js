@@ -42,7 +42,7 @@ describe("Test logging in, adding a fishcatch, deleting it and logging out.", ()
     cy.get("#email").type("kjell@ullared.se");
     cy.get("#passWord").type("pass123");
     cy.get("button:contains(Log in)").click();
-    cy.get(".Toastify__toast-body").contains("You logged in");
+    cy.get(".Toastify__toast").contains("You logged in");
     cy.get("a:contains(Add)").click();
     cy.get("#species").type("kjellsTest");
     cy.get("#weight").type("500");
@@ -61,9 +61,9 @@ describe("Test logging in, adding a fishcatch, deleting it and logging out.", ()
     cy.contains("2022-02-05");
     cy.get(".deleteButton").click();
     cy.wait(500);
-    cy.get(".Toastify__toast-body").contains("Catch deleted");
+    cy.get(".Toastify__toast").contains("Catch deleted");
     cy.wait(1000);
     cy.get("button:contains(Logout)").click();
-    cy.get(".Toastify__toast-body").contains("You have been logged out");
+    cy.get(".Toastify__toast").contains("You have been logged out");
   });
 });
