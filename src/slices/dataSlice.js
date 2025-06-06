@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 
-const maxWeightFilter = 10000;
-const maxLengthFilter = 500;
+const MAX_WEIGHT_FILTER = 10000;
+const MAX_LENGTH_FILTER = 500;
 const initialState = {
   filterOnSpecies: "",
   searchResults: [],
@@ -11,9 +11,9 @@ const initialState = {
   fishCatches: [],
   filterOnUser: "",
   filterOnWeightMin: 0,
-  filterOnWeightMax: maxWeightFilter,
+  filterOnWeightMax: MAX_WEIGHT_FILTER,
   filterOnLengthMin: 0,
-  filterOnLengthMax: maxLengthFilter,
+  filterOnLengthMax: MAX_LENGTH_FILTER,
   filterOnDateFrom: "",
   filterOnDateTo: "",
   sortBy: "date",
@@ -197,13 +197,13 @@ export const selectSearchResultsSelector = createSelector(
       });
     }
 
-    if (filterOnWeightMax < maxWeightFilter) {
+    if (filterOnWeightMax < MAX_WEIGHT_FILTER) {
       filteredResults = filteredResults.filter((fishCatch) => {
         return fishCatch.weight < filterOnWeightMax;
       });
     }
 
-    if (filterOnLengthMax < maxLengthFilter) {
+    if (filterOnLengthMax < MAX_LENGTH_FILTER) {
       filteredResults = filteredResults.filter((fishCatch) => {
         return fishCatch.length < filterOnLengthMax;
       });
