@@ -1,121 +1,26 @@
 import AddEditMap from "./AddEditMap";
 import AddEditForm from "./AddEditForm";
-import { useState, useEffect } from "react";
-import api from "../../api/api";
-import {
-  selectFishCatches,
-  setFishCatches,
-  setIsLoading,
-  setFilterOnSpecies,
-  setFilterOnUser,
-  setFilterOnWeightMin,
-  setFilterOnWeightMax,
-  setFilterOnLengthMin,
-  setFilterOnLengthMax,
-} from "../../slices/dataSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
-import {
-  successToast,
-  infoToast,
-  errorToast,
-} from "../../services/toastService";
-import {
-  setMarkerLat,
-  setMarkerLng,
-  selectMarkerLat,
-  selectMarkerLng,
-} from "../../slices/userSlice";
+import NotFoundAddEdit from "./NotFoundAddEdit";
+import useFishCatchForm from "../../hooks/useFishCatchForm";
 
 const Add = () => {
-  const dispatch = useDispatch();
-  const [species, setSpecies] = useState("");
-  const [length, setLength] = useState("");
-  const [weight, setWeight] = useState("");
-  const [uploadImages, setUploadImages] = useState([]);
-  const [previewImageUrls, setPreviewImageUrls] = useState([]);
-  const [date, setDate] = useState("");
-  const username = localStorage.getItem("fishlog-userName");
-  const navigate = useNavigate();
-  const fishCatches = useSelector(selectFishCatches);
-  const markerLat = useSelector(selectMarkerLat);
-  const markerLng = useSelector(selectMarkerLng);
-
-  useEffect(() => {
-    dispatch(setMarkerLat(null));
-    dispatch(setMarkerLng(null));
-  }, []);
-
-  useEffect(() => {
-    if (uploadImages.length < 1) return;
-    setPreviewImageUrls(URL.createObjectURL(uploadImages));
-  }, [uploadImages]);
-
-  const location = [markerLat, markerLng];
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!location) {
-      infoToast("Please set the location by clicking on the map.");
-      return;
-    }
-
-    const uploadImage = uploadImages;
-
-    const data = {
-      species,
-      length,
-      weight,
-      uploadImage,
-      username,
-      location,
-      date,
-    };
-
-    const formData = new FormData();
-    for (const key in data) {
-      formData.append(key, data[key]);
-    }
-
-    setIsLoading(true);
-    try {
-      const response = await api.post("/api/create", formData, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("fishlog-token"),
-        },
-      });
-
-      await response.data;
-      const newCatch = response.data.data;
-      newCatch.username = localStorage.getItem("fishlog-userName");
-      dispatch(setFishCatches([...fishCatches, response.data.data]));
-      successToast("Catch added!");
-      dispatch(setFilterOnSpecies(""));
-      dispatch(setFilterOnUser(""));
-      dispatch(setFilterOnWeightMin(0));
-      dispatch(setFilterOnWeightMax(10000));
-      dispatch(setFilterOnLengthMin(0));
-      dispatch(setFilterOnLengthMax(500));
-      navigate(`/map/${response.data.data.id}`);
-    } catch (err) {
-      errorToast("Could not add catch, please check your data.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const {
+    species,
+    setSpecies,
+    length,
+    setLength,
+    weight,
+    setWeight,
+    date,
+    setDate,
+    uploadImage,
+    setUploadImage,
+    previewImageUrls,
+    handleSubmit,
+  } = useFishCatchForm("add");
 
   if (!localStorage.getItem("fishlog-token")) {
-    return (
-      <article>
-        <p>
-          <Link to="/login">Login</Link> to be able to add a catch.
-        </p>
-        <p>
-          Or <Link to="/signup">create an account.</Link>
-        </p>
-      </article>
-    );
+    return <NotFoundAddEdit />;
   }
 
   return (
@@ -133,8 +38,8 @@ const Add = () => {
         setWeight={setWeight}
         date={date}
         setDate={setDate}
-        uploadImages={uploadImages}
-        setUploadImages={setUploadImages}
+        uploadImage={uploadImage}
+        setUploadImage={setUploadImage}
         previewImageUrls={previewImageUrls}
       />
     </article>

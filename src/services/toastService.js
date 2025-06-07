@@ -10,6 +10,11 @@ export function infoToast(message) {
   toast.info(message);
 }
 
+export function warningToast(message) {
+  if (typeof message === "function") return;
+  toast.warning(message);
+}
+
 export function errorToast(message) {
   if (typeof message === "function") return;
   toast.error(message);

@@ -1,28 +1,40 @@
+@use "colors";
+
 .startPage {
   .fishCatches {
     display: flex;
     flex-flow: wrap;
     justify-content: space-between;
-    .fishCatchCard {
+    .miniFishCatchCard {
       height: initial;
       padding: 0;
       margin-bottom: 1em;
       border-bottom: none;
-      width: 46%;
-      .editButton,
-      .deleteButton {
-        display: none;
-      }
-      img {
-        max-height: 15em;
-        object-fit: cover;
-        object-position: center;
-      }
-      .content {
-        .catchInfo {
-          margin-right: 2%;
+      width: 49%;
+      border: 1px solid colors.$third-color;
+      border-radius: 4px;
+      .imageWrapper {
+        overflow: hidden;
+        height: 8em;
+        img {
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          width: 100%;
+          transition: transform 0.3s ease;
+          &:hover {
+            transform: scale(1.1);
+          }
         }
       }
+      .content {
+        display: flex;
+        flex-direction: column-reverse;
+        p {
+          text-align: center;
+        }
+      }
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
   }
 }

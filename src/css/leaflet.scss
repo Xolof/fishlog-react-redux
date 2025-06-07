@@ -1,3 +1,5 @@
+@use "colors";
+
 .leaflet-container {
   height: 50vh;
   a.leaflet-popup-close-button {
@@ -5,9 +7,9 @@
     width: 36px;
     height: 28px;
     font-size: 28px;
-    color: $first-color;
+    color: colors.$first-color;
     &:hover {
-      color: $third-color;
+      color: colors.$third-color;
     }
   }
 }
@@ -21,15 +23,15 @@
       height: auto;
       display: block;
       margin: 0 auto 0.5em;
-      border: 2px solid $first-color;
+      border: 2px solid colors.$first-color;
     }
     border-bottom: none;
   }
 }
 
 .leaflet-popup-content-wrapper {
-  color: $first-color;
-  background-color: $fourth-color;
+  color: colors.$first-color;
+  background-color: colors.$fourth-color;
   font-size: 1.4em;
   h3 {
     margin: 0.2em 0 0.2em;
@@ -41,7 +43,7 @@
 }
 
 .leaflet-popup-tip {
-  background-color: $fourth-color;
+  background-color: colors.$fourth-color;
 }
 
 .mapWrapper {
@@ -49,7 +51,7 @@
 }
 
 .noResults {
-  background-color: $warning;
+  background-color: colors.$warning;
   color: #111;
   font-weight: bold;
   text-align: center;
@@ -68,8 +70,8 @@
   left: 0;
   right: 0;
   z-index: 7000;
-  background: $fourth-color;
-  border: 1px solid $first-color;
+  background: colors.$fourth-color;
+  border: 1px solid colors.$first-color;
   section {
     border: none;
   }
@@ -80,15 +82,15 @@
     top: 0.25em;
     padding: 0;
     border: none;
-    background-color: $fourth-color;
+    background-color: colors.$fourth-color;
     cursor: pointer;
     font-weight: bold;
     font-size: 3.4em;
     padding: 0 0.2em;
-    color: $first-color;
-    border: 1px solid $first-color;
+    color: colors.$first-color;
+    border: 1px solid colors.$first-color;
     &:hover {
-      color: $third-color;
+      color: colors.$third-color;
     }
   }
 }

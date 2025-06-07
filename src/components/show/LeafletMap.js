@@ -16,6 +16,7 @@ const LeafletMap = ({ searchResults, showId }) => {
   const tileUrl = useSelector(selectTileUrl);
   const [showPopup, setShowPopup] = useState(false);
   const nodeRef = useRef(null);
+  let positionAlreadySet = false;
 
   useEffect(() => {
     currentFishCatch ? setShowPopup(true) : setShowPopup(false);
@@ -34,6 +35,7 @@ const LeafletMap = ({ searchResults, showId }) => {
     const lon = splitPosition[1];
     mapPosition = [lat, lon];
     zoom = 14;
+    positionAlreadySet = true;
   } else {
     mapPosition = userLat && userLng ? [userLat, userLng] : [55.8, 12.5];
     zoom = 8;
@@ -47,7 +49,7 @@ const LeafletMap = ({ searchResults, showId }) => {
           url={tileUrl}
           className="map-tiles"
         />
-        <UserMarker />
+        <UserMarker positionAlreadySet={positionAlreadySet} />
         {searchResults
           ? searchResults.map((fishCatch) => {
             const splitPosition = fishCatch.location.split(",");
@@ -60,8 +62,8 @@ const LeafletMap = ({ searchResults, showId }) => {
                 key={fishCatch.id}
                 eventHandlers={{
                   click: () => {
-                    setCurrentFishCatch(false);
-                    setCurrentFishCatch(fishCatch);
+                    const copyOfFishCatch = { ...fishCatch };
+                    setCurrentFishCatch(copyOfFishCatch);
                   },
                 }}
               ></Marker>

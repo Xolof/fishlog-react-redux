@@ -58,6 +58,7 @@ const Login = () => {
           id="email"
           type="text"
           required
+          autoComplete="on"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />

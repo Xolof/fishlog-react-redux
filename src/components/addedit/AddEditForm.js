@@ -11,8 +11,7 @@ const AddEditForm = ({
   setWeight,
   date,
   setDate,
-  uploadImages,
-  setUploadImages,
+  setUploadImage,
   previewImageUrls,
 }) => {
   return (
@@ -61,11 +60,11 @@ const AddEditForm = ({
       </label>
       <input
         required={formRole === "add"}
-        value={formRole === "add" ? uploadImages[0] : ""}
         id="uploadImage"
         type="file"
         onChange={(e) => {
-          setUploadImages(...e.target.files);
+          console.log(e.target.files[0])
+          setUploadImage(e.target.files[0]);
         }}
       />
       {previewImageUrls.length > 0 ? (
