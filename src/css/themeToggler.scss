@@ -6,6 +6,9 @@
   display: block;
   margin-top: 0.4em;
   position: relative;
+  position: absolute;
+  right: 0.4em;
+  z-index: 999;
 }
 
 .themeToggleContainer {
