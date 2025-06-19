@@ -1,3 +1,5 @@
+[![CI](https://github.com/Xolof/fishlog-react-redux/actions/workflows/ci.yml/badge.svg)](https://github.com/Xolof/fishlog-react-redux/actions/workflows/ci.yml)
+
 # Fishlog React Redux
 
 The Fishlog app allows the users to save information about the fish they caught. The user can search for catches and view them on a map.
