@@ -5,36 +5,36 @@ import { useSelector } from "react-redux";
 import {
   selectUserLat,
   selectUserLng,
-  selectMarkerLat,
-  selectMarkerLng,
 } from "../../slices/userSlice";
 import { selectTileUrl } from "../../slices/themeSlice";
 
-const AddEditMap = ({ center }) => {
-  const userLat = useSelector(selectUserLat);
-  const userLng = useSelector(selectUserLng);
-  const tileUrl = useSelector(selectTileUrl);
+type AddEditMapProps = {
+  center: number[] | null;
+};
 
-  let userCoordinates = null;
-  if (userLat && userLng) {
+const AddEditMap: React.FC<AddEditMapProps> = () => {
+  const userLat = useSelector(selectUserLat) as number | null;
+  const userLng = useSelector(selectUserLng) as number | null;
+  const tileUrl = useSelector(selectTileUrl) as string;
+
+  let userCoordinates: [number, number] | null = null;
+  if (typeof userLat === "number" && typeof userLng === "number") {
     userCoordinates = [userLat, userLng];
   }
 
-  const mapCenter = center ?? userCoordinates ?? [56, 12.6];
-
-  const markerLat = useSelector(selectMarkerLat);
-  const markerLng = useSelector(selectMarkerLng);
+  const mapCenter: [number, number] = userCoordinates ?? [56, 12.6];
 
   return (
     <>
+      {/* @ts-ignore */}
       <MapContainer center={mapCenter} zoom={9}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        {/*// @ts-ignore */}
+        <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url={tileUrl}
           className="map-tiles"
         />
         <UserMarker />
-        <PositionMarker location={[markerLat, markerLng]} />
+        <PositionMarker />
       </MapContainer>
     </>
   );

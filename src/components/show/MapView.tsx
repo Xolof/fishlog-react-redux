@@ -9,6 +9,7 @@ import { useParams, Link } from "react-router-dom";
 import Filters from "../filters/Filters";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 import { useSelector } from "react-redux";
+import { FishCatch } from "../../types/FishCatch";
 
 const MapView = () => {
   const API_URL = process.env.REACT_APP_API_URL;
@@ -19,12 +20,10 @@ const MapView = () => {
   const isLoading = useSelector(selectIsLoading);
   const fishCatches = useSelector(selectFishCatches);
 
-  const id = useParams().id;
+  const { id } = useParams<{ id?: string }>();
+  const numericId = id ? Number(id) : NaN;
 
-  if (
-    id != "all" &&
-    fishCatches.filter((item) => parseInt(item.id) === parseInt(id)).length < 1
-  ) {
+  if (numericId && !fishCatches.some((item: FishCatch) => item.id == numericId)) {
     return (
       <article>
         <h2>NotFound</h2>
@@ -43,7 +42,8 @@ const MapView = () => {
           <p className="noResults">No results.</p>
         )}
         {!isLoading && !fetchError && (
-          <LeafletMap searchResults={searchResults} showId={parseInt(id)} />
+          // @ts-ignore
+          <LeafletMap searchResults={searchResults} showId={numericId} />
         )}
       </div>
     </article>

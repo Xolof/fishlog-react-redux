@@ -27,6 +27,7 @@ function App() {
         <Route path="/add" element={<Add />} />
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/map/:id" element={<MapView />} />
+        <Route path="/map" element={<MapView />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<About />} />

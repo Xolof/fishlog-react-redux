@@ -1,9 +1,10 @@
+import React from "react";
 import AddEditMap from "./AddEditMap";
 import AddEditForm from "./AddEditForm";
 import NotFoundAddEdit from "./NotFoundAddEdit";
 import useFishCatchForm from "../../hooks/useFishCatchForm";
 
-const Add = () => {
+const Add: React.FC = () => {
   const {
     species,
     setSpecies,
@@ -26,7 +27,7 @@ const Add = () => {
   return (
     <article>
       <p>Click the map to set position.</p>
-      <AddEditMap />
+      <AddEditMap center={null} />
       <AddEditForm
         formRole="add"
         handleSubmit={handleSubmit}

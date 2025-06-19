@@ -6,6 +6,7 @@ import {
   selectFilterOnLengthMax,
   setFilterOnLengthMax,
 } from "../../slices/dataSlice";
+import { SyntheticEvent } from "react";
 
 const labels = [
   {
@@ -34,14 +35,17 @@ const labels = [
   },
 ];
 
-const LengthFilter = () => {
+const LengthFilter: React.FC = () => {
   const dispatch = useDispatch();
 
-  const filterOnLengthMin = useSelector(selectFilterOnLengthMin);
-  const filterOnLengthMax = useSelector(selectFilterOnLengthMax);
-  const updateRange = (e, data) => {
-    dispatch(setFilterOnLengthMin(data[0]));
-    dispatch(setFilterOnLengthMax(data[1]));
+  const filterOnLengthMin = useSelector(selectFilterOnLengthMin) as number;
+  const filterOnLengthMax = useSelector(selectFilterOnLengthMax) as number;
+
+  const updateRange = (_e: Event | SyntheticEvent<Element, Event>, data: number | number[]) => {
+    if (Array.isArray(data) && data.length === 2) {
+      dispatch(setFilterOnLengthMin(data[0]));
+      dispatch(setFilterOnLengthMax(data[1]));
+    }
   };
 
   return (

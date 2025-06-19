@@ -13,19 +13,15 @@ const PositionMarker = () => {
   const markerLng = useSelector(selectMarkerLng);
 
   useMapEvents({
-    click(e) {
+    click(e: any) {
       dispatch(setMarkerLat(e.latlng.lat));
       dispatch(setMarkerLng(e.latlng.lng));
     },
   });
 
-  let location = null;
-
-  if (markerLat && markerLng) {
-    location = [markerLat, markerLng];
+  if (typeof markerLat === "number" && typeof markerLng === "number") {
+    return <Marker position={[markerLat, markerLng]}></Marker>;
   }
-
-  return location ? <Marker position={location}></Marker> : null;
 };
 
 export default PositionMarker;

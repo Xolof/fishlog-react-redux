@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
+import { AppState } from "../types/AppState";
+import { FishCatch } from "../types/FishCatch";
 
 const MAX_WEIGHT_FILTER = 10000;
 const MAX_LENGTH_FILTER = 500;
@@ -83,10 +85,66 @@ export const {
   setSortOrder,
 } = dataSlice.actions;
 
-export const selectSearchResults = (state) => {
+export const selectSearchResults = (state: AppState) => {
   const fishCatches = state.data.fishCatches;
   return fishCatches;
 };
+
+type SortableFieldsUserOrSpecies = "username" | "species";
+type SortOrder = "ASC" | "DESC";
+
+function sortFishCatchesByUserOrSpecies(
+  filteredResults: FishCatch[],
+  sortBy: SortableFieldsUserOrSpecies,
+  sortOrder: SortOrder
+) {
+  filteredResults.sort((a, b) => {
+    const stringA = a[sortBy].toUpperCase();
+    const stringB = b[sortBy].toUpperCase();
+
+    if (sortOrder === "ASC") {
+      return stringA.localeCompare(stringB);
+    } else if (sortOrder === "DESC") {
+      return stringB.localeCompare(stringA);
+    }
+    return 0;
+  });
+}
+
+type SortableFieldsLengthOrWeight = "length" | "weight";
+
+function sortFishCatchesByLengthOrWeight(
+  filteredResults: FishCatch[],
+  sortBy: SortableFieldsLengthOrWeight,
+  sortOrder: SortOrder
+) {
+  filteredResults.sort((a: FishCatch, b: FishCatch) => {
+    if (sortOrder === "DESC") {
+      return b[sortBy] - a[sortBy];
+    }
+    if (sortOrder === "ASC") {
+      return a[sortBy] - b[sortBy];
+    }
+    return 0;
+  });
+}
+
+function sortFishCatchesByDate(
+  filteredResults: FishCatch[],
+  sortOrder: SortOrder
+) {
+  filteredResults.sort((a: FishCatch, b: FishCatch) => {
+    const aTime = new Date(a["date"]).getTime();
+    const bTime = new Date(b["date"]).getTime();
+    if (sortOrder === "DESC") {
+      return bTime - aTime;
+    }
+    if (sortOrder === "ASC") {
+      return aTime - bTime;
+    }
+    return 0;
+  });
+}
 
 export const selectSearchResultsSelector = createSelector(
   [
@@ -100,7 +158,7 @@ export const selectSearchResultsSelector = createSelector(
     (state) => state.data.filterOnDateFrom,
     (state) => state.data.filterOnDateTo,
     (state) => state.data.sortBy,
-    (state) => state.data.sortOrder
+    (state) => state.data.sortOrder,
   ],
   (
     fishCatches,
@@ -120,69 +178,22 @@ export const selectSearchResultsSelector = createSelector(
         fishCatch.species
           .toLowerCase()
           .includes(filterOnSpecies.toLowerCase()) &&
-        fishCatch.username
-          .toLowerCase()
-          .includes(filterOnUser.toLowerCase()) &&
+        fishCatch.username.toLowerCase().includes(filterOnUser.toLowerCase()) &&
         fishCatch.weight > filterOnWeightMin &&
         fishCatch.length > filterOnLengthMin
       );
     });
 
     if (sortBy === "username" || sortBy === "species") {
-      filteredResults.sort((a, b) => {
-        if (sortOrder === "DESC") {
-          const stringA = a[sortBy].toUpperCase();
-          const stringB = b[sortBy].toUpperCase();
-          if (stringA < stringB) {
-            return -1;
-          }
-          if (stringA > stringB) {
-            return 1;
-          }
-          return 0;
-        }
-        if (sortOrder === "ASC") {
-          const stringA = a[sortBy].toUpperCase();
-          const stringB = b[sortBy].toUpperCase();
-          if (stringA > stringB) {
-            return -1;
-          }
-          if (stringA < stringB) {
-            return 1;
-          }
-          return 0;
-        }
-      });
+      sortFishCatchesByUserOrSpecies(filteredResults, sortBy, sortOrder);
     }
 
     if (sortBy === "length" || sortBy === "weight") {
-      filteredResults.sort((a, b) => {
-        if (sortOrder === "DESC") {
-          return (
-            parseInt(b[sortBy]) - parseInt(a[sortBy])
-          );
-        }
-        if (sortOrder === "ASC") {
-          return (
-            parseInt(a[sortBy]) - parseInt(b[sortBy])
-          );
-        }
-      });
-
+      sortFishCatchesByLengthOrWeight(filteredResults, sortBy, sortOrder);
     }
 
     if (sortBy === "date") {
-      filteredResults.sort((a, b) => {
-        const aTime = new Date(a[sortBy]).getTime();
-        const bTime = new Date(b[sortBy]).getTime();
-        if (sortOrder === "DESC") {
-          return parseInt(bTime) - parseInt(aTime);
-        }
-        if (sortOrder === "ASC") {
-          return parseInt(aTime) - parseInt(bTime);
-        }
-      });
-
+      sortFishCatchesByDate(filteredResults, sortOrder);
     }
 
     if (filterOnDateFrom !== "") {
@@ -212,59 +223,59 @@ export const selectSearchResultsSelector = createSelector(
   }
 );
 
-export const selectFetchError = (state) => {
+export const selectFetchError = (state: AppState) => {
   return state.data.fetchError;
 };
 
-export const selectIsLoading = (state) => {
+export const selectIsLoading = (state: AppState) => {
   return state.data.isLoading;
 };
 
-export const selectFishCatches = (state) => {
+export const selectFishCatches = (state: AppState) => {
   return state.data.fishCatches;
 };
 
-export const selectFilterOnUser = (state) => {
+export const selectFilterOnUser = (state: AppState) => {
   return state.data.filterOnUser;
 };
 
-export const selectFilterOnSpecies = (state) => {
+export const selectFilterOnSpecies = (state: AppState) => {
   return state.data.filterOnSpecies;
 };
 
-export const selectFilterOnWeightMin = (state) => {
+export const selectFilterOnWeightMin = (state: AppState) => {
   return state.data.filterOnWeightMin;
 };
 
-export const selectFilterOnWeightMax = (state) => {
+export const selectFilterOnWeightMax = (state: AppState) => {
   return state.data.filterOnWeightMax;
 };
 
-export const selectFilterOnLengthMin = (state) => {
+export const selectFilterOnLengthMin = (state: AppState) => {
   return state.data.filterOnLengthMin;
 };
 
-export const selectFilterOnLengthMax = (state) => {
+export const selectFilterOnLengthMax = (state: AppState) => {
   return state.data.filterOnLengthMax;
 };
 
-export const selectFilterOnDateFrom = (state) => {
+export const selectFilterOnDateFrom = (state: AppState) => {
   return state.data.filterOnDateFrom;
 };
 
-export const selectFilterOnDateTo = (state) => {
+export const selectFilterOnDateTo = (state: AppState) => {
   return state.data.filterOnDateTo;
 };
 
-export const selectSortBy = (state) => {
+export const selectSortBy = (state: AppState) => {
   return state.data.sortBy;
 };
 
-export const selectSortOrder = (state) => {
+export const selectSortOrder = (state: AppState) => {
   return state.data.sortOrder;
 };
 
-export const selectAPI_URL = (state) => {
+export const selectAPI_URL = (state: AppState) => {
   return state.data.API_URL;
 };
 

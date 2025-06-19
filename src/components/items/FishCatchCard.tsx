@@ -8,8 +8,13 @@ import {
 import { successToast, errorToast } from "../../services/toastService";
 import api from "../../api/api";
 import { useNavigate } from "react-router-dom";
+import { FishCatch } from "../../types/FishCatch";
 
-const FishCatchCard = ({ fishCatch }) => {
+type FCCProps = {
+  fishCatch: FishCatch;
+};
+
+const FishCatchCard: React.FC<FCCProps> = ({ fishCatch }) => {
   const navigate = useNavigate();
   const splitPosition = fishCatch.location.split(",");
   const lat = splitPosition[0].slice(0, 4);
@@ -18,7 +23,7 @@ const FishCatchCard = ({ fishCatch }) => {
   const fishCatches = useSelector(selectFishCatches);
   const dispatch = useDispatch();
 
-  async function handleDelete(id) {
+  async function handleDelete(id: number) {
     dispatch(setIsLoading(true));
     try {
       const response = await api.delete(`/api/delete/${id}`, {
@@ -28,13 +33,13 @@ const FishCatchCard = ({ fishCatch }) => {
       });
 
       await response.data;
-      const updatedFishCatches = fishCatches.filter((item) => {
-        return parseInt(item.id) !== parseInt(id);
+      const updatedFishCatches = fishCatches.filter((item: FishCatch) => {
+        return item.id !== id;
       });
       dispatch(setFishCatches(updatedFishCatches));
       successToast("Catch deleted!");
       navigate("/map/all");
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
       console.error(`Error: ${err.message}`);
       errorToast("Could not delete catch.");

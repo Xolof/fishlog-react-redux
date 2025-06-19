@@ -7,14 +7,14 @@ import {
   setIsLoading,
 } from "../slices/dataSlice";
 
-const useAxiosFetch = (dataUrl) => {
+const useAxiosFetch = (dataUrl: string) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     let isMounted = true;
     const source = axios.CancelToken.source();
 
-    const fetchData = async (url) => {
+    const fetchData = async (url: string) => {
       try {
         const res = await axios.get(url, {
           cancelToken: source.token,
@@ -23,7 +23,7 @@ const useAxiosFetch = (dataUrl) => {
           dispatch(setFishCatches(res.data));
           dispatch(setFetchError(null));
         }
-      } catch (err) {
+      } catch (err: any) {
         if (isMounted) {
           dispatch(setFetchError(err.message));
           dispatch(setFishCatches([]));

@@ -5,14 +5,22 @@ import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { selectUserLat, selectUserLng } from "../../slices/userSlice";
 import { selectTileUrl } from "../../slices/themeSlice";
-import { selectFishCatches } from "../../slices/dataSlice";
+import { selectFishCatches, selectSearchResults } from "../../slices/dataSlice";
 import { CSSTransition } from "react-transition-group";
+import { FishCatch } from "../../types/FishCatch";
 
-const LeafletMap = ({ searchResults, showId }) => {
+type LeafletMapType = {
+  searchResults: [];
+  showId: number;
+};
+
+const LeafletMap: React.FC<LeafletMapType> = ({ searchResults, showId }) => {
   const fishCatches = useSelector(selectFishCatches);
   const userLat = useSelector(selectUserLat);
   const userLng = useSelector(selectUserLng);
-  const [currentFishCatch, setCurrentFishCatch] = useState(null);
+  const [currentFishCatch, setCurrentFishCatch] = useState<FishCatch | null>(
+    null
+  );
   const tileUrl = useSelector(selectTileUrl);
   const [showPopup, setShowPopup] = useState(false);
   const nodeRef = useRef(null);
@@ -22,9 +30,9 @@ const LeafletMap = ({ searchResults, showId }) => {
     currentFishCatch ? setShowPopup(true) : setShowPopup(false);
   }, [currentFishCatch]);
 
-  const showCatch = fishCatches.filter(
-    (item) => parseInt(item.id) === parseInt(showId)
-  )[0];
+  const showCatch = fishCatches.find(
+    (item: FishCatch) => item.id == showId
+  );
 
   let mapPosition = [];
   let zoom;
@@ -43,32 +51,34 @@ const LeafletMap = ({ searchResults, showId }) => {
 
   return (
     <>
+      {/* @ts-ignore */}
       <MapContainer center={mapPosition} zoom={zoom}>
         <TileLayer
+          /* @ts-ignore */
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url={tileUrl}
           className="map-tiles"
         />
         <UserMarker positionAlreadySet={positionAlreadySet} />
         {searchResults
-          ? searchResults.map((fishCatch) => {
-            const splitPosition = fishCatch.location.split(",");
-            const lat = splitPosition[0];
-            const lon = splitPosition[1];
+          ? searchResults.map((fishCatch: FishCatch) => {
+              const splitPosition = fishCatch.location.split(",");
+              const lat = splitPosition[0];
+              const lon = splitPosition[1];
 
-            return (
-              <Marker
-                position={[lat, lon]}
-                key={fishCatch.id}
-                eventHandlers={{
-                  click: () => {
-                    const copyOfFishCatch = { ...fishCatch };
-                    setCurrentFishCatch(copyOfFishCatch);
-                  },
-                }}
-              ></Marker>
-            );
-          })
+              return (
+                <Marker
+                  position={[lat, lon]}
+                  key={fishCatch.id}
+                  eventHandlers={{
+                    click: () => {
+                      const copyOfFishCatch = { ...fishCatch };
+                      setCurrentFishCatch(copyOfFishCatch);
+                    },
+                  }}
+                ></Marker>
+              );
+            })
           : null}
       </MapContainer>
 

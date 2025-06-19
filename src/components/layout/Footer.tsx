@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 
-const Footer = () => {
+const Footer: React.FC = () => {
   const dateObj = new Date();
   return (
     <footer>
       <p>&copy; Xolof {dateObj.getFullYear()}</p>
       <p>
-        <NavLink to="/about" activeclassname="active">
+        <NavLink to="/about" className={({ isActive }) => (isActive ? "active" : undefined)}>
           About
         </NavLink>
       </p>

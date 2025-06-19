@@ -10,3 +10,5 @@ export const store = configureStore({
     data: dataReducer,
   },
 });
+
+export type AppDispatch = typeof store.dispatch;

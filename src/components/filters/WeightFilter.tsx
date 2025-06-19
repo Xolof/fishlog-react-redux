@@ -6,6 +6,7 @@ import {
   setFilterOnWeightMax,
 } from "../../slices/dataSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { SyntheticEvent } from "react";
 
 const labels = [
   {
@@ -30,14 +31,19 @@ const labels = [
   },
 ];
 
-const WeightFilter = () => {
+const WeightFilter: React.FC = () => {
   const dispatch = useDispatch();
-  const filterOnWeightMin = useSelector(selectFilterOnWeightMin);
-  const filterOnWeightMax = useSelector(selectFilterOnWeightMax);
+  const filterOnWeightMin = useSelector(selectFilterOnWeightMin) as number;
+  const filterOnWeightMax = useSelector(selectFilterOnWeightMax) as number;
 
-  const updateRange = (e, data) => {
-    dispatch(setFilterOnWeightMin(data[0]));
-    dispatch(setFilterOnWeightMax(data[1]));
+  const updateRange = (
+    _e: Event | SyntheticEvent<Element, Event>,
+    data: number | number[]
+  ) => {
+    if (Array.isArray(data) && data.length === 2) {
+      dispatch(setFilterOnWeightMin(data[0]));
+      dispatch(setFilterOnWeightMax(data[1]));
+    }
   };
 
   return (

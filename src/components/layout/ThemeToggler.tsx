@@ -1,10 +1,10 @@
 import { selectDarkTheme, setDarkTheme } from "../../slices/themeSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
 
 const ThemeToggler = () => {
-  const dispatch = useDispatch();
-
+  const dispatch = useAppDispatch();
   const darkTheme = useSelector(selectDarkTheme);
 
   function themeToggle() {
@@ -13,8 +13,9 @@ const ThemeToggler = () => {
 
   useEffect(() => {
     const darkThemeInitiallyActive =
-      localStorage.getItem("fishlog-theme") === "dark" ? true : false;
+      localStorage.getItem("fishlog-theme") === "dark";
     dispatch(setDarkTheme(darkThemeInitiallyActive));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

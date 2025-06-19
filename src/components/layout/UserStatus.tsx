@@ -1,4 +1,8 @@
-const UserStatus = ({ userName }) => {
+type UserStatusType = {
+  userName: string;
+};
+
+const UserStatus: React.FC<UserStatusType> = ({ userName }) => {
   if (userName) {
     return (
       <>

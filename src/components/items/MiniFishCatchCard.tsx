@@ -1,7 +1,12 @@
 import { useSelector } from "react-redux";
 import { selectAPI_URL } from "../../slices/dataSlice";
+import { FishCatch } from "../../types/FishCatch";
 
-const MiniFishCatchCard = ({ fishCatch }) => {
+type FCCProps = {
+  fishCatch: FishCatch
+};
+
+const MiniFishCatchCard: React.FC<FCCProps> = ({ fishCatch }) => {
   const API_URL = useSelector(selectAPI_URL);
 
   return (

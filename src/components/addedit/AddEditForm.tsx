@@ -1,6 +1,23 @@
+import React, { ChangeEvent, FormEvent } from "react";
 import getTodaysDate from "../../services/getTodaysDate";
 
-const AddEditForm = ({
+type AddEditFormProps = {
+  formRole: "add" | "edit";
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  species: string;
+  setSpecies: (value: string) => void;
+  length: string | number;
+  setLength: (value: string) => void;
+  weight: string | number;
+  setWeight: (value: string) => void;
+  date: string;
+  setDate: (value: string) => void;
+  setUploadImage: (file: File) => void;
+  uploadImage: File|null;
+  previewImageUrls: string[];
+};
+
+const AddEditForm: React.FC<AddEditFormProps> = ({
   formRole,
   handleSubmit,
   species,
@@ -22,7 +39,7 @@ const AddEditForm = ({
         type="text"
         required
         pattern="[a-zA-ZåäöÅÄÖ0-9]+"
-        maxLength="30"
+        maxLength={30}
         value={species}
         onChange={(e) => setSpecies(e.target.value)}
       />
@@ -30,8 +47,8 @@ const AddEditForm = ({
       <input
         id="length"
         type="number"
-        min="0"
-        max="9999"
+        min={0}
+        max={9999}
         required
         value={length}
         onChange={(e) => setLength(e.target.value)}
@@ -40,8 +57,8 @@ const AddEditForm = ({
       <input
         id="weight"
         type="number"
-        min="0"
-        max="9999999"
+        min={0}
+        max={9999999}
         required
         value={weight}
         onChange={(e) => setWeight(e.target.value)}
@@ -62,14 +79,15 @@ const AddEditForm = ({
         required={formRole === "add"}
         id="uploadImage"
         type="file"
-        onChange={(e) => {
-          console.log(e.target.files[0])
-          setUploadImage(e.target.files[0]);
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          if (e.target.files && e.target.files[0]) {
+            setUploadImage(e.target.files[0]);
+          }
         }}
       />
       {previewImageUrls.length > 0 ? (
         <img
-          src={previewImageUrls}
+          src={previewImageUrls[0]}
           alt="uploadPreviewImage"
           className="uploadPreviewImage"
         />

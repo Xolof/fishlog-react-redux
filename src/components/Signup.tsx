@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import { successToast, errorToast } from "../services/toastService";
@@ -12,7 +12,7 @@ const Signup = () => {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(setIsLoading(true));
     try {
@@ -36,7 +36,7 @@ const Signup = () => {
         successToast("You signed up!");
         navigate("/login");
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(`Error: ${err.message}`);
       errorToast("Signup failed.");
     } finally {

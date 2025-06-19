@@ -8,12 +8,13 @@ import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { infoToast } from "../../services/toastService";
+import { MouseEvent } from "react";
 
 const Nav = () => {
   const dispatch = useDispatch();
   const userName = useSelector(selectUsername);
 
-  function handleLogout(e) {
+  function handleLogout(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     localStorage.removeItem("fishlog-token");
     localStorage.removeItem("fishlog-userName");
@@ -28,22 +29,22 @@ const Nav = () => {
       <nav>
         <ul className="navLinks">
           <li>
-            <NavLink to="/" activeclassname="active">
+            <NavLink to="/" className={({ isActive }) => (isActive ? "active" : undefined)}>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/add" activeclassname="active">
+            <NavLink to="/add" className={({ isActive }) => (isActive ? "active" : undefined)}>
               Add
             </NavLink>
           </li>
           <li>
-            <NavLink to="/list" activeclassname="active">
+            <NavLink to="/list" className={({ isActive }) => (isActive ? "active" : undefined)}>
               List
             </NavLink>
           </li>
           <li>
-            <NavLink to="/map/all" activeclassname="active">
+            <NavLink to="/map" className={({ isActive }) => (isActive ? "active" : undefined)}>
               Map
             </NavLink>
           </li>
@@ -51,7 +52,7 @@ const Nav = () => {
             {userName ? (
               <button onClick={handleLogout}>Logout</button>
             ) : (
-              <NavLink to="/login" activeclassname="active">
+              <NavLink to="/login" className={({ isActive }) => (isActive ? "active" : undefined)}>
                 Login
               </NavLink>
             )}

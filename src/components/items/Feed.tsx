@@ -1,6 +1,11 @@
 import FishCatchCard from "./FishCatchCard";
+import { FishCatch } from "./../../types/FishCatch";
 
-const Feed = ({ fishCatches }) => {
+type FeedProps = {
+  fishCatches: FishCatch[];
+};
+
+const Feed: React.FC<FeedProps> = ({ fishCatches }) => {
   return (
     <>
       {fishCatches.map((fishCatch) => (

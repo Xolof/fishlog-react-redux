@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../api/api";
 import { successToast, errorToast } from "../services/toastService";
@@ -13,7 +13,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const API_URL = useSelector(selectAPI_URL);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(setIsLoading(true));
     try {
@@ -40,9 +40,9 @@ const Login = () => {
         localStorage.setItem("fishlog-userName", res.data.user.name);
         dispatch(setUserName(res.data.user.name));
         successToast("You logged in!");
-        navigate("/map/all");
+        navigate("/map");
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(`Error: ${err.message}`);
       errorToast("Login failed, please check username and password.");
     } finally {

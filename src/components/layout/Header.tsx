@@ -4,7 +4,11 @@ import { selectUsername } from "../../slices/userSlice";
 import { useSelector } from "react-redux";
 import { selectIsLoading } from "../../slices/dataSlice";
 
-const Header = ({ title }) => {
+type HeaderProps = {
+  title: string
+}
+
+const Header: React.FC<HeaderProps> = ({ title }) => {
   const isLoading = useSelector(selectIsLoading);
   const location = useLocation();
   const notLoadingRoutes = ["/add", "/login", "/about"];

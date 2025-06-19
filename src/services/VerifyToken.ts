@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { SyntheticEvent, useEffect } from "react";
 import { infoToast } from "./toastService";
 import { useNavigate } from "react-router-dom";
 import { setUserName } from "../slices/userSlice";
@@ -8,7 +8,7 @@ export default () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function parseJwt(token) {
+  function parseJwt(token: string) {
     try {
       return JSON.parse(atob(token.split(".")[1]));
     } catch (e) {
@@ -17,7 +17,7 @@ export default () => {
   }
 
   function AuthVerify() {
-    const decodedJwt = parseJwt(localStorage.getItem("fishlog-token"));
+    const decodedJwt = parseJwt(localStorage.getItem("fishlog-token") ?? '');
     if (decodedJwt.exp * 1000 > Date.now()) {
       return true;
     }
@@ -32,7 +32,7 @@ export default () => {
     infoToast("You have been logged out due to inactivity.");
   }
 
-  function handleUserAction(e) {
+  function handleUserAction(e: Event | SyntheticEvent<Element, Event>) {
     if (!localStorage.getItem("fishlog-token")) {
       return;
     }

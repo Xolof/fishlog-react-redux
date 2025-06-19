@@ -1,7 +1,14 @@
-import { useState, useEffect } from "react";
+import {
+  useState,
+  useEffect,
+  FormEvent,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
+
 import {
   selectFishCatches,
   setFishCatches,
@@ -12,37 +19,73 @@ import {
   setFilterOnWeightMax,
   setFilterOnLengthMin,
   setFilterOnLengthMax,
-  selectAPI_URL
+  selectAPI_URL,
 } from "../slices/dataSlice";
+
 import {
   setMarkerLat,
   setMarkerLng,
   selectMarkerLat,
   selectMarkerLng,
 } from "../slices/userSlice";
+
 import {
   successToast,
   warningToast,
   errorToast,
 } from "../services/toastService";
 
-const useFishCatchForm = (mode = "add", id = null) => {
+type Mode = "add" | "edit";
+
+type FishCatch = {
+  id: number | string;
+  species: string;
+  length: string | number;
+  weight: string | number;
+  location: string;
+  date: string;
+  imageurl?: string;
+  username?: string;
+  [key: string]: any;
+};
+
+type UseFishCatchFormReturn = {
+  species: string;
+  setSpecies: Dispatch<SetStateAction<string>>;
+  length: string;
+  setLength: Dispatch<SetStateAction<string>>;
+  weight: string;
+  setWeight: Dispatch<SetStateAction<string>>;
+  date: string;
+  setDate: Dispatch<SetStateAction<string>>;
+  uploadImage: File | null;
+  setUploadImage: Dispatch<SetStateAction<File | null>>;
+  previewImageUrls: string[];
+  mapCenter: number[] | null;
+  error: unknown;
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => Promise<void>;
+};
+
+const useFishCatchForm = (
+  mode: Mode = "add",
+  id: number | string | null = null
+): UseFishCatchFormReturn => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const fishCatches = useSelector(selectFishCatches);
-  const markerLat = useSelector(selectMarkerLat);
-  const markerLng = useSelector(selectMarkerLng);
-  const username = localStorage.getItem("fishlog-userName");
+  const fishCatches = useSelector(selectFishCatches) as FishCatch[];
+  const markerLat = useSelector(selectMarkerLat) as number | null;
+  const markerLng = useSelector(selectMarkerLng) as number | null;
+  const username = localStorage.getItem("fishlog-userName") || "";
 
-  const [species, setSpecies] = useState("");
-  const [length, setLength] = useState("");
-  const [weight, setWeight] = useState("");
-  const [date, setDate] = useState("");
-  const [uploadImage, setUploadImage] = useState(null);
-  const [previewImageUrls, setPreviewImageUrls] = useState([]);
-  const [mapCenter, setMapCenter] = useState(null);
-  const [error, setError] = useState(null);
-  const API_URL = useSelector(selectAPI_URL);
+  const [species, setSpecies] = useState<string>("");
+  const [length, setLength] = useState<string>("");
+  const [weight, setWeight] = useState<string>("");
+  const [date, setDate] = useState<string>("");
+  const [uploadImage, setUploadImage] = useState<File | null>(null);
+  const [previewImageUrls, setPreviewImageUrls] = useState<string[]>([]);
+  const [mapCenter, setMapCenter] = useState<number[] | null>(null);
+  const [error, setError] = useState<unknown>(null);
+  const API_URL = useSelector(selectAPI_URL) as string;
 
   useEffect(() => {
     dispatch(setMarkerLat(null));
@@ -81,7 +124,7 @@ const useFishCatchForm = (mode = "add", id = null) => {
       }
     }
     fetchCatch();
-  }, [mode, id, dispatch]);
+  }, [mode, id, dispatch, API_URL]);
 
   const resetFilters = () => {
     dispatch(setFilterOnSpecies(""));
@@ -92,7 +135,7 @@ const useFishCatchForm = (mode = "add", id = null) => {
     dispatch(setFilterOnLengthMax(500));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!markerLat || !markerLng) {
@@ -101,7 +144,7 @@ const useFishCatchForm = (mode = "add", id = null) => {
     }
 
     const location = `${markerLat},${markerLng}`;
-    const data = {
+    const data: { [key: string]: any } = {
       species,
       length,
       weight,
@@ -128,14 +171,16 @@ const useFishCatchForm = (mode = "add", id = null) => {
         },
       });
 
-      const newCatch = response.data.data;
+      const newCatch = response.data.data as FishCatch;
       newCatch.username = username;
 
       if (mode === "add") {
         dispatch(setFishCatches([...fishCatches, newCatch]));
       } else {
         const updatedFishCatches = fishCatches.map((item) => {
-          return parseInt(item.id) === parseInt(newCatch.id) ? newCatch : item
+          return parseInt(item.id as string) === parseInt(newCatch.id as string)
+            ? newCatch
+            : item;
         });
         dispatch(setFishCatches(updatedFishCatches));
       }
@@ -143,10 +188,10 @@ const useFishCatchForm = (mode = "add", id = null) => {
       successToast(mode === "add" ? "Catch added!" : "Catch updated!");
       resetFilters();
       navigate(`/map/${newCatch.id}`);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
       const errors = err.response?.data?.error || ["An error occurred"];
-      errors.forEach((error) => errorToast(error));
+      errors.forEach((error: string) => errorToast(error));
     } finally {
       dispatch(setIsLoading(false));
     }

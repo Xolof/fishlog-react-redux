@@ -27,7 +27,7 @@ const getTime = () => {
   };
 };
 
-const padZero = (num) => {
+const padZero = (num: number) => {
   const s = "0" + num;
   return s.slice(-2);
 };
@@ -47,7 +47,7 @@ const StartPage = () => {
 
   const [time, setTime] = useState(getTime());
 
-  const showPosition = (position) => {
+  const showPosition = (position: GeolocationPosition) => {
     const { latitude, longitude } = position.coords;
     dispatch(setUserLat(latitude));
     dispatch(setUserLng(longitude));
@@ -94,7 +94,7 @@ const StartPage = () => {
             .sort((a, b) => {
               const aTime = new Date(a.date).getTime();
               const bTime = new Date(b.date).getTime();
-              return parseInt(bTime) - parseInt(aTime);
+              return bTime - aTime;
             })
             .map((fishCatch) => (
               <MiniFishCatchCard fishCatch={fishCatch} key={fishCatch.id} />

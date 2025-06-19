@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { AppState } from "../types/AppState";
 
 const initialState = {
   name: localStorage.getItem("fishlog-userName"),
@@ -38,23 +39,23 @@ export const {
   setMarkerLng,
 } = userSlice.actions;
 
-export const selectUsername = (state) => {
+export const selectUsername = (state: AppState) => {
   return state.user.name;
 };
 
-export const selectUserLat = (state) => {
+export const selectUserLat = (state: AppState) => {
   return state.user.userLat;
 };
 
-export const selectUserLng = (state) => {
+export const selectUserLng = (state: AppState) => {
   return state.user.userLng;
 };
 
-export const selectMarkerLat = (state) => {
+export const selectMarkerLat = (state: AppState) => {
   return state.user.markerLat;
 };
 
-export const selectMarkerLng = (state) => {
+export const selectMarkerLng = (state: AppState) => {
   return state.user.markerLng;
 };
 
