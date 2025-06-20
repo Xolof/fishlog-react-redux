@@ -9,6 +9,7 @@ import {
   setUserLat,
   setUserLng,
 } from "../../slices/userSlice";
+import userIconFile from "../../img/user.png";
 
 type UserMarkerProps = {
   positionAlreadySet?: boolean;
@@ -44,7 +45,7 @@ const UserMarker: React.FC<UserMarkerProps> = ({ positionAlreadySet }) => {
   }, [map, userLat, userLng, positionAlreadySet, dispatch]);
 
   const userIcon = L.icon({
-    iconUrl: require("../../img/user.png"),
+    iconUrl: userIconFile,
     iconSize: [25, 25],
   });
 
