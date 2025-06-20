@@ -38,7 +38,7 @@ const StartPage = () => {
   const userLat = useSelector(selectUserLat);
   const userLng = useSelector(selectUserLng);
 
-  const API_URL = process.env.REACT_APP_API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
   useAxiosFetch(`${API_URL}/api/public_fishcatch`);
 
   const fishCatches = useSelector(selectFishCatches);

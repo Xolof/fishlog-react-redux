@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { FishCatch } from "../../types/FishCatch";
 
 const MapView = () => {
-  const API_URL = process.env.REACT_APP_API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
   useAxiosFetch(`${API_URL}/api/public_fishcatch`);
 
   const searchResults = useSelector(selectSearchResultsSelector);
