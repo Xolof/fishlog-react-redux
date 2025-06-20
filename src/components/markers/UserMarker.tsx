@@ -41,7 +41,7 @@ const UserMarker: React.FC<UserMarkerProps> = ({ positionAlreadySet }) => {
     return () => {
       map.off("locationfound", onLocationFound);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [map, userLat, userLng, positionAlreadySet, dispatch]);
 
   const userIcon = L.icon({

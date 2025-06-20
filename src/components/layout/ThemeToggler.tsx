@@ -15,7 +15,7 @@ const ThemeToggler = () => {
     const darkThemeInitiallyActive =
       localStorage.getItem("fishlog-theme") === "dark";
     dispatch(setDarkTheme(darkThemeInitiallyActive));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, []);
 
   return (
