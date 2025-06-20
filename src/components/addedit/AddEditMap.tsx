@@ -2,10 +2,7 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import UserMarker from "../markers/UserMarker";
 import PositionMarker from "../markers/PositionMarker";
 import { useSelector } from "react-redux";
-import {
-  selectUserLat,
-  selectUserLng,
-} from "../../slices/userSlice";
+import { selectUserLat, selectUserLng } from "../../slices/userSlice";
 import { selectTileUrl } from "../../slices/themeSlice";
 
 type AddEditMapProps = {
@@ -26,10 +23,11 @@ const AddEditMap: React.FC<AddEditMapProps> = () => {
 
   return (
     <>
-      {/* @ts-ignore */}
+      {/* @ts-expect-error Excluding Leaflet components from TypeScript. */}
       <MapContainer center={mapCenter} zoom={9}>
-        {/*// @ts-ignore */}
-        <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        {/* @ts-expect-error Excluding Leaflet components from TypeScript. */}
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url={tileUrl}
           className="map-tiles"
         />

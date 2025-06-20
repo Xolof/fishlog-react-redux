@@ -12,6 +12,7 @@ module.exports = [
       'cypress',
       'cypress.config.js',
       'eslint.config.cjs',
+      'vite.config.ts'
     ],
   },
   js.configs.recommended,

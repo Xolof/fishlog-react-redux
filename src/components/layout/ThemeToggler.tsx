@@ -16,7 +16,7 @@ const ThemeToggler = () => {
       localStorage.getItem("fishlog-theme") === "dark";
     dispatch(setDarkTheme(darkThemeInitiallyActive));
      
-  }, []);
+  });
 
   return (
     <div className="themeToggler">

@@ -39,10 +39,14 @@ const FishCatchCard: React.FC<FCCProps> = ({ fishCatch }) => {
       dispatch(setFishCatches(updatedFishCatches));
       successToast("Catch deleted!");
       navigate("/map/all");
-    } catch (err: any) {
-      console.error(err);
-      console.error(`Error: ${err.message}`);
-      errorToast("Could not delete catch.");
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err);
+        console.error(`Error: ${err.message}`);
+        errorToast("Could not delete catch.");
+      } else {
+        console.error("Unknown error", err);
+      }
     } finally {
       dispatch(setIsLoading(false));
     }

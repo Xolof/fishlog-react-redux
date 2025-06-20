@@ -5,7 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { selectUserLat, selectUserLng } from "../../slices/userSlice";
 import { selectTileUrl } from "../../slices/themeSlice";
-import { selectFishCatches, selectSearchResults } from "../../slices/dataSlice";
+import { selectFishCatches } from "../../slices/dataSlice";
 import { CSSTransition } from "react-transition-group";
 import { FishCatch } from "../../types/FishCatch";
 
@@ -27,12 +27,14 @@ const LeafletMap: React.FC<LeafletMapType> = ({ searchResults, showId }) => {
   let positionAlreadySet = false;
 
   useEffect(() => {
-    currentFishCatch ? setShowPopup(true) : setShowPopup(false);
+    if (currentFishCatch) {
+      setShowPopup(true);
+    } else {
+      setShowPopup(false);
+    }
   }, [currentFishCatch]);
 
-  const showCatch = fishCatches.find(
-    (item: FishCatch) => item.id == showId
-  );
+  const showCatch = fishCatches.find((item: FishCatch) => item.id == showId);
 
   let mapPosition = [];
   let zoom;
@@ -51,10 +53,10 @@ const LeafletMap: React.FC<LeafletMapType> = ({ searchResults, showId }) => {
 
   return (
     <>
-      {/* @ts-ignore */}
+      {/* @ts-expect-error Excluding Leaflet from TypeScript. */}
       <MapContainer center={mapPosition} zoom={zoom}>
         <TileLayer
-          /* @ts-ignore */
+          /* @ts-expect-error Excluding Leaflet from TypeScript. */
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url={tileUrl}
           className="map-tiles"

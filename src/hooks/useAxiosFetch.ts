@@ -23,13 +23,19 @@ const useAxiosFetch = (dataUrl: string) => {
           dispatch(setFishCatches(res.data));
           dispatch(setFetchError(null));
         }
-      } catch (err: any) {
-        if (isMounted) {
-          dispatch(setFetchError(err.message));
-          dispatch(setFishCatches([]));
+      } catch (err) {
+        if (err instanceof Error) {
+          if (isMounted) {
+            dispatch(setFetchError(err.message));
+            dispatch(setFishCatches([]));
+          }
+        } else {
+          console.error("Unknown error", err);
         }
       } finally {
-        isMounted && dispatch(setIsLoading(false));
+        if (isMounted) {
+          dispatch(setIsLoading(false));
+        }
       }
     };
 
@@ -41,7 +47,7 @@ const useAxiosFetch = (dataUrl: string) => {
     };
 
     return cleanUp;
-  }, [dataUrl]);
+  }, [dataUrl, dispatch]);
 };
 
 export default useAxiosFetch;

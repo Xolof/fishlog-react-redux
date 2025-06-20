@@ -8,6 +8,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
+import { FishCatch } from "../types/FishCatch";
 
 import {
   selectFishCatches,
@@ -36,18 +37,6 @@ import {
 } from "../services/toastService";
 
 type Mode = "add" | "edit";
-
-type FishCatch = {
-  id: number | string;
-  species: string;
-  length: string | number;
-  weight: string | number;
-  location: string;
-  date: string;
-  imageurl?: string;
-  username?: string;
-  [key: string]: any;
-};
 
 type UseFishCatchFormReturn = {
   species: string;
@@ -118,7 +107,11 @@ const useFishCatchForm = (
         dispatch(setMarkerLng(lon));
         setPreviewImageUrls([`${API_URL}${res.data.imageurl}`]);
       } catch (err) {
-        setError(err);
+        if (err instanceof Error) {
+          setError(err);
+        } else {
+          console.error("Unknown error", err);
+        }
       } finally {
         dispatch(setIsLoading(false));
       }
@@ -144,7 +137,8 @@ const useFishCatchForm = (
     }
 
     const location = `${markerLat},${markerLng}`;
-    const data: { [key: string]: any } = {
+
+    const data = {
       species,
       length,
       weight,
@@ -188,10 +182,14 @@ const useFishCatchForm = (
       successToast(mode === "add" ? "Catch added!" : "Catch updated!");
       resetFilters();
       navigate(`/map/${newCatch.id}`);
-    } catch (err: any) {
-      console.error(err);
-      const errors = err.response?.data?.error || ["An error occurred"];
-      errors.forEach((error: string) => errorToast(error));
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err);
+        const errors = err.response?.data?.error || ["An error occurred"];
+        errors.forEach((error: string) => errorToast(error));
+      } else {
+        console.error(`Unknown Error: ${err}`);
+      }
     } finally {
       dispatch(setIsLoading(false));
     }

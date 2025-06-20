@@ -42,7 +42,7 @@ const MapView = () => {
           <p className="noResults">No results.</p>
         )}
         {!isLoading && !fetchError && (
-          // @ts-ignore
+          /* @ts-expect-error Excluding Leaflet from TypeScript. */
           <LeafletMap searchResults={searchResults} showId={numericId} />
         )}
       </div>

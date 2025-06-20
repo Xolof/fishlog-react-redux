@@ -15,7 +15,7 @@ export type AppState = {
   "data": {
     "filterOnSpecies": string,
     "searchResults": FishCatch[],
-    "fetchError": any,
+    "fetchError": Error,
     "isLoading": boolean,
     "fishCatches": FishCatch[],
     "filterOnUser": string,

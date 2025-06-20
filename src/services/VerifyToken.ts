@@ -12,6 +12,7 @@ export default () => {
     try {
       return JSON.parse(atob(token.split(".")[1]));
     } catch (e) {
+      console.error(e)
       return null;
     }
   }
@@ -55,7 +56,7 @@ export default () => {
       document.removeEventListener("mousemove", handleUserAction);
       document.removeEventListener("scroll", handleUserAction);
     };
-  }, []);
+  }, [handleUserAction]);
 
   return null;
 };

@@ -23,8 +23,8 @@ const Signup = () => {
       });
 
       if (response.data.error) {
-        for (let key in response.data.error) {
-          for (let message of response.data.error[key]) {
+        for (const key in response.data.error) {
+          for (const message of response.data.error[key]) {
             errorToast(message);
           }
         }
@@ -36,9 +36,13 @@ const Signup = () => {
         successToast("You signed up!");
         navigate("/login");
       }
-    } catch (err: any) {
-      console.error(`Error: ${err.message}`);
-      errorToast("Signup failed.");
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(`Error: ${err.message}`);
+        errorToast("Signup failed.");
+      } else {
+        console.error("Unknown error", err);
+      }
     } finally {
       dispatch(setIsLoading(false));
     }

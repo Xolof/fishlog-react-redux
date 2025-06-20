@@ -13,7 +13,8 @@ const PositionMarker = () => {
   const markerLng = useSelector(selectMarkerLng);
 
   useMapEvents({
-    click(e: any) {
+    /* @ts-expect-error Excluding Leaflet from TypeScript. */
+    click(e) {
       dispatch(setMarkerLat(e.latlng.lat));
       dispatch(setMarkerLng(e.latlng.lng));
     },

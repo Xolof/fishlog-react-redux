@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-{/* @ts-ignore */}
+{/* @ts-expect-error Excluding Leaflet from TypeScript. */}
 import L from "leaflet";
 import { useMap, Marker, Popup } from "react-leaflet";
 import { useSelector, useDispatch } from "react-redux";
@@ -21,7 +21,6 @@ const UserMarker: React.FC<UserMarkerProps> = ({ positionAlreadySet }) => {
   const userLng = useSelector(selectUserLng) as number | null;
   const map = useMap();
 
-  // Use ref to keep positionSet between renders
   let positionSet = false;
 
   useEffect(() => {
@@ -31,6 +30,7 @@ const UserMarker: React.FC<UserMarkerProps> = ({ positionAlreadySet }) => {
       if ((!userLat || !userLng) && !positionSet && !positionAlreadySet) {
         map.flyTo(e.latlng, map.getZoom());
       }
+
       positionSet = true;
       dispatch(setUserLat(e.latlng.lat));
       dispatch(setUserLng(e.latlng.lng));
@@ -50,7 +50,6 @@ const UserMarker: React.FC<UserMarkerProps> = ({ positionAlreadySet }) => {
   });
 
   return userLat === null || userLng === null ? null : (
-    /* @ts-ignore */
     <Marker position={[userLat, userLng]} icon={userIcon}>
       <Popup>
         <br />

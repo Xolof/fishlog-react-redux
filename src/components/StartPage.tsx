@@ -72,7 +72,7 @@ const StartPage = () => {
     };
 
     return cleanUp;
-  }, []);
+  });
 
   return (
     <article className="startPage">
