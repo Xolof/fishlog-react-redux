@@ -21,27 +21,14 @@
     "react-leaflet": "^5.0.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.2",
-    "react-scripts": "^5.0.1",
     "react-toastify": "^11.0.5",
     "react-transition-group": "^4.4.5",
     "sass": "^1.89.1",
     "typescript": "^5.8.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "cypress": "cypress open",
-    "headless_cypress": "cypress run --headless",
-    "lint": "eslint \"src/**/*.{js,jsx}\"",
-    "lint:fix": "eslint \"src/**/*.{js,jsx}\" --fix"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "headless_cypress": "cypress run --headless"
   },
   "browserslist": {
     "production": [
@@ -54,11 +41,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "eslint": "^8.9.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.28.0"
   }
 }
