@@ -1,6 +1,6 @@
 import "cypress-file-upload";
 
-const URL = `http://localhost:3000`;
+const URL = `http://localhost:5173`;
 const email = "kjell@ullared.se";
 const password = "pass123";
 const species = "mackerel"
