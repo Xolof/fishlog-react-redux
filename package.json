@@ -8,6 +8,8 @@
     "@mui/material": "^7.1.1",
     "@mui/styles": "^6.4.12",
     "@reduxjs/toolkit": "^2.8.2",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "axios": "^1.9.0",
     "cypress": "^14.4.1",
     "cypress-file-upload": "^5.0.8",
@@ -19,26 +21,18 @@
     "react-leaflet": "^5.0.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.2",
-    "react-scripts": "^5.0.1",
     "react-toastify": "^11.0.5",
     "react-transition-group": "^4.4.5",
-    "sass": "^1.89.1"
+    "sass": "^1.89.1",
+    "typescript": "^5.8.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "cypress": "cypress open",
     "headless_cypress": "cypress run --headless",
-    "lint": "eslint \"src/**/*.{js,jsx}\"",
-    "lint:fix": "eslint \"src/**/*.{js,jsx}\" --fix"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "browserslist": {
     "production": [
@@ -53,9 +47,15 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.9.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.28.0"
+    "@eslint/js": "^9.29.0",
+    "@typescript-eslint/eslint-plugin": "^8.34.1",
+    "@typescript-eslint/parser": "^8.34.1",
+    "@vitejs/plugin-react": "^4.5.2",
+    "eslint": "^9.29.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "typescript-eslint": "^8.34.1",
+    "vite": "^6.3.5"
   }
 }
