@@ -1,4 +1,4 @@
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom/client";
 import React from "react";
 import "normalize.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,11 +10,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { store } from "./store/store";
 import { Provider } from "react-redux";
 
-const container = document.getElementById("root");
-if (!container) throw new Error("Root element not found!");
-
-const root = createRoot(container);
-root.render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Router>
       <Provider store={store}>
