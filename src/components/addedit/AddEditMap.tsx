@@ -41,7 +41,6 @@ const AddEditMap: React.FC<AddEditMapProps> = () => {
       const splitLocation = currentFishCatch.location.split(",");
       const lat = parseFloat(splitLocation[0]);
       const lon = parseFloat(splitLocation[1]);
-      console.log(lat, lon);
       mapCenter = [lat, lon];
     }
   }
