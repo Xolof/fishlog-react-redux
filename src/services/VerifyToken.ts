@@ -10,7 +10,7 @@ export default () => {
 
   function parseJwt(token: string) {
     try {
-      return JSON.parse(atob(token.split(".")[1]));
+      return JSON.parse(window.atob(token.split(".")[1]));
     } catch (e) {
       console.error(e)
       return null;
