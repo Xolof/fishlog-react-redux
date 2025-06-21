@@ -24,10 +24,13 @@ const AddEditMap: React.FC<AddEditMapProps> = () => {
   }
 
   let mapCenter: [number, number] = userCoordinates ?? [56, 12.6];
+  let zoom = 9;
 
   const { id } = useParams<{ id?: string }>();
 
   if (id) {
+    zoom = 14;
+
     const numericId = Number(id);
 
     const currentFishCatch = fishCatches.filter(
@@ -46,7 +49,7 @@ const AddEditMap: React.FC<AddEditMapProps> = () => {
   return (
     <>
       {/* @ts-expect-error Excluding Leaflet components from TypeScript. */}
-      <MapContainer center={mapCenter} zoom={9}>
+      <MapContainer center={mapCenter} zoom={zoom}>
         {/* @ts-expect-error Excluding Leaflet components from TypeScript. */}
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
