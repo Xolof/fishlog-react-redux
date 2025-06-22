@@ -3,9 +3,8 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import {
   setFishCatches,
-  setFetchError,
-  setIsLoading,
 } from "../slices/dataSlice";
+import { setFetchError, setIsLoading } from "../slices/fetchStatusSlice";
 
 const useAxiosFetch = (dataUrl: string) => {
   const dispatch = useDispatch();

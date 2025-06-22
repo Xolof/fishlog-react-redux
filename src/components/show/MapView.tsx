@@ -1,9 +1,8 @@
 import {
   selectSearchResultsSelector,
-  selectFetchError,
-  selectIsLoading,
   selectFishCatches,
 } from "../../slices/dataSlice";
+import { selectFetchError, selectIsLoading } from "../../slices/fetchStatusSlice";
 import LeafletMap from "./LeafletMap";
 import { useParams, Link } from "react-router-dom";
 import Filters from "../filters/Filters";

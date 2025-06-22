@@ -3,12 +3,12 @@ import {
   selectAPI_URL,
   selectFishCatches,
   setFishCatches,
-  setIsLoading,
 } from "../../slices/dataSlice";
 import { successToast, errorToast } from "../../services/toastService";
 import api from "../../api/api";
 import { useNavigate } from "react-router-dom";
 import { FishCatch } from "../../types/FishCatch";
+import { setIsLoading } from "../../slices/fetchStatusSlice";
 
 type FCCProps = {
   fishCatch: FishCatch;

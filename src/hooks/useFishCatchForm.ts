@@ -13,7 +13,6 @@ import { FishCatch } from "../types/FishCatch";
 import {
   selectFishCatches,
   setFishCatches,
-  setIsLoading,
   setFilterOnSpecies,
   setFilterOnUser,
   setFilterOnWeightMin,
@@ -22,6 +21,8 @@ import {
   setFilterOnLengthMax,
   selectAPI_URL,
 } from "../slices/dataSlice";
+
+import { setIsLoading } from "../slices/fetchStatusSlice";
 
 import {
   setMarkerLat,

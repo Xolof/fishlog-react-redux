@@ -8,8 +8,6 @@ const MAX_LENGTH_FILTER = 500;
 const initialState = {
   filterOnSpecies: "",
   searchResults: [],
-  fetchError: null,
-  isLoading: true,
   fishCatches: [],
   filterOnUser: "",
   filterOnWeightMin: 0,
@@ -29,12 +27,6 @@ export const dataSlice = createSlice({
   reducers: {
     setFilterOnSpecies: (state, action) => {
       state.filterOnSpecies = action.payload;
-    },
-    setFetchError: (state, action) => {
-      state.fetchError = action.payload;
-    },
-    setIsLoading: (state, action) => {
-      state.isLoading = action.payload;
     },
     setFishCatches: (state, action) => {
       state.fishCatches = action.payload;
@@ -71,8 +63,6 @@ export const dataSlice = createSlice({
 
 export const {
   setFilterOnSpecies,
-  setFetchError,
-  setIsLoading,
   setFishCatches,
   setFilterOnUser,
   setFilterOnWeightMin,
@@ -222,14 +212,6 @@ export const selectSearchResultsSelector = createSelector(
     return filteredResults;
   }
 );
-
-export const selectFetchError = (state: AppState) => {
-  return state.data.fetchError;
-};
-
-export const selectIsLoading = (state: AppState) => {
-  return state.data.isLoading;
-};
 
 export const selectFishCatches = (state: AppState) => {
   return state.data.fishCatches;
