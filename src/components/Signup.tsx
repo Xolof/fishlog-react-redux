@@ -2,7 +2,7 @@ import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import { successToast, errorToast } from "../services/toastService";
-import { setIsLoading } from "../slices/dataSlice";
+import { setIsLoading } from "../slices/fetchStatusSlice";
 import { useDispatch } from "react-redux";
 
 const Signup = () => {

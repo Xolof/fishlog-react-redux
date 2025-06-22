@@ -8,11 +8,8 @@ import {
   setUserLat,
   setUserLng,
 } from "../slices/userSlice";
-import {
-  selectFishCatches,
-  selectFetchError,
-  selectIsLoading,
-} from "../slices/dataSlice";
+import { selectFishCatches } from "../slices/dataSlice";
+import { selectFetchError, selectIsLoading } from "../slices/fetchStatusSlice";
 
 const getTime = () => {
   const now = new Date();

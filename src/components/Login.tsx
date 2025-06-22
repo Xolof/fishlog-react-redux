@@ -3,7 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import api from "../api/api";
 import { successToast, errorToast } from "../services/toastService";
 import { setUserName } from "../slices/userSlice";
-import { selectAPI_URL, setIsLoading } from "../slices/dataSlice";
+import { selectAPI_URL } from "../slices/dataSlice";
+import { setIsLoading } from "../slices/fetchStatusSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {

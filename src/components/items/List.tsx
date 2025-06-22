@@ -1,8 +1,7 @@
 import {
-  selectSearchResultsSelector,
-  selectFetchError,
-  selectIsLoading,
+  selectSearchResultsSelector
 } from "../../slices/dataSlice";
+import { selectFetchError, selectIsLoading } from "../../slices/fetchStatusSlice";
 import Feed from "./Feed";
 import useAxiosFetch from "../../hooks/useAxiosFetch";
 import Filters from "../filters/Filters";

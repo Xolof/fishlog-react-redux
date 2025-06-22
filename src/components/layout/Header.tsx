@@ -2,7 +2,7 @@ import UserStatus from "./UserStatus";
 import { useLocation } from "react-router-dom";
 import { selectUsername } from "../../slices/userSlice";
 import { useSelector } from "react-redux";
-import { selectIsLoading } from "../../slices/dataSlice";
+import { selectIsLoading } from "../../slices/fetchStatusSlice";
 
 type HeaderProps = {
   title: string
